@@ -1,3 +1,4 @@
+@import url("fonts/montserrat/montserrat.css");
 * {
   margin: 0;
   padding: 0;
@@ -12,8 +13,8 @@ html {
 body {
   width: 100%;
   height: 100%;
-  background-color: lightblue;
-  font-family: "Roboto", sans-serif;
+  background-color: #F8F5EA;
+  font-family: "Montserrat", sans-serif;
   font-size: 16px;
   font-weight: 300;
   color: #222222;
@@ -33,7 +34,7 @@ button {
 }
 
 .container {
-  max-width: 1210px;
+  max-width: 1160px;
   margin: 0 auto;
 }
 
@@ -82,7 +83,105 @@ button {
 }
 
 .header {
+  background-color: #F8F5EA;
+  height: 125px;
+  width: 100%;
+  position: relative;
+}
+.header > .header-absolute {
+  top: 0;
+  left: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+.header > .header-absolute > .header-progress-bar {
+  width: 100%;
+  height: 5px;
+  background-color: #0a5b88;
+}
+.header > .header-absolute > .header-progress-bar > .header-progress-bar-line {
+  height: 100%;
+  width: 30%;
+  background-color: red;
+}
+.header > .header-absolute > .container {
+  height: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header > .header-absolute > .container > .header-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header > .header-absolute > .container > .header-logo:hover {
+  cursor: pointer;
   background-color: pink;
+}
+.header > .header-absolute > .container > .header-logo > .header-logo-image {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+.header > .header-absolute > .container > .header-logo > .header-logo-image > img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.header > .header-absolute > .container > .header-login {
+  display: flex;
+}
+.header > .header-absolute > .container > .header-login > button {
+  margin: 0 10px;
+  padding: 0;
+}
+.header > .header-absolute > .container > .header-login > .header-button-login {
+  height: 40px;
+  padding: 0 36px;
+  border-radius: 5px;
+  border: 1px solid #1B1B1B;
+  background-color: #F8F5EA;
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 13px;
+  color: #1B1B1B;
+}
+.header > .header-absolute > .container > .header-login > .header-button-reg {
+  height: 40px;
+  padding: 0 36px;
+  border-radius: 5px;
+  border: none;
+  background-color: #FA1E38;
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 13px;
+  color: #FFFFFF;
+}
+.header > .header-absolute > .container > .header-burger-menu {
+  height: 40px;
+  width: 40px;
+  border-radius: 5px;
+  background-color: #A5A5A5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px 0;
+  box-sizing: border-box;
+}
+.header > .header-absolute > .container > .header-burger-menu:hover {
+  cursor: pointer;
+}
+.header > .header-absolute > .container > .header-burger-menu:hover > .header-burger-menu-line {
+  background-color: #FA1E38;
+}
+.header > .header-absolute > .container > .header-burger-menu > .header-burger-menu-line {
+  height: 2px;
+  width: 20px;
+  background-color: #FFFFFF;
+  transition: 0.3s;
 }
 
 .main {
