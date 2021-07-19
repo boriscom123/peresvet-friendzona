@@ -1,5 +1,5 @@
 // подключение шрифтов
-@import "../../fonts/montserrat/montserrat.css";
+@import url("../fonts/montserrat/stylesheet.css");
 
 // цвет фона
 $mainColor: #F8F5EA; // Основной цвет
@@ -12,9 +12,10 @@ $mainBgColor: #F8F5EA; // Основной цвет бэкграунда
 $alterBgColor3: #FA1E38; // Дополнительный цвет 3
 $bgColor: #F8F5EA; // Основной цвет бэкграунда
 // шрифты
-$mainFontFamily: 'Montserrat';
+$mainFontFamily: 'Montserrat', sans-serif;
 $mainFontColor: #1B1B1B;
 $alterFontColor: #FFFFFF;
+$alterFontColor4: #000000;
 $fontFamily: 'Montserrat', sans-serif;
 $fontSize: 16px;
 $fontWeight: 300;
