@@ -6,6 +6,7 @@
     > .container {
       height: 100%;
       display: flex;
+      justify-content: space-between;
       align-items: center;
       > .main-block-1-container-info {
         > h2 {
@@ -16,12 +17,82 @@
         }
          > h1 {
            max-width: 410px;
+           margin: 16px 0 20px 0;
+           font-family: $mainFontFamily;
            font-weight: 600;
-           font-style: normal;
            font-size: 35px;
            line-height: 45px;
            color: $mainFontColor;
          }
+        > .main-block-1-container-info-navigation {
+          display: flex;
+          > button {
+            height: 40px;
+            padding: 0 36px;
+            border-radius: 5px;
+            border: none;
+            background-color: $alterBgColor3;
+            font-family: $mainFontFamily;
+            font-weight: 500;
+            font-size: 13px;
+            color: $alterFontColor;
+            transition: $transition;
+            &:hover {
+              color: $mainFontColor;
+            }
+          }
+          > .scroll-buttons {
+            display: flex;
+            margin: 0 0 0 10px;
+            > button {
+              height: 40px;
+              width: 40px;
+              margin: 0 0 0 10px;
+              border-radius: 5px;
+              border: none;
+              background-color: $alterColor2;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-evenly;
+              align-items: center;
+              box-sizing: border-box;
+              &:hover {
+                >img {
+                  transform: scale(1.5);
+                }
+              }
+              > img {
+                transition: $transition;
+              }
+            }
+          }
+          > .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 50px;
+            margin: 0 0 0 25px;
+            > .circle {
+              height: 10px;
+              width: 10px;
+              border-radius: 50%;
+              border: 1px solid grey;
+              background-color: $mainBgColor;
+              box-sizing: border-box;
+              transition: $transition;
+              &:hover {
+                cursor: pointer;
+                background-color: $alterBgColor3;
+                border: none;
+              }
+            }
+            > .active {
+              background-color: $alterBgColor3;
+              border: 1px solid $alterBgColor3;
+            }
+          }
+        }
       }
       > .main-block-1-container-image {
         height: 100%;
@@ -33,7 +104,818 @@
       }
     }
   }
-}
-.footer {
-  background-color: yellow;
+  > .main-block-2 {
+    height: 557px;
+    width: 100%;
+    background-color: $mainBgColor;
+    position: relative;
+    > .main-block-2-top {
+      height: 500px;
+      width: 100%;
+      background-color: $alterColor3;
+      > .container {
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        > .main-block-2-container-info {
+          > h2 {
+            font-family: $mainFontFamily;
+            font-weight: 600;
+            font-size: 35px;
+            line-height: 45px;
+            color: $alterFontColor;
+          }
+          > h3 {
+            width: 100%;
+            max-width: 460px;
+            margin: 28px 0 50px 0;
+            font-family: $mainFontFamily;
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 26px;
+            color: $alterFontColor;
+          }
+          > .main-block-2-container-info-button {
+            height: 40px;
+            width: 100%;
+            max-width: 183px;
+            padding: 0 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: $alterBgColor4;
+            border-radius: 5px;
+            box-sizing: border-box;
+            &:hover {
+              cursor: pointer;
+            }
+            > p {
+              font-family: $mainFontFamily;
+              font-weight: 500;
+              font-size: 13px;
+              color: $alterFontColor;
+            }
+            > .circle {
+              height: 18px;
+              width: 18px;
+              border: 1px solid $alterBgColor3;
+              border-radius: 50%;
+              box-sizing: border-box;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              transition: $transition;
+              &:hover {
+                border: 1px dotted $alterBgColor3;
+                transform: scale(1.5);
+                > img {
+                  transform: scale(1.5);
+                }
+              }
+              > img {
+                height: 50%;
+                width: 50%;
+                margin: 0 0 0 2px;
+                object-fit: contain;
+                transition: $transition;
+              }
+            }
+          }
+        }
+        > .main-block-2-container-image {
+          position: relative;
+          > img {
+            position: relative;
+            z-index: 1;
+          }
+          > div {
+            position: absolute;
+            top: 30%;
+            left: -15%;
+            z-index: 0;
+          }
+        }
+      }
+    }
+    > .main-block-2-bottom {
+      background-color: pink;
+      position: relative;
+      width: 100%;
+      > .container {
+        height: 115px;
+        background-color: $alterBgColor4;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        border-radius: 10px;
+        padding: 0 100px;
+        box-sizing: border-box;
+        > .main-block-2-bottom-item {
+          display: flex;
+          align-items: center;
+          > .main-block-2-bottom-item-icon {
+            height: 36px;
+            min-height: 36px;
+            width: 36px;
+            min-width: 36px;
+            > img {
+              height: 100%;
+              width: 100%;
+              object-fit: contain;
+            }
+          }
+          > p {
+            margin: 0 0 0 20px;
+            font-family: $mainFontFamily;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 18px;
+            color: $alterFontColor;
+          }
+        }
+      }
+    }
+  }
+  > .main-block-3 {
+    width: 100%;
+    // background-color: pink;
+    > .container {
+      > .main-block-3-1 {
+        // background-color: red;
+        display: flex;
+        justify-content: space-between;
+        margin: 75px 0 0 0;
+        > h2 {
+          width: 100%;
+          max-width: #{calc(50% - 10px)};
+          font-family: $mainFontFamily;
+          font-weight: 600;
+          font-size: 35px;
+          line-height: 45px;
+          color: $alterFontColor3;
+        }
+        > .text {
+          width: 100%;
+          max-width: #{calc(50% - 10px)};
+          > p {
+            font-family: $mainFontFamily;
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 26px;
+            color: $mainFontColor;
+          }
+          > .decoration {
+            height: 1px;
+            width: 135px;
+            margin: 25px 0 0 0;
+            background-color: $alterBgColor3;
+          }
+        }
+      }
+      > .main-block-3-2 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 55px 0 0 0;
+        > .main-block-3-info-item {
+          height: 275px;
+          width: 275px;
+          border-radius: 10px;
+          margin: 0 0 20px 0;
+          transition: $transition;
+          &:hover {
+            transform: scale(1.1);
+          }
+          > h2 {
+            font-family: $mainFontFamily;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 31px;
+            color: $alterFontColor;
+          }
+        }
+        > .main-item {
+          background-color: $alterBgColor3;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        > .image-item {
+          background-color: $alterBgColor5;
+          position: relative;
+          overflow: hidden;
+          > img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+            position: absolute;
+            top: 5%;
+          }
+        }
+        > .info-item {
+          background-color: $alterBgColor4;
+          padding: 0 25px;
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          > h3 {
+            font-family: $mainFontFamily;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 23px;
+            color: $alterFontColor3;
+          }
+          > p {
+            margin: 16px 0 0 0;
+            font-family: $mainFontFamily;
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 26px;
+            color: $alterFontColor;
+          }
+        }
+      }
+      > .main-block-3-3 {
+        // background-color: red;
+        display: flex;
+        justify-content: space-between;
+        margin: 75px 0 0 0;
+        > h2 {
+          width: 100%;
+          max-width: #{calc(50% - 10px)};
+          font-family: $mainFontFamily;
+          font-weight: 600;
+          font-size: 35px;
+          line-height: 45px;
+          color: $alterFontColor3;
+        }
+        > .text {
+          width: 100%;
+          max-width: #{calc(50% - 10px)};
+          > p {
+            font-family: $mainFontFamily;
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 26px;
+            color: $mainFontColor;
+          }
+          > .decoration {
+            height: 1px;
+            width: 135px;
+            margin: 25px 0 0 0;
+            background-color: $alterBgColor3;
+          }
+        }
+      }
+      > .main-block-3-4 {
+        margin: 55px 0 75px 0;
+        display: flex;
+        justify-content: space-between;
+        > .main-block-3-4-item {
+          height: 500px;
+          width: 100%;
+          max-width: 360px;
+          border-radius: 10px;
+          background-color: $alterColor1;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          > .image {
+            height: 50%;
+            width: 100%;
+            > img {
+              height: 100%;
+              width: 100%;
+              object-fit: contain;
+            }
+          }
+          > .info {
+            height: 50%;
+            width: 100%;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            box-sizing: border-box;
+            > h2 {
+              font-family: $mainFontFamily;
+              font-weight: 600;
+              font-size: 18px;
+              color: $alterFontColor3;
+            }
+            > p {
+              margin: 25px 0 0 0;
+              font-family: $mainFontFamily;
+              font-weight: 500;
+              font-size: 15px;
+              line-height: 26px;
+              color: $alterFontColor4;
+            }
+          }
+          > .decoration {
+            height: 128px;
+            width: 64px;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background-image: url("../images/block-3-decoration.svg");
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            > p {
+              font-family: $mainFontFamily;
+              font-weight: bold;
+              font-size: 24px;
+              color: $alterFontColor;
+            }
+          }
+        }
+      }
+    }
+  }
+  > .main-block-4 {
+    width: 100%;
+    background-color: $alterBgColor4;
+    > .container {
+      display: flex;
+      > .main-block-4-1 {
+        // background-color: pink;
+        display: flex;
+        justify-content: space-between;
+        margin: 75px 0 0 0;
+        > h2 {
+          width: 100%;
+          max-width: #{calc(50% - 10px)};
+          font-family: $mainFontFamily;
+          font-weight: 600;
+          font-size: 35px;
+          line-height: 45px;
+          color: $alterFontColor3;
+        }
+        > .text {
+          width: 100%;
+          max-width: #{calc(50% - 10px)};
+          > p {
+            font-family: $mainFontFamily;
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 26px;
+            color: $alterFontColor;
+          }
+          > .decoration {
+            height: 1px;
+            width: 135px;
+            margin: 25px 0 0 0;
+            background-color: $alterBgColor3;
+          }
+        }
+      }
+      > .main-block-4-2 {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin: 55px 0 0 0;
+        > .image {
+          width: 40%;
+          // background-color: red;
+          display: flex;
+          overflow: hidden;
+          position: relative;
+          > img {
+            height: 125%;
+            width: 125%;
+            object-fit: contain;
+            transform: rotate(0deg);
+            position: absolute;
+            left: -92px;
+            bottom: -215px;
+          }
+        }
+        > .info {
+          width: 60%;
+          max-width: 635px;
+          margin: 0 0 45px 0;
+          // background-color: green;
+          > .info-block {
+            width: 100%;
+            max-width: 635px;
+            border-radius: 10px;
+            border: 1px solid $alterBgColor3;
+            padding: 55px 65px 65px 65px;
+            box-sizing: border-box;
+            margin: 0 0 20px 0;
+            > h2 {
+              margin: 0 0 15px 0;
+              width: 100%;
+              font-family: $mainFontFamily;
+              font-weight: bold;
+              font-size: 24px;
+              line-height: 29px;
+              color: $alterFontColor;
+            }
+            > div {
+              display: flex;
+              margin:25px 0 0 0;
+              > .decoration {
+                margin: 10px 30px 0 0;
+                height: 5px;
+                min-height: 5px;
+                width: 5px;
+                min-width: 5px;
+                border-radius: 50%;
+                border: 1px solid $alterBgColor3;
+                &:hover {
+                  cursor: pointer;
+                  background-color: $alterBgColor3;
+                }
+              }
+              > p {
+                font-family: $mainFontFamily;
+                font-weight: 500;
+                font-size: 15px;
+                line-height: 22px;
+                color: $alterFontColor;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  > .main-block-5 {
+    width: 100%;
+    background-color: $alterColor3;
+    height: 380px;
+    > .container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      > .main-block-5-info {
+        width: 60%;
+        > h2 {
+          font-family: $mainFontFamily;
+          font-weight: 600;
+          font-size: 35px;
+          line-height: 45px;
+          color: $alterFontColor;
+        }
+        > button {
+          height: 40px;
+          padding: 0 36px;
+          margin: 30px 0 0 0;
+          background-color: #0c0c0c;
+          border-radius: 5px;
+          border: none;
+          font-family: $mainFontFamily;
+          font-weight: 500;
+          font-size: 13px;
+          color: $alterFontColor;
+          transition: $transition;
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
+      }
+      > .main-block-5-image {
+        width: 40%;
+        > img {
+          height: 100%;
+          width: 100%;
+          object-fit: contain;
+        }
+      }
+    }
+  }
+  > .main-block-6 {
+    width: 100%;
+    background-color: $mainColor;
+    > .container {
+      display: flex;
+      > .main-block-6-1 {
+        // background-color: pink;
+        display: flex;
+        justify-content: space-between;
+        margin: 75px 0 0 0;
+        > h2 {
+          width: 100%;
+          max-width: #{calc(50% - 10px)};
+          font-family: $mainFontFamily;
+          font-weight: 600;
+          font-size: 35px;
+          line-height: 45px;
+          color: $alterFontColor3;
+        }
+        > .text {
+          width: 100%;
+          max-width: #{calc(50% - 10px)};
+          > p {
+            font-family: $mainFontFamily;
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 26px;
+            color: $mainFontColor;
+          }
+          > .decoration {
+            height: 1px;
+            width: 135px;
+            margin: 25px 0 0 0;
+            background-color: $alterBgColor3;
+          }
+        }
+      }
+      > .main-block-6-2 {
+        // background-color: pink;
+        margin: 25px 0 0 0;
+        > .item-question {
+          position: relative;
+          margin: 30px 0 0 0;
+          &:not(:last-child) {
+            border-bottom: 1px solid grey;
+          }
+          > h2 {
+            font-family: $mainFontFamily;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 22px;
+            color: $mainFontColor;
+          }
+          > p {
+            margin: 20px 0 25px 0;
+            font-family: $mainFontFamily;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 24px;
+            color: $mainFontColor;
+          }
+          > .close {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 25px;
+            width: 25px;
+            background-color: $alterColor2;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &:hover {
+              cursor: pointer;
+            }
+            > img {
+              height: 60%;
+              width: 60%;
+              object-fit: contain;
+            }
+          }
+        }
+        > .brief {
+          > h2 {
+            margin: 0 0 25px 0;
+          }
+          > p {
+            display: none;
+          }
+          > .close {
+            > img {
+              transform: rotate(45deg);
+            }
+          }
+        }
+      }
+      > .main-block-6-3 {
+        width: 100%;
+        > .main-block-6-video {
+          height: 865px;
+          width: 100%;
+          background-color: $alterBgColor4;
+          border-radius: 10px;
+          position: relative;
+          > img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateY(-50%) translateX(-50%);
+            height: 80px;
+            width: 80px;
+            transition: $transition;
+            &:hover {
+              cursor: pointer;
+              transform: translateY(-50%) translateX(-50%) scale(1.1);
+            }
+          }
+        }
+        > .main-block-6-button {
+          margin: 55px 0 75px 0;
+          display: flex;
+          justify-content: center;
+          > button {
+            height: 40px;
+            padding: 0 36px;
+            border-radius: 5px;
+            border: none;
+            background-color: $alterBgColor3;
+            font-family: $mainFontFamily;
+            font-weight: 500;
+            font-size: 13px;
+            color: $alterFontColor;
+            transition: $transition;
+            &:hover {
+              color: $mainFontColor;
+            }
+          }
+        }
+      }
+    }
+  }
+  > .main-block-7 {
+    width: 100%;
+    background-color: $alterBgColor4;
+    > .container {
+      display: flex;
+      > .main-block-7-1 {
+        // background-color: pink;
+        display: flex;
+        justify-content: space-between;
+        margin: 75px 0 0 0;
+        > h2 {
+          width: 100%;
+          max-width: #{calc(50% - 10px)};
+          font-family: $mainFontFamily;
+          font-weight: 600;
+          font-size: 35px;
+          line-height: 45px;
+          color: $alterFontColor3;
+        }
+        > .text {
+          width: 100%;
+          max-width: #{calc(50% - 10px)};
+          > p {
+            font-family: $mainFontFamily;
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 26px;
+            color: $alterFontColor;
+          }
+          > .decoration {
+            height: 1px;
+            width: 135px;
+            margin: 25px 0 0 0;
+            background-color: $alterBgColor3;
+          }
+        }
+      }
+      > .main-block-7-2 {
+        width: 100%;
+        > .main-block-7-news {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          margin: 55px 0 0 0;
+          > .item-news {
+            width: 100%;
+            max-width: 360px;
+            > .image {
+              height: 240px;
+              width: 360px;
+              background: $alterColor1;
+              border-radius: 10px;
+              overflow: hidden;
+              > img {
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+              }
+            }
+            > p {
+              margin: 20px 0 10px 0;
+              font-family: $mainFontFamily;
+              font-weight: 500;
+              font-size: 13px;
+              color: $alterFontColor2;
+            }
+            > h2 {
+              font-family: $mainFontFamily;
+              font-weight: 600;
+              font-size: 20px;
+              line-height: 25px;
+              color: $alterFontColor;
+            }
+          }
+        }
+        > .main-block-7-button {
+          margin: 55px 0 75px 0;
+          display: flex;
+          justify-content: center;
+          > button {
+            height: 40px;
+            padding: 0 36px;
+            border-radius: 5px;
+            border: none;
+            background-color: $alterBgColor3;
+            font-family: $mainFontFamily;
+            font-weight: 500;
+            font-size: 13px;
+            color: $alterFontColor;
+            transition: $transition;
+            &:hover {
+              color: $mainFontColor;
+            }
+          }
+        }
+      }
+    }
+  }
+  > .main-block-8 {
+    height: 440px;
+    width: 100%;
+    background-color: $mainColor;
+    > .container {
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      > .about {
+        > h2 {
+          font-family: $mainFontFamily;
+          font-weight: 600;
+          font-size: 35px;
+          line-height: 45px;
+          color: $alterFontColor3;
+        }
+        > div {
+          margin: 35px 0;
+          > p {
+            font-family: $mainFontFamily;
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 36px;
+            color: $mainFontColor;
+          }
+        }
+        > a {
+          font-family: $mainFontFamily;
+          font-weight: 500;
+          font-size: 13px;
+          color: $mainFontColor;
+          border-bottom: 1px dotted $mainFontColor;
+          &:hover {
+            border-bottom: 1px solid $mainFontColor;
+          }
+        }
+      }
+      > .registration {
+        width: 100%;
+        max-width: 570px;
+        display: flex;
+        background: #EEEDE7;
+        border-radius: 10px;
+        padding: 0 0 0 45px;
+        box-sizing: border-box;
+        > .text {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          width: 100%;
+          max-width: 215px;
+          > h2 {
+            font-family: $mainFontFamily;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 31px;
+            color: $mainFontColor;
+          }
+          > button {
+            margin: 25px 0 0 0;
+            height: 40px;
+            padding: 0 36px;
+            border-radius: 5px;
+            border: none;
+            background-color: $alterBgColor3;
+            font-family: $mainFontFamily;
+            font-weight: 500;
+            font-size: 13px;
+            color: $alterFontColor;
+            transition: $transition;
+            &:hover {
+              color: $mainFontColor;
+            }
+          }
+        }
+        > .image {
+          > img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+          }
+        }
+      }
+    }
+  }
 }
