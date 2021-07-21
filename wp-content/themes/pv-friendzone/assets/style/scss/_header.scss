@@ -29,9 +29,8 @@
       justify-content: space-between;
       align-items: center;
       > .header-logo {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        width: 50%;
+        max-width: 280px;
         transition: $transition;
         &:hover {
           cursor: pointer;
@@ -49,68 +48,114 @@
           }
         }
       }
-      > .header-login {
+      > .header-buttons {
+        width: 50%;
         display: flex;
-        > button {
-          margin: 0 10px;
-          padding: 0;
-          box-sizing: border-box;
-        }
-        > .header-button-login {
-          height: 40px;
-          padding: 0 36px;
-          border-radius: 5px;
-          border: 1px solid #1B1B1B;
-          background-color: $mainBgColor;
-          font-family: $mainFontFamily;
-          font-weight: 500;
-          font-size: 13px;
-          color: $mainFontColor;
-          transition: $transition;
-          &:hover {
-            border: 1px solid $alterFontColor;
-            background-color: $alterBgColor3;
-            color: $alterFontColor;
+        justify-content: space-between;
+        > .header-login {
+          display: flex;
+          > button {
+            //margin: 0 10px;
+            padding: 0;
+            box-sizing: border-box;
           }
-        }
-        > .header-button-reg {
-          height: 40px;
-          padding: 0 36px;
-          border-radius: 5px;
-          border: none;
-          background-color: $alterBgColor3;
-          font-family: $mainFontFamily;
-          font-weight: 500;
-          font-size: 13px;
-          color: $alterFontColor;
-          transition: $transition;
-          &:hover {
+          > .header-button-login {
+            height: 40px;
+            padding: 0 36px;
+            border-radius: 5px;
+            border: 1px solid #1B1B1B;
+            background-color: $mainBgColor;
+            font-family: $mainFontFamily;
+            font-weight: 500;
+            font-size: 13px;
             color: $mainFontColor;
+            transition: $transition;
+            &:hover {
+              border: 1px solid $alterFontColor;
+              background-color: $alterBgColor3;
+              color: $alterFontColor;
+            }
+          }
+          > .header-button-reg {
+            height: 40px;
+            padding: 0 36px;
+            border-radius: 5px;
+            border: none;
+            background-color: $alterBgColor3;
+            font-family: $mainFontFamily;
+            font-weight: 500;
+            font-size: 13px;
+            color: $alterFontColor;
+            margin: 0 0 0 20px;
+            transition: $transition;
+            &:hover {
+              color: $mainFontColor;
+            }
           }
         }
-      }
-      > .header-burger-menu {
-        height: 40px;
-        width: 40px;
-        border-radius: 5px;
-        background-color: $alterColor2;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        padding: 10px 0;
-        box-sizing: border-box;
-        &:hover {
-          cursor: pointer;
+        > .login {
+          // display: flex;
+          align-items: center;
+          > .avatar {
+            height: 45px;
+            min-height: 45px;
+            width: 45px;
+            min-width: 45px;
+            border-radius: 50%;
+            overflow: hidden;
+            > img {
+              height: 100%;
+              width: 100%;
+              object-fit: contain;
+            }
+          }
+          > .user {
+            font-family: $mainFontFamily;
+            font-weight: 500;
+            font-size: 13px;
+            color: $mainFontColor;
+            margin: 0 10px 0 20px;
+          }
+          > .actions {
+            height: 10px;
+            width: 10px;
+            //background-color: purple;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &:hover {
+              cursor: pointer;
+            }
+            > img {
+              height: 100%;
+              width: 100%;
+              object-fit: contain;
+            }
+          }
+        }
+        > .header-burger-menu {
+          height: 40px;
+          width: 40px;
+          border-radius: 5px;
+          background-color: $alterColor2;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+          align-items: center;
+          padding: 10px 0;
+          box-sizing: border-box;
+          &:hover {
+            cursor: pointer;
+            > .header-burger-menu-line {
+              background-color: $alterColor3;
+            }
+          }
           > .header-burger-menu-line {
-            background-color: $alterColor3;
+            height: 2px;
+            width: 20px;
+            background-color: $alterColor1;
+            transition: $transition;
           }
-        }
-        > .header-burger-menu-line {
-          height: 2px;
-          width: 20px;
-          background-color: $alterColor1;
-          transition: $transition;
         }
       }
     }

@@ -116,9 +116,8 @@ button {
   align-items: center;
 }
 .header > .header-fixed > .container > .header-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 50%;
+  max-width: 280px;
   transition: 0.3s;
 }
 .header > .header-fixed > .container > .header-logo:hover {
@@ -135,15 +134,19 @@ button {
   width: 100%;
   object-fit: contain;
 }
-.header > .header-fixed > .container > .header-login {
+.header > .header-fixed > .container > .header-buttons {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+.header > .header-fixed > .container > .header-buttons > .header-login {
   display: flex;
 }
-.header > .header-fixed > .container > .header-login > button {
-  margin: 0 10px;
+.header > .header-fixed > .container > .header-buttons > .header-login > button {
   padding: 0;
   box-sizing: border-box;
 }
-.header > .header-fixed > .container > .header-login > .header-button-login {
+.header > .header-fixed > .container > .header-buttons > .header-login > .header-button-login {
   height: 40px;
   padding: 0 36px;
   border-radius: 5px;
@@ -155,12 +158,12 @@ button {
   color: #1B1B1B;
   transition: 0.3s;
 }
-.header > .header-fixed > .container > .header-login > .header-button-login:hover {
+.header > .header-fixed > .container > .header-buttons > .header-login > .header-button-login:hover {
   border: 1px solid #FFFFFF;
   background-color: #FA1E38;
   color: #FFFFFF;
 }
-.header > .header-fixed > .container > .header-login > .header-button-reg {
+.header > .header-fixed > .container > .header-buttons > .header-login > .header-button-reg {
   height: 40px;
   padding: 0 36px;
   border-radius: 5px;
@@ -170,12 +173,51 @@ button {
   font-weight: 500;
   font-size: 13px;
   color: #FFFFFF;
+  margin: 0 0 0 20px;
   transition: 0.3s;
 }
-.header > .header-fixed > .container > .header-login > .header-button-reg:hover {
+.header > .header-fixed > .container > .header-buttons > .header-login > .header-button-reg:hover {
   color: #1B1B1B;
 }
-.header > .header-fixed > .container > .header-burger-menu {
+.header > .header-fixed > .container > .header-buttons > .login {
+  align-items: center;
+}
+.header > .header-fixed > .container > .header-buttons > .login > .avatar {
+  height: 45px;
+  min-height: 45px;
+  width: 45px;
+  min-width: 45px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.header > .header-fixed > .container > .header-buttons > .login > .avatar > img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.header > .header-fixed > .container > .header-buttons > .login > .user {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #1B1B1B;
+  margin: 0 10px 0 20px;
+}
+.header > .header-fixed > .container > .header-buttons > .login > .actions {
+  height: 10px;
+  width: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header > .header-fixed > .container > .header-buttons > .login > .actions:hover {
+  cursor: pointer;
+}
+.header > .header-fixed > .container > .header-buttons > .login > .actions > img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.header > .header-fixed > .container > .header-buttons > .header-burger-menu {
   height: 40px;
   width: 40px;
   border-radius: 5px;
@@ -187,13 +229,13 @@ button {
   padding: 10px 0;
   box-sizing: border-box;
 }
-.header > .header-fixed > .container > .header-burger-menu:hover {
+.header > .header-fixed > .container > .header-buttons > .header-burger-menu:hover {
   cursor: pointer;
 }
-.header > .header-fixed > .container > .header-burger-menu:hover > .header-burger-menu-line {
+.header > .header-fixed > .container > .header-buttons > .header-burger-menu:hover > .header-burger-menu-line {
   background-color: #FA1E38;
 }
-.header > .header-fixed > .container > .header-burger-menu > .header-burger-menu-line {
+.header > .header-fixed > .container > .header-buttons > .header-burger-menu > .header-burger-menu-line {
   height: 2px;
   width: 20px;
   background-color: #FFFFFF;
@@ -212,13 +254,13 @@ button {
   justify-content: space-between;
   align-items: center;
 }
-.main > .main-block-1 > .container > .main-block-1-container-info > h2 {
+.main > .main-block-1 > .container > .main-block-1-container-info > .text > h2 {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 15px;
   color: #000000;
 }
-.main > .main-block-1 > .container > .main-block-1-container-info > h1 {
+.main > .main-block-1 > .container > .main-block-1-container-info > .text > h1 {
   max-width: 410px;
   margin: 16px 0 20px 0;
   font-family: "Montserrat", sans-serif;
@@ -875,10 +917,13 @@ button {
 }
 .main > .main-block-6 > .container > .main-block-6-3 {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .main > .main-block-6 > .container > .main-block-6-3 > .main-block-6-video {
-  height: 865px;
-  width: 100%;
+  min-height: 600px;
+  width: 75%;
   background-color: #1B1B1B;
   border-radius: 10px;
   position: relative;
@@ -1161,6 +1206,178 @@ button {
   color: #A5A5A5;
 }
 .footer > .container > .made-by > a:hover {
+  text-decoration: underline;
+}
+
+.modals {
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(27, 27, 27, 0.8);
+}
+.modals > .header-menu > .modal-progress-bar {
+  height: 5px;
+  width: 100%;
+  background: none;
+}
+.modals > .header-menu > .modal-progress-bar > .modal-progress-bar-line {
+  height: 100%;
+  width: 0;
+  background-color: #FA1E38;
+}
+.modals > .header-menu > .container-modal {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  background-color: #1B1B1B;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons {
+  height: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image {
+  width: 50%;
+  max-width: 280px;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > a {
+  height: 100%;
+  width: 100%;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > a > img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons > .not-login > .button-login {
+  height: 40px;
+  padding: 0 36px;
+  border-radius: 5px;
+  border: 1px solid #FFFFFF;
+  background-color: #1B1B1B;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #FFFFFF;
+  transition: 0.3s;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons > .not-login > .button-login:hover {
+  border: 1px solid #FFFFFF;
+  background-color: #F8F5EA;
+  color: #1B1B1B;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons > .not-login > .button-registration {
+  height: 40px;
+  padding: 0 36px;
+  border-radius: 5px;
+  border: none;
+  background-color: #FA1E38;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #FFFFFF;
+  margin: 0 0 0 20px;
+  transition: 0.3s;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons > .not-login > .button-registration:hover {
+  color: #1B1B1B;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons > .login {
+  align-items: center;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons > .login > .avatar {
+  height: 45px;
+  min-height: 45px;
+  width: 45px;
+  min-width: 45px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons > .login > .avatar > img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons > .login > .user {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #FFFFFF;
+  margin: 0 10px 0 20px;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons > .login > .actions {
+  height: 10px;
+  width: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons > .login > .actions:hover {
+  cursor: pointer;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons > .login > .actions > img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons > .close {
+  height: 40px;
+  width: 40px;
+  background: #A5A5A5;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons > .close:hover {
+  cursor: pointer;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons > .close > img {
+  height: 50%;
+  width: 50%;
+  object-fit: contain;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-links {
+  display: flex;
+  margin: 50px 0 0 0;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-links > div {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-links > div > a {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  color: #A5A5A5;
+  margin: 0 0 25px 0;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-links > div > a:hover {
+  text-decoration: underline;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-links > .active > a {
+  color: #FFFFFF;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-copyright {
+  display: flex;
+  justify-content: space-between;
+  margin: 50px 0 0 0;
+  padding: 0 0 50px 0;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-copyright > a {
+  width: 50%;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #A5A5A5;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-copyright > a:hover {
   text-decoration: underline;
 }
 

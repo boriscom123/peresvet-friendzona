@@ -23,13 +23,27 @@
                         <img src="images/logo.svg" alt="FRIENDзона">
                     </a>
                 </div>
-                <div class="header-login">
-                    <button class="header-button-login">Войти</button>
-                    <button class="header-button-reg">Зарегистрироваться</button>
-                </div>
-                <div class="header-burger-menu">
-                    <div class="header-burger-menu-line"></div>
-                    <div class="header-burger-menu-line"></div>
+                <div class="header-buttons">
+                    <div class="header-login">
+                        <button class="header-button-login">Войти</button>
+                        <button class="header-button-reg">Зарегистрироваться</button>
+                    </div>
+                    <div class="login d-none">
+                        <div class="avatar">
+                            <img src="images/user-avatar.svg" alt="user-avatar">
+                        </div>
+                        <div class="user">Иван</div>
+                        <div class="actions">
+                            <img src="images/chevron-down-black.svg" alt="chevron-down">
+                        </div>
+                    </div>
+                    <div class="close">
+                        <img src="images/icon-cross.svg" alt="icon-cross">
+                    </div>
+                    <div class="header-burger-menu">
+                        <div class="header-burger-menu-line"></div>
+                        <div class="header-burger-menu-line"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -40,8 +54,18 @@
         <div class="main-block-1">
             <div class="container">
                 <div class="main-block-1-container-info">
-                    <h2>Счастье не в друзьях, а в их количестве!</h2>
-                    <h1>Помоги другу купить квартиру и получи 40 000 ₽</h1>
+                    <div class="text">
+                        <h2>Счастье не в друзьях, а в их количестве!</h2>
+                        <h1>Помоги другу купить квартиру и получи 40 000 ₽</h1>
+                    </div>
+                    <div class="text d-none">
+                        <h2>FRIENDзона — пространство возможностей</h2>
+                        <h1>Присоединяйтесь к уникальному сообществу единомышленников и экспертов недвижимости</h1>
+                    </div>
+                    <div class="text d-none">
+                        <h2>FRIENDзона — пространство возможностей</h2>
+                        <h1>Купите себе квартиру со скидкой в 300 000 ₽</h1>
+                    </div>
                     <div class="main-block-1-container-info-navigation">
                         <button>Узнать подробнее</button>
                         <div class="scroll-buttons">
@@ -57,6 +81,8 @@
                 </div>
                 <div class="main-block-1-container-image">
                     <img src="images/block-1-image-1.svg" alt="block-1-image">
+                    <img class="d-none" src="images/block-1-image-2.svg" alt="block-2-image">
+                    <img class="d-none" src="images/block-1-image-3.svg" alt="block-3-image">
                 </div>
             </div>
         </div>
@@ -452,6 +478,64 @@
             </div>
         </div>
     </footer>
+
+    <div class="modals d-none">
+
+        <div class="header-menu">
+            <div class="modal-progress-bar">
+                <div class="modal-progress-bar-line"></div>
+            </div>
+            <div class="container-modal">
+                <div class="container">
+                    <div class="modal-menu-buttons">
+                        <div class="image">
+                            <a href="index.html">
+                                <img src="images/footer-logo.svg" alt="footer-logo">
+                            </a>
+                        </div>
+                        <div class="buttons">
+                            <div class="not-login">
+                                <button class="button-login">Войти</button>
+                                <button class="button-registration">Зарегистрироваться</button>
+                            </div>
+                            <div class="login d-none">
+                                <div class="avatar">
+                                    <img src="images/user-avatar.svg" alt="user-avatar">
+                                </div>
+                                <div class="user">Иван</div>
+                                <div class="actions">
+                                    <img src="images/chevron-down.svg" alt="chevron-down">
+                                </div>
+                            </div>
+                            <div class="close">
+                                <img src="images/icon-cross.svg" alt="icon-cross">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-menu-links">
+                        <div>
+                            <a href="#">Vkontakte</a>
+                            <a href="#">Facebook</a>
+                            <a href="#">Instagram</a>
+                            <a href="#">Youtube</a>
+                        </div>
+                        <div class="active">
+                            <a href="#">О программе</a>
+                            <a href="#">Условия</a>
+                            <a href="#">Новости</a>
+                            <a href="#">Контакты</a>
+                        </div>
+                    </div>
+                    <div class="modal-menu-copyright">
+                        <a href="#">© 2012-2021 Пересвет.Недвижимость</a>
+                        <a href="#">Политика конфиденциальности</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
     <script src="script/index.js"></script>
 </body>
 </html>
