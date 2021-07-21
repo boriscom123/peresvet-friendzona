@@ -9,10 +9,15 @@
       > .image {
         // width: 50%;
         // background-color: pink;
-        transition: $transition;
-        &:hover {
-          cursor: pointer;
-          transform: scale(1.1);
+        > a {
+          > img {
+            width: 100%;
+            object-fit: contain;
+            transition: $transition;
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
         }
       }
       > .links {

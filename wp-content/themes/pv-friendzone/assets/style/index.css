@@ -1043,7 +1043,9 @@ button {
   display: flex;
   justify-content: center;
 }
-.main > .main-block-7 > .container > .main-block-7-2 > .main-block-7-button > button {
+.main > .main-block-7 > .container > .main-block-7-2 > .main-block-7-button > a {
+  display: flex;
+  align-items: center;
   height: 40px;
   padding: 0 36px;
   border-radius: 5px;
@@ -1055,7 +1057,7 @@ button {
   color: #FFFFFF;
   transition: 0.3s;
 }
-.main > .main-block-7 > .container > .main-block-7-2 > .main-block-7-button > button:hover {
+.main > .main-block-7 > .container > .main-block-7-2 > .main-block-7-button > a:hover {
   color: #1B1B1B;
 }
 .main > .main-block-8 {
@@ -1150,11 +1152,12 @@ button {
   display: flex;
   justify-content: space-between;
 }
-.footer > .container > .footer-links > .image {
+.footer > .container > .footer-links > .image > a > img {
+  width: 100%;
+  object-fit: contain;
   transition: 0.3s;
 }
-.footer > .container > .footer-links > .image:hover {
-  cursor: pointer;
+.footer > .container > .footer-links > .image > a > img:hover {
   transform: scale(1.1);
 }
 .footer > .container > .footer-links > .links {
@@ -1379,6 +1382,443 @@ button {
 }
 .modals > .header-menu > .container-modal > .container > .modal-menu-copyright > a:hover {
   text-decoration: underline;
+}
+
+.breadcrumbs {
+  height: 50px;
+  width: 100%;
+  background-color: #EBEADE;
+}
+.breadcrumbs > .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.breadcrumbs > .container > .link > a {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #A5A5A5;
+  margin: 5px 0 0 10px;
+}
+
+.main > .main-news {
+  background-color: #F8F5EA;
+  margin: 55px 0 0 0;
+}
+.main > .main-news > .container {
+  display: flex;
+  justify-content: space-between;
+}
+.main > .main-news > .container > .text {
+  width: 50%;
+  max-width: calc(50% - 40px);
+}
+.main > .main-news > .container > .text > p {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #A5A5A5;
+}
+.main > .main-news > .container > .text > h1 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 25px;
+  color: #1B1B1B;
+  margin: 10px 0;
+}
+.main > .main-news > .container > .text > h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  color: #1B1B1B;
+}
+.main > .main-news > .container > .text > .link {
+  margin: 15px 0 0 0;
+}
+.main > .main-news > .container > .text > .link > a {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #FA1E38;
+}
+.main > .main-news > .container > .text > .link > a:hover {
+  text-decoration: underline;
+}
+.main > .main-news > .container > .text > .link > a > img {
+  margin: 0 0 0 12px;
+  transition: 0.3s;
+}
+.main > .main-news > .container > .text > .link > a > img:hover {
+  margin: 0 0 0 20px;
+}
+.main > .main-news > .container > .image {
+  height: 100%;
+  min-height: 320px;
+  width: 50%;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+}
+.main > .main-news > .container > .image > img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.main > .brief-news {
+  background-color: #F8F5EA;
+  margin: 55px 0 0 0;
+}
+.main > .brief-news > .container {
+  display: flex;
+  justify-content: space-between;
+}
+.main > .brief-news > .container > .item-news {
+  width: 100%;
+  max-width: 360px;
+}
+.main > .brief-news > .container > .item-news > .image {
+  height: 240px;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.main > .brief-news > .container > .item-news > .image > img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.main > .brief-news > .container > .item-news > p {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #A5A5A5;
+  margin: 20px 0 0 0;
+}
+.main > .brief-news > .container > .item-news > h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 25px;
+  color: #1B1B1B;
+  margin: 10px 0;
+}
+.main > .brief-news > .container > .item-news > h3 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  color: #1B1B1B;
+}
+.main > .brief-news > .container > .item-news > .link {
+  margin: 15px 0 0 0;
+}
+.main > .brief-news > .container > .item-news > .link > a {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #FA1E38;
+}
+.main > .brief-news > .container > .item-news > .link > a:hover {
+  text-decoration: underline;
+}
+.main > .brief-news > .container > .item-news > .link > a > img {
+  margin: 0 0 0 12px;
+  transition: 0.3s;
+}
+.main > .brief-news > .container > .item-news > .link > a > img:hover {
+  margin: 0 0 0 20px;
+}
+.main > .promo {
+  background-color: #F8F5EA;
+  margin: 55px 0 75px 0;
+}
+.main > .promo > .container > div {
+  background: #A5A5A5;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 70px 120px;
+}
+.main > .promo > .container > div > .text > h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 35px;
+  line-height: 45px;
+  color: #FFFFFF;
+  max-width: 520px;
+}
+.main > .promo > .container > div > .text > button {
+  height: 40px;
+  padding: 0 36px;
+  border-radius: 5px;
+  border: 1px solid #1B1B1B;
+  background-color: #1B1B1B;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #FFFFFF;
+  margin: 30px 0 0 0;
+  transition: 0.3s;
+}
+.main > .promo > .container > div > .text > button:hover {
+  border: 1px solid #1B1B1B;
+  background-color: #F8F5EA;
+  color: #1B1B1B;
+}
+.main > .promo > .container > div > .image > img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.main > .more-news {
+  background-color: #F8F5EA;
+  margin: 55px 0 75px 0;
+}
+.main > .more-news > .container {
+  display: flex;
+  justify-content: center;
+}
+.main > .more-news > .container > button {
+  height: 40px;
+  padding: 0 36px;
+  border-radius: 5px;
+  border: 1px solid #FA1E38;
+  background-color: #FA1E38;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #FFFFFF;
+  margin: 30px 0 0 0;
+  transition: 0.3s;
+}
+.main > .more-news > .container > button:hover {
+  border: 1px solid #1B1B1B;
+  color: #1B1B1B;
+}
+
+.main > .main-articles {
+  background-color: #F8F5EA;
+  margin: 55px 0 55px 0;
+}
+.main > .main-articles > .container {
+  display: flex;
+  justify-content: space-between;
+}
+.main > .main-articles > .container > .article {
+  width: 100%;
+  max-width: calc(100% - 400px);
+}
+.main > .main-articles > .container > .article > h3 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #A5A5A5;
+}
+.main > .main-articles > .container > .article > h1 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 35px;
+  line-height: 45px;
+  color: #1B1B1B;
+  margin: 10px 0 15px 0;
+}
+.main > .main-articles > .container > .article > .main-article-image {
+  max-height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.main > .main-articles > .container > .article > .main-article-image > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.main > .main-articles > .container > .article > p {
+  font-family: "Montserrat", sans-serif;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 31px;
+  color: #1B1B1B;
+  margin: 20px 0 20px 0;
+}
+.main > .main-articles > .container > .article > h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  color: #1B1B1B;
+  margin: 55px 0 35px 0;
+}
+.main > .main-articles > .container > .article > .image {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  margin: 35px 0 0 0;
+}
+.main > .main-articles > .container > .article > .image > img {
+  width: 100%;
+  object-fit: contain;
+}
+.main > .main-articles > .container > .article > .lock {
+  background: #A5A5A5;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 80px;
+  margin: 50px 0 0 0;
+}
+.main > .main-articles > .container > .article > .lock > .text > h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  color: #FFFFFF;
+  max-width: 360px;
+}
+.main > .main-articles > .container > .article > .lock > .text > button {
+  height: 40px;
+  padding: 0 36px;
+  border-radius: 5px;
+  border: 1px solid #1B1B1B;
+  background-color: #1B1B1B;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #FFFFFF;
+  margin: 30px 0 0 0;
+  transition: 0.3s;
+}
+.main > .main-articles > .container > .article > .lock > .text > button:hover {
+  border: 1px solid #1B1B1B;
+  background-color: #F8F5EA;
+  color: #1B1B1B;
+}
+.main > .main-articles > .container > .article > .lock > .image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main > .main-articles > .container > .article > .lock > .image > img {
+  height: 50%;
+  width: 50%;
+  object-fit: contain;
+}
+.main > .main-articles > .container > .mini-articles {
+  width: 100%;
+  max-width: 240px;
+}
+.main > .main-articles > .container > .mini-articles > .mini-art {
+  position: relative;
+}
+.main > .main-articles > .container > .mini-articles > .mini-art > .image {
+  height: 240px;
+  width: 240px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.main > .main-articles > .container > .mini-articles > .mini-art > .image > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.main > .main-articles > .container > .mini-articles > .mini-art > h3 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #A5A5A5;
+  margin: 20px 0 10px 0;
+}
+.main > .main-articles > .container > .mini-articles > .mini-art > h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #1B1B1B;
+  margin: 0 0 50px 0;
+}
+.main > .main-articles > .container > .mini-articles > .mini-art > .lock {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(165, 165, 165, 0.8);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main > .main-articles > .container > .mini-articles > .mini-art > .lock > img {
+  height: 50%;
+  width: 50%;
+  object-fit: contain;
+}
+.main > .main-additional-articles {
+  background-color: #F8F5EA;
+  margin: 55px 0 75px 0;
+}
+.main > .main-additional-articles > .container > .title > h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 35px;
+  line-height: 45px;
+  color: #1B1B1B;
+}
+.main > .main-additional-articles > .container > .title > .decoration {
+  height: 1px;
+  width: 100%;
+  max-width: 135px;
+  background-color: #FA1E38;
+  margin: 22px 0 0 0;
+}
+.main > .main-additional-articles > .container > .art-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 55px 0 0 0;
+}
+.main > .main-additional-articles > .container > .art-info > .art {
+  width: 100%;
+  max-width: 360px;
+}
+.main > .main-additional-articles > .container > .art-info > .art > h3 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #A5A5A5;
+}
+.main > .main-additional-articles > .container > .art-info > .art > h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 25px;
+  color: #1B1B1B;
+  margin: 10px 0 15px 0;
+}
+.main > .main-additional-articles > .container > .art-info > .art > .link {
+  margin: 15px 0 0 0;
+}
+.main > .main-additional-articles > .container > .art-info > .art > .link > a {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #FA1E38;
+}
+.main > .main-additional-articles > .container > .art-info > .art > .link > a:hover {
+  text-decoration: underline;
+}
+.main > .main-additional-articles > .container > .art-info > .art > .link > a > img {
+  margin: 0 0 0 12px;
+  transition: 0.3s;
+}
+.main > .main-additional-articles > .container > .art-info > .art > .link > a > img:hover {
+  margin: 0 0 0 20px;
 }
 
 /*# sourceMappingURL=index.css.map */
