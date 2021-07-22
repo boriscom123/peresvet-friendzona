@@ -53,13 +53,16 @@
         display: flex;
         justify-content: space-between;
         > .header-login {
-          display: flex;
+          // display: flex;
           > button {
             //margin: 0 10px;
             padding: 0;
             box-sizing: border-box;
           }
           > .header-button-login {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             height: 40px;
             padding: 0 36px;
             border-radius: 5px;
