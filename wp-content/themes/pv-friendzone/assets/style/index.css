@@ -179,6 +179,7 @@ button {
 @media (max-width: 550px) {
   .header > .header-fixed > .container > .header-buttons {
     flex-direction: column-reverse;
+    align-items: flex-end;
   }
 }
 @media (max-width: 850px) {
@@ -284,6 +285,11 @@ button {
   padding: 10px 0;
   box-sizing: border-box;
 }
+@media (max-width: 550px) {
+  .header > .header-fixed > .container > .header-buttons > .header-burger-menu {
+    margin: 0 0 60px 0;
+  }
+}
 .header > .header-fixed > .container > .header-buttons > .header-burger-menu:hover {
   cursor: pointer;
 }
@@ -328,13 +334,13 @@ button {
     width: 100%;
   }
 }
-.main > .main-block-1 > .container > .main-block-1-container-info > .text > h2 {
+.main > .main-block-1 > .container > .main-block-1-container-info > .text-block > .text > h2 {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 15px;
   color: #000000;
 }
-.main > .main-block-1 > .container > .main-block-1-container-info > .text > h1 {
+.main > .main-block-1 > .container > .main-block-1-container-info > .text-block > .text > h1 {
   max-width: 410px;
   margin: 16px 0 20px 0;
   font-family: "Montserrat", sans-serif;
@@ -344,13 +350,13 @@ button {
   color: #1B1B1B;
 }
 @media (max-width: 850px) {
-  .main > .main-block-1 > .container > .main-block-1-container-info > .text > h1 {
+  .main > .main-block-1 > .container > .main-block-1-container-info > .text-block > .text > h1 {
     font-size: 28px;
     line-height: 38px;
   }
 }
 @media (max-width: 700px) {
-  .main > .main-block-1 > .container > .main-block-1-container-info > .text > h1 {
+  .main > .main-block-1 > .container > .main-block-1-container-info > .text-block > .text > h1 {
     font-size: 24px;
     line-height: 34px;
   }
@@ -1208,6 +1214,7 @@ button {
 }
 .main > .main-block-6 > .container > .main-block-6-2 {
   margin: 25px 0 0 0;
+  width: 100%;
 }
 .main > .main-block-6 > .container > .main-block-6-2 > .item-question {
   position: relative;
@@ -1733,19 +1740,13 @@ button {
 }
 
 .modals {
-  min-height: 100vh;
+  min-height: calc(100vh - 5px);
   width: 100%;
   background-color: rgba(27, 27, 27, 0.8);
-}
-.modals > .header-menu > .modal-progress-bar {
-  height: 5px;
-  width: 100%;
-  background: none;
-}
-.modals > .header-menu > .modal-progress-bar > .modal-progress-bar-line {
-  height: 100%;
-  width: 0;
-  background-color: #FA1E38;
+  position: fixed;
+  top: 5px;
+  left: 0;
+  z-index: 5000;
 }
 .modals > .header-menu > .container-modal {
   width: 100%;

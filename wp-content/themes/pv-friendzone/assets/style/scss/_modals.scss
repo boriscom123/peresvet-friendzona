@@ -1,18 +1,12 @@
 .modals {
-  min-height: 100vh;
+  min-height: #{calc(100vh - 5px)};
   width: 100%;
   background-color: rgba(27, 27, 27, 0.8);
+  position: fixed;
+  top: 5px;
+  left: 0;
+  z-index: 5000;
   > .header-menu {
-    > .modal-progress-bar {
-      height: 5px;
-      width: 100%;
-      background: none;
-      > .modal-progress-bar-line {
-        height: 100%;
-        width: 0;
-        background-color: $alterBgColor3;
-      }
-    }
     > .container-modal {
       width: 100%;
       max-width: 1360px;

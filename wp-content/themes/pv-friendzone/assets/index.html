@@ -25,8 +25,8 @@
                 </div>
                 <div class="header-buttons">
                     <div class="header-login d-flex">
-                        <button class="header-button-login">Войти</button>
-                        <button class="header-button-reg">Зарегистрироваться</button>
+                        <button class="header-button-login login-button">Войти</button>
+                        <button class="header-button-reg registration-button">Зарегистрироваться</button>
                     </div>
                     <div class="login d-none">
                         <div class="avatar">
@@ -54,32 +54,34 @@
         <div class="main-block-1">
             <div class="container">
                 <div class="main-block-1-container-info">
-                    <div class="text">
-                        <h2>Счастье не в друзьях, а в их количестве!</h2>
-                        <h1>Помоги другу купить квартиру и получи<br>40 000 ₽</h1>
-                    </div>
-                    <div class="text d-none">
-                        <h2>FRIENDзона — пространство возможностей</h2>
-                        <h1>Присоединяйтесь к уникальному сообществу единомышленников и экспертов недвижимости</h1>
-                    </div>
-                    <div class="text d-none">
-                        <h2>FRIENDзона — пространство возможностей</h2>
-                        <h1>Купите себе квартиру со скидкой в 300 000 ₽</h1>
+                    <div class="text-block" id="slider-text">
+                        <div class="text">
+                            <h2>Счастье не в друзьях, а в их количестве!</h2>
+                            <h1>Помоги другу купить квартиру и получи<br>40 000 ₽</h1>
+                        </div>
+                        <div class="text d-none">
+                            <h2>FRIENDзона — пространство возможностей</h2>
+                            <h1>Присоединяйтесь к уникальному сообществу единомышленников и экспертов недвижимости</h1>
+                        </div>
+                        <div class="text d-none">
+                            <h2>FRIENDзона — пространство возможностей</h2>
+                            <h1>Купите себе квартиру со скидкой в 300 000 ₽</h1>
+                        </div>
                     </div>
                     <div class="main-block-1-container-info-navigation">
                         <button>Узнать подробнее</button>
                         <div class="scroll-buttons">
-                            <button class="left"><img src="images/chevron-left.svg" alt="chevron-left"></button>
-                            <button class="right"><img src="images/chevron-right.svg" alt="chevron-right"></button>
+                            <button class="left" id="slider-left-button"><img src="images/chevron-left.svg" alt="chevron-left"></button>
+                            <button class="right" id="slider-right-button"><img src="images/chevron-right.svg" alt="chevron-right"></button>
                         </div>
-                        <div class="pagination">
+                        <div class="pagination" id="slider-pagination">
                             <div class="circle active"></div>
                             <div class="circle"></div>
                             <div class="circle"></div>
                         </div>
                     </div>
                 </div>
-                <div class="main-block-1-container-image">
+                <div class="main-block-1-container-image" id="slider-images">
                     <img src="images/block-1-image-1.svg" alt="block-1-image">
                     <img class="d-none" src="images/block-1-image-2.svg" alt="block-2-image">
                     <img class="d-none" src="images/block-1-image-3.svg" alt="block-3-image">
@@ -298,7 +300,7 @@
             <div class="container">
                 <div class="main-block-5-info">
                     <h2>Присоединяйся к сообществу <br>FRIENDзона прямо сейчас!</h2>
-                    <button>Регистрация</button>
+                    <button class="registration-button">Регистрация</button>
                 </div>
                 <div class="main-block-5-image">
                     <img src="images/block-5-img-1.svg" alt="block-5-img-1">
@@ -436,7 +438,7 @@
                 <div class="registration">
                     <div class="text">
                         <h2>Ждем вас в нашей команде</h2>
-                        <button>Зарегистрироваться</button>
+                        <button class="registration-button">Зарегистрироваться</button>
                     </div>
                     <div class="image">
                         <img src="images/block-8-img-1.svg" alt="block-8-img-1">
@@ -484,12 +486,9 @@
         </div>
     </footer>
 
-    <div class="modals">
+    <div class="modals d-none">
 
-        <div class="header-menu">
-            <div class="modal-progress-bar">
-                <div class="modal-progress-bar-line"></div>
-            </div>
+        <div class="header-menu d-none">
             <div class="container-modal">
                 <div class="container">
                     <div class="modal-menu-buttons">
@@ -500,8 +499,8 @@
                         </div>
                         <div class="buttons">
                             <div class="not-login d-flex">
-                                <button class="button-login">Войти</button>
-                                <button class="button-registration">Зарегистрироваться</button>
+                                <button class="button-login login-button">Войти</button>
+                                <button class="button-registration registration-button">Зарегистрироваться</button>
                             </div>
                             <div class="login d-none">
                                 <div class="avatar">
@@ -512,7 +511,7 @@
                                     <img src="images/chevron-down.svg" alt="chevron-down">
                                 </div>
                             </div>
-                            <div class="close">
+                            <div class="close" id="close-burger-menu">
                                 <img src="images/icon-cross.svg" alt="icon-cross">
                             </div>
                         </div>
@@ -539,7 +538,7 @@
             </div>
         </div>
 
-        <div class="form-reg">
+        <div class="form-reg d-none">
             <div class="container">
                 <div class="reg-form-info">
                     <h2>Регистрация в&nbsp;личном&nbsp;кабинете</h2>
@@ -582,13 +581,13 @@
                         <input type="submit" value="Продолжить"  form="check-tel">
                     </div>
                 </div>
-                <div class="close">
+                <div class="close close-modal">
                     <img src="images/icon-cross-black.svg" alt="icon-cross-black">
                 </div>
             </div>
         </div>
 
-        <div class="form-login">
+        <div class="form-login d-none">
             <div class="container">
                 <div class="login-form-info">
                     <h2>Войти в&nbsp;личный&nbsp;кабинет</h2>
@@ -611,13 +610,13 @@
                     </div>
 
                 </div>
-                <div class="close">
+                <div class="close close-modal">
                     <img src="images/icon-cross-black.svg" alt="icon-cross-black">
                 </div>
             </div>
         </div>
 
-        <div class="form-pass-restore">
+        <div class="form-pass-restore d-none">
             <div class="container">
                 <div class="pass-restore-info">
                     <h2>Восстановить пароль</h2>
@@ -636,13 +635,13 @@
                     </div>
 
                 </div>
-                <div class="close">
+                <div class="close close-modal">
                     <img src="images/icon-cross-black.svg" alt="icon-cross-black">
                 </div>
             </div>
         </div>
 
-        <div class="form-money">
+        <div class="form-money d-none">
             <div class="container">
                 <div class="money-form-info">
                     <h2>Вывод денежных средств</h2>
@@ -662,13 +661,13 @@
                     </div>
 
                 </div>
-                <div class="close">
+                <div class="close close-modal">
                     <img src="images/icon-cross-black.svg" alt="icon-cross-black">
                 </div>
             </div>
         </div>
 
-        <div class="form-question">
+        <div class="form-question d-none">
             <div class="container">
                 <div class="form-question-info">
                     <h2>Задать вопрос</h2>
@@ -684,13 +683,13 @@
                     </div>
 
                 </div>
-                <div class="close">
+                <div class="close close-modal">
                     <img src="images/icon-cross-black.svg" alt="icon-cross-black">
                 </div>
             </div>
         </div>
 
-        <div class="confirm">
+        <div class="confirm d-none">
             <div class="container">
                 <div class="confirm-message">
                     <div class="checked">
@@ -698,7 +697,7 @@
                     </div>
                     <p>Данные успешно отправлены, мы свяжемся с вами в ближайшее время.</p>
                 </div>
-                <div class="close">
+                <div class="close close-modal">
                     <img src="images/icon-cross-black.svg" alt="icon-cross-black">
                 </div>
             </div>

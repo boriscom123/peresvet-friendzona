@@ -24,11 +24,11 @@
                 </a>
             </div>
             <div class="header-buttons">
-                <div class="header-login d-none">
+                <div class="header-login d-flex">
                     <button class="header-button-login">Войти</button>
                     <button class="header-button-reg">Зарегистрироваться</button>
                 </div>
-                <div class="login d-flex">
+                <div class="login d-none">
                     <div class="avatar">
                         <img src="images/user-avatar.svg" alt="user-avatar">
                     </div>
@@ -37,7 +37,7 @@
                         <img src="images/chevron-down-black.svg" alt="chevron-down">
                     </div>
                 </div>
-                <div class="close">
+                <div class="close d-none">
                     <img src="images/icon-cross.svg" alt="icon-cross">
                 </div>
                 <div class="header-burger-menu">
@@ -424,10 +424,7 @@
 
 <div class="modals d-none">
 
-    <div class="header-menu">
-        <div class="modal-progress-bar">
-            <div class="modal-progress-bar-line"></div>
-        </div>
+    <div class="header-menu d-none">
         <div class="container-modal">
             <div class="container">
                 <div class="modal-menu-buttons">
@@ -437,7 +434,7 @@
                         </a>
                     </div>
                     <div class="buttons">
-                        <div class="not-login">
+                        <div class="not-login d-flex">
                             <button class="button-login">Войти</button>
                             <button class="button-registration">Зарегистрироваться</button>
                         </div>
@@ -450,7 +447,7 @@
                                 <img src="images/chevron-down.svg" alt="chevron-down">
                             </div>
                         </div>
-                        <div class="close">
+                        <div class="close" id="close-burger-menu">
                             <img src="images/icon-cross.svg" alt="icon-cross">
                         </div>
                     </div>
@@ -473,6 +470,171 @@
                     <a href="#">© 2012-2021 Пересвет.Недвижимость</a>
                     <a href="#">Политика конфиденциальности</a>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-reg d-none">
+        <div class="container">
+            <div class="reg-form-info">
+                <h2>Регистрация в&nbsp;личном&nbsp;кабинете</h2>
+                <p>В личном кабинете вы можете просматривать историю переданных показаний и платежей, задавать вопросы специалистам компании</p>
+                <div class="image">
+                </div>
+            </div>
+            <div class="reg-form-inputs d-flex">
+                <form action="user.html" method="get" id="reg"></form>
+                <div class="inputs">
+                    <input type="text" name="f" placeholder="Фамилия*" form="reg" required>
+                    <input type="text" name="i" placeholder="Имя*" form="reg" required>
+                    <input type="tel" name="tel" placeholder="Телефон*" form="reg" required>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" id="rules" name="rules" form="reg">
+                    <label for="rules">С условиями участия ознакомлен</label>
+                </div>
+                <div class="submit">
+                    <input type="submit" value="Зарегистрироваться" form="reg">
+                </div>
+                <div class="text">
+                    <p>Отправляя данные, вы даете согласие на обработку персональных данных и соглашаетесь c политикой конфиденциальности</p>
+                </div>
+            </div>
+            <div class="reg-form-check-tel d-none">
+                <form action="user.html" method="get" id="check-tel"></form>
+                <h2>Введите пароль</h2>
+                <div class="text">
+                    <p>Мы отправили пароль в СМС на номер</p>
+                    <p>+7 (912) 345-67-89</p>
+                </div>
+                <div class="input">
+                    <input type="text" name="code" placeholder="Пароль из СМС*" form="check-tel" required>
+                </div>
+                <div class="timer">
+                    <p>Отправить повторно через <span>59</span> сек.</p>
+                </div>
+                <div class="submit">
+                    <input type="submit" value="Продолжить"  form="check-tel">
+                </div>
+            </div>
+            <div class="close">
+                <img src="images/icon-cross-black.svg" alt="icon-cross-black">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-login d-none">
+        <div class="container">
+            <div class="login-form-info">
+                <h2>Войти в&nbsp;личный&nbsp;кабинет</h2>
+                <div class="image">
+                    <div class="image-1"></div>
+                    <div class="image-2"></div>
+                </div>
+            </div>
+            <div class="login-form-inputs d-flex">
+                <form action="user.html" method="get" id="login"></form>
+                <div class="inputs">
+                    <input type="text" name="u-login" placeholder="Телефон или почта" form="login" required>
+                    <input type="password" name="u-pass" placeholder="Пароль" form="login" required>
+                </div>
+                <div class="text">
+                    <a href="#">Забыли пароль?</a>
+                </div>
+                <div class="submit">
+                    <input type="submit" value="Войти" form="login">
+                </div>
+
+            </div>
+            <div class="close">
+                <img src="images/icon-cross-black.svg" alt="icon-cross-black">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-pass-restore d-none">
+        <div class="container">
+            <div class="pass-restore-info">
+                <h2>Восстановить пароль</h2>
+                <p>Для восстановления пароля введите номер телефона, который вы указали при регистрации</p>
+            </div>
+            <div class="pass-restore-inputs d-flex">
+                <form action="user.html" method="get" id="pass-restore"></form>
+                <div class="inputs">
+                    <input type="tel" name="u-tel" placeholder="Номер телефона*" form="pass-restore" required>
+                </div>
+                <div class="text">
+                    <a href="#">Я вспомнил пароль</a>
+                </div>
+                <div class="submit">
+                    <input type="submit" value="Продолжить" form="pass-restore">
+                </div>
+
+            </div>
+            <div class="close">
+                <img src="images/icon-cross-black.svg" alt="icon-cross-black">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-money d-none">
+        <div class="container">
+            <div class="money-form-info">
+                <h2>Вывод денежных средств</h2>
+                <p>Оставьте заявку и мы вам перезвоним,<br>ваш 1 бонусный балл = 1 рублю</p>
+            </div>
+            <div class="money-form-inputs d-flex">
+                <form action="user.html" method="get" id="money"></form>
+                <div class="inputs">
+                    <input type="tel" name="u-summ" placeholder="Сумма" form="money" required>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" id="agree" name="agree" form="money" required>
+                    <label for="agree">Я подтверждаю снятие баллов</label>
+                </div>
+                <div class="submit">
+                    <input type="submit" value="Отправить" form="money">
+                </div>
+
+            </div>
+            <div class="close">
+                <img src="images/icon-cross-black.svg" alt="icon-cross-black">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-question d-none">
+        <div class="container">
+            <div class="form-question-info">
+                <h2>Задать вопрос</h2>
+                <p>Ответ на вопрос отправим на почту, указанную в личном кабинете</p>
+            </div>
+            <div class="form-question-inputs d-flex">
+                <form action="user.html" method="get" id="question"></form>
+                <div class="inputs">
+                    <textarea name="u-question" id="u-question" placeholder="Ваше сообщение*" form="question"></textarea>
+                </div>
+                <div class="submit">
+                    <input type="submit" value="Отправить" form="question">
+                </div>
+
+            </div>
+            <div class="close">
+                <img src="images/icon-cross-black.svg" alt="icon-cross-black">
+            </div>
+        </div>
+    </div>
+
+    <div class="confirm d-none">
+        <div class="container">
+            <div class="confirm-message">
+                <div class="checked">
+                    <img src="images/check.svg" alt="check">
+                </div>
+                <p>Данные успешно отправлены, мы свяжемся с вами в ближайшее время.</p>
+            </div>
+            <div class="close">
+                <img src="images/icon-cross-black.svg" alt="icon-cross-black">
             </div>
         </div>
     </div>

@@ -59,7 +59,7 @@
         justify-content: space-between;
         @media (max-width: 850px) { justify-content: flex-end; }
         @media (max-width: 600px) { width: 60px; }
-        @media (max-width: 550px) { flex-direction: column-reverse; }
+        @media (max-width: 550px) { flex-direction: column-reverse; align-items: flex-end; }
         > .header-login {
           // display: flex;
           @media (max-width: 850px) { display: none; }
@@ -160,6 +160,7 @@
           align-items: center;
           padding: 10px 0;
           box-sizing: border-box;
+          @media (max-width: 550px) { margin: 0 0 60px 0; }
           &:hover {
             cursor: pointer;
             > .header-burger-menu-line {

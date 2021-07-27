@@ -13,23 +13,25 @@
       > .main-block-1-container-info {
         width: 50%;
         @media (max-width: 600px) { width: 100%; }
-        > .text {
-          > h2 {
-            font-family: $mainFontFamily;
-            font-weight: 500;
-            font-size: 15px;
-            color: $alterFontColor4;
-          }
-          > h1 {
-            max-width: 410px;
-            margin: 16px 0 20px 0;
-            font-family: $mainFontFamily;
-            font-weight: 600;
-            font-size: 35px;
-            line-height: 45px;
-            color: $mainFontColor;
-            @media (max-width: 850px) { font-size: 28px; line-height: 38px;}
-            @media (max-width: 700px) { font-size: 24px; line-height: 34px;}
+        > .text-block {
+          > .text {
+            > h2 {
+              font-family: $mainFontFamily;
+              font-weight: 500;
+              font-size: 15px;
+              color: $alterFontColor4;
+            }
+            > h1 {
+              max-width: 410px;
+              margin: 16px 0 20px 0;
+              font-family: $mainFontFamily;
+              font-weight: 600;
+              font-size: 35px;
+              line-height: 45px;
+              color: $mainFontColor;
+              @media (max-width: 850px) { font-size: 28px; line-height: 38px;}
+              @media (max-width: 700px) { font-size: 24px; line-height: 34px;}
+            }
           }
         }
         > .main-block-1-container-info-navigation {
@@ -699,6 +701,7 @@
       > .main-block-6-2 {
         // background-color: pink;
         margin: 25px 0 0 0;
+        width: 100%;
         > .item-question {
           position: relative;
           margin: 30px 0 0 0;
