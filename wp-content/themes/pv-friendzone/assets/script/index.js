@@ -109,6 +109,7 @@ for(let i=0; i<closeModalButtonEl.length; i++){
 // закрытие модальных окон - конец
 // кнопки входа
 function showLoginModal(el){
+    closeModal();
     if(burgerMenuEl.status = true){
         modalsEl.children[0].classList.add('d-none');
         burgerMenuEl.status = false;
@@ -150,3 +151,131 @@ for(let i=0; i<questionEl.length; i++){
     questionEl[i].addEventListener('click', function (){ questionAction(this) });
 }
 // ответы на вопросы - конец
+// воспроизведение видео
+function playVideoSmall(el){
+    videoContainerSmallEl.play();
+}
+let videoContainerSmallEl = document.getElementById('video-container-small');
+let playVideoButtonSmallEl = document.getElementById('play-video-button-small');
+if(playVideoButtonSmallEl) {
+    playVideoButtonSmallEl.addEventListener('click', function (){ playVideoSmall(this) });
+}
+function playVideoBig(el){
+    playVideoButtonBigEl.classList.add('d-none');
+    videoContainerBigEl.play();
+    videoContainerBigEl.controls = true;
+    videoContainerBigEl.onended = () => {
+        videoContainerBigEl.controls = false;
+        playVideoButtonBigEl.classList.remove('d-none');
+    }
+}
+let videoContainerBigEl = document.getElementById('video-container-big');
+let playVideoButtonBigEl = document.getElementById('play-video-button-big');
+if(playVideoButtonBigEl){
+    playVideoButtonBigEl.addEventListener('click', function (){ playVideoBig(this) });
+}
+// воспроизведение видео - конец
+// модальное окно регистрации
+function modalRegistrationAction(el){
+    if(!modalRegInputF.value){
+        console.log('net familii');
+        formRegistrationEl.confirmf = false;
+    } else {
+        formRegistrationEl.confirmf = true;
+    }
+    if(!modalRegInputI.value){
+        console.log('net imeny');
+        formRegistrationEl.confirmi = false;
+    } else {
+        formRegistrationEl.confirmi = true;
+    }
+    if(!modalRegInputTel.value){
+        console.log('net telefona');
+        formRegistrationEl.confirmtel = false;
+    } else {
+        formRegistrationEl.confirmtel = true;
+    }
+    if(formRegistrationRulesEl.checked) {
+        console.log('checked');
+        if(formRegistrationEl.confirmf && formRegistrationEl.confirmi && formRegistrationEl.confirmtel){
+            formRegistrationEl.addEventListener('submit', (event)=>{ event.preventDefault(); });
+            modalRegistrationInputsEl.classList.remove('d-flex');
+            modalRegistrationInputsEl.classList.add('d-none');
+            modalRegistrationTelCheckEl.classList.remove('d-none');
+            modalRegistrationTelCheckEl.classList.add('d-flex');
+        }
+    } else {
+        console.log('ne checked');
+        formRegistrationEl.addEventListener('submit', (event)=>{ event.preventDefault(); });
+    }
+}
+function modalRegistrationConfirmAction(el){
+    if(!modalRegInputCode.value){
+        console.log('net coda');
+        modalRegInputCode.confirmcode = false;
+    } else {
+        formRegistrationEl.confirmcode = true;
+    }
+    if(formRegistrationEl.confirmf && formRegistrationEl.confirmi && formRegistrationEl.confirmtel && formRegistrationEl.confirmcode)
+    {
+        formRegistrationEl.addEventListener('submit', (event)=>{ formRegistrationEl.submit(); });
+    }
+}
+const modalRegInputF = document.getElementById('form-reg-f');
+const modalRegInputI = document.getElementById('form-reg-i');
+const modalRegInputTel = document.getElementById('form-reg-tel');
+const modalRegInputCode = document.getElementById('form-reg-code');
+const modalRegistrationInputsEl = document.getElementsByClassName('reg-form-inputs')[0];
+const modalRegistrationTelCheckEl = document.getElementsByClassName('reg-form-check-tel')[0];
+const formRegistrationEl = document.getElementById('form-reg');
+const formRegistrationRulesEl = document.getElementById('rules');
+let modalRegistrationButtonEl = document.getElementById('modal-reg-button');
+if(modalRegistrationButtonEl){
+    modalRegistrationButtonEl.addEventListener('click', function (){ modalRegistrationAction(this) });
+}
+let modalRegistrationConfirmButtonEl = document.getElementById('modal-reg-button-confirm');
+if(modalRegistrationConfirmButtonEl){
+    modalRegistrationConfirmButtonEl.addEventListener('click', function (){ modalRegistrationConfirmAction(this) });
+}
+// модальное окно регистрации - конец
+// модальное окно забыли пароль
+function modalPassForget(el){
+    closeModal();
+    modalsEl.classList.remove('d-none');
+    modalsEl.children[3].classList.remove('d-none');
+}
+const modalPassForgetEl = document.getElementById('modal-pass-forget');
+modalPassForgetEl.addEventListener('click', function (){ modalPassForget(this) });
+// модальное окно забыли пароль - конец
+// модально окно задать вопрос
+function modalQuestionAction(el){
+    closeModal();
+    modalsEl.classList.remove('d-none');
+    modalsEl.children[5].classList.remove('d-none');
+}
+let userQuestionButtonEl = document.getElementById('user-question-button');
+if(userQuestionButtonEl){
+    userQuestionButtonEl.addEventListener('click', function (){ modalQuestionAction(this) });
+}
+// модально окно задать вопрос - конец
+// модально окно вывести
+function modalMoneyAction(el){
+    console.log(el);
+    console.log('modalMoneyAction');
+    closeModal();
+    modalsEl.classList.remove('d-none');
+    modalsEl.children[4].classList.remove('d-none');
+}
+let userMoneyButtonEl = document.getElementById('user-money-button');
+if(userMoneyButtonEl){
+    userMoneyButtonEl.addEventListener('click', function (){ modalMoneyAction(this) });
+}
+// модально окно вывести - конец
+// модальное окно подтверждения
+function modalConfirmAction(el){
+    closeModal();
+    modalsEl.classList.remove('d-none');
+    modalsEl.children[6].classList.remove('d-none');
+    setTimeout(()=>{ closeModal(); }, 3000);
+}
+// модальное окно подтверждения - конец

@@ -24,11 +24,11 @@
                 </a>
             </div>
             <div class="header-buttons">
-                <div class="header-login d-flex">
+                <div class="header-login d-none">
                     <button class="header-button-login">Войти</button>
                     <button class="header-button-reg">Зарегистрироваться</button>
                 </div>
-                <div class="login d-none">
+                <div class="login d-flex">
                     <div class="avatar">
                         <img src="images/user-avatar.svg" alt="user-avatar">
                     </div>
@@ -79,29 +79,23 @@
                     <div class="user-pages">
 
                         <div class="page active">
-                            <div class="icon body">
-<!--                                <img src="images/body.svg" alt="body">-->
-                            </div>
+                            <div class="icon body"></div>
                             <div class="text">Профиль</div>
                         </div>
 
                         <div class="page">
-                            <div class="icon bodies">
-<!--                                <img src="images/bodies.svg" alt="bodies">-->
-                            </div>
+                            <div class="icon bodies"></div>
                             <div class="text">Друзья</div>
                         </div>
 
                         <div class="page">
-                            <div class="icon options">
-<!--                                <img src="images/options.svg" alt="options">-->
-                            </div>
+                            <div class="icon options"></div>
                             <div class="text">Настройки</div>
                         </div>
 
                     </div>
                     <div class="question">
-                        <button>Задать вопрос</button>
+                        <button id="user-question-button">Задать вопрос</button>
                     </div>
                 </div>
             </div>
@@ -121,7 +115,7 @@
                     <h2>Бонусный счет</h2>
                     <div class="info">
                         <h3>105 000 баллов</h3>
-                        <button>Вывести</button>
+                        <button id="user-money-button">Вывести</button>
                     </div>
                     <a href="#">Операции по счету</a>
                 </div>
@@ -435,8 +429,8 @@
                     </div>
                     <div class="buttons">
                         <div class="not-login d-flex">
-                            <button class="button-login">Войти</button>
-                            <button class="button-registration">Зарегистрироваться</button>
+                            <button class="button-login login-button">Войти</button>
+                            <button class="button-registration registration-button">Зарегистрироваться</button>
                         </div>
                         <div class="login d-none">
                             <div class="avatar">
@@ -483,41 +477,40 @@
                 </div>
             </div>
             <div class="reg-form-inputs d-flex">
-                <form action="user.html" method="get" id="reg"></form>
+                <form action="user.html" method="get" id="form-reg"></form>
                 <div class="inputs">
-                    <input type="text" name="f" placeholder="Фамилия*" form="reg" required>
-                    <input type="text" name="i" placeholder="Имя*" form="reg" required>
-                    <input type="tel" name="tel" placeholder="Телефон*" form="reg" required>
+                    <input type="text" name="f" placeholder="Фамилия*" form="form-reg" id="form-reg-f">
+                    <input type="text" name="i" placeholder="Имя*" form="form-reg" id="form-reg-i">
+                    <input type="tel" name="tel" placeholder="Телефон*" form="form-reg" id="form-reg-tel">
                 </div>
                 <div class="checkbox">
-                    <input type="checkbox" id="rules" name="rules" form="reg">
+                    <input type="checkbox" id="rules" name="rules" form="form-reg">
                     <label for="rules">С условиями участия ознакомлен</label>
                 </div>
                 <div class="submit">
-                    <input type="submit" value="Зарегистрироваться" form="reg">
+                    <input type="submit" value="Зарегистрироваться" form="form-reg" id="modal-reg-button">
                 </div>
                 <div class="text">
                     <p>Отправляя данные, вы даете согласие на обработку персональных данных и соглашаетесь c политикой конфиденциальности</p>
                 </div>
             </div>
             <div class="reg-form-check-tel d-none">
-                <form action="user.html" method="get" id="check-tel"></form>
                 <h2>Введите пароль</h2>
                 <div class="text">
                     <p>Мы отправили пароль в СМС на номер</p>
                     <p>+7 (912) 345-67-89</p>
                 </div>
                 <div class="input">
-                    <input type="text" name="code" placeholder="Пароль из СМС*" form="check-tel" required>
+                    <input type="text" name="code" placeholder="Пароль из СМС*" form="form-reg"  id="form-reg-code">
                 </div>
                 <div class="timer">
                     <p>Отправить повторно через <span>59</span> сек.</p>
                 </div>
                 <div class="submit">
-                    <input type="submit" value="Продолжить"  form="check-tel">
+                    <input type="submit" value="Продолжить" form="form-reg" id="modal-reg-button-confirm">
                 </div>
             </div>
-            <div class="close">
+            <div class="close close-modal">
                 <img src="images/icon-cross-black.svg" alt="icon-cross-black">
             </div>
         </div>
@@ -539,14 +532,14 @@
                     <input type="password" name="u-pass" placeholder="Пароль" form="login" required>
                 </div>
                 <div class="text">
-                    <a href="#">Забыли пароль?</a>
+                    <a href="#" id="modal-pass-forget">Забыли пароль?</a>
                 </div>
                 <div class="submit">
                     <input type="submit" value="Войти" form="login">
                 </div>
 
             </div>
-            <div class="close">
+            <div class="close close-modal">
                 <img src="images/icon-cross-black.svg" alt="icon-cross-black">
             </div>
         </div>
@@ -564,14 +557,14 @@
                     <input type="tel" name="u-tel" placeholder="Номер телефона*" form="pass-restore" required>
                 </div>
                 <div class="text">
-                    <a href="#">Я вспомнил пароль</a>
+                    <a href="#" class="login-button">Я вспомнил пароль</a>
                 </div>
                 <div class="submit">
                     <input type="submit" value="Продолжить" form="pass-restore">
                 </div>
 
             </div>
-            <div class="close">
+            <div class="close close-modal">
                 <img src="images/icon-cross-black.svg" alt="icon-cross-black">
             </div>
         </div>
@@ -584,20 +577,20 @@
                 <p>Оставьте заявку и мы вам перезвоним,<br>ваш 1 бонусный балл = 1 рублю</p>
             </div>
             <div class="money-form-inputs d-flex">
-                <form action="user.html" method="get" id="money"></form>
+                <form action="user.html" method="get" id="form-money"></form>
                 <div class="inputs">
-                    <input type="tel" name="u-summ" placeholder="Сумма" form="money" required>
+                    <input type="tel" name="u-summ" placeholder="Сумма" form="form-money" id="form-money-u-summ">
                 </div>
                 <div class="checkbox">
-                    <input type="checkbox" id="agree" name="agree" form="money" required>
+                    <input type="checkbox" id="agree" name="agree" form="form-money" id="form-money-u-agree">
                     <label for="agree">Я подтверждаю снятие баллов</label>
                 </div>
                 <div class="submit">
-                    <input type="submit" value="Отправить" form="money">
+                    <input type="submit" value="Отправить" form="form-money" id="form-money-submit">
                 </div>
 
             </div>
-            <div class="close">
+            <div class="close close-modal">
                 <img src="images/icon-cross-black.svg" alt="icon-cross-black">
             </div>
         </div>
@@ -619,7 +612,7 @@
                 </div>
 
             </div>
-            <div class="close">
+            <div class="close close-modal">
                 <img src="images/icon-cross-black.svg" alt="icon-cross-black">
             </div>
         </div>
@@ -633,7 +626,7 @@
                 </div>
                 <p>Данные успешно отправлены, мы свяжемся с вами в ближайшее время.</p>
             </div>
-            <div class="close">
+            <div class="close close-modal">
                 <img src="images/icon-cross-black.svg" alt="icon-cross-black">
             </div>
         </div>

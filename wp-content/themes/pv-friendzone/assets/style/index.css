@@ -31,6 +31,7 @@ a {
 
 button {
   cursor: pointer;
+  -webkit-appearance: none;
 }
 
 .container {
@@ -584,7 +585,27 @@ button {
   position: relative;
   z-index: 1;
 }
-.main > .main-block-2 > .main-block-2-top > .container > .main-block-2-container-image > div {
+.main > .main-block-2 > .main-block-2-top > .container > .main-block-2-container-image > .video {
+  height: 81%;
+  width: 76%;
+  position: absolute;
+  z-index: 5;
+  top: 7%;
+  left: 12%;
+  background-color: black;
+}
+@media (max-width: 600px) {
+  .main > .main-block-2 > .main-block-2-top > .container > .main-block-2-container-image > .video {
+    top: 11%;
+    height: 73%;
+  }
+}
+.main > .main-block-2 > .main-block-2-top > .container > .main-block-2-container-image > .video > video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.main > .main-block-2 > .main-block-2-top > .container > .main-block-2-container-image > .decoration {
   position: absolute;
   top: 30%;
   left: -15%;
@@ -1307,10 +1328,20 @@ button {
   height: 80px;
   width: 80px;
   transition: 0.3s;
+  z-index: 5;
 }
 .main > .main-block-6 > .container > .main-block-6-3 > .main-block-6-video > img:hover {
   cursor: pointer;
   transform: translateY(-50%) translateX(-50%) scale(1.1);
+}
+.main > .main-block-6 > .container > .main-block-6-3 > .main-block-6-video > video {
+  height: 94%;
+  width: 94%;
+  object-fit: contain;
+  position: absolute;
+  z-index: 4;
+  top: 3%;
+  left: 3%;
 }
 .main > .main-block-6 > .container > .main-block-6-3 > .main-block-6-button {
   margin: 55px 0 75px 0;

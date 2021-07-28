@@ -25,8 +25,8 @@
             </div>
             <div class="header-buttons">
                 <div class="header-login d-flex">
-                    <button class="header-button-login">Войти</button>
-                    <button class="header-button-reg">Зарегистрироваться</button>
+                    <button class="header-button-login login-button">Войти</button>
+                    <button class="header-button-reg registration-button">Зарегистрироваться</button>
                 </div>
                 <div class="login d-none">
                     <div class="avatar">
@@ -151,7 +151,7 @@
             <div>
                 <div class="text">
                     <h2>Зарегистрируйтесь, чтобы получить доступ ко всем полезным статьям</h2>
-                    <button>Зарегистрироваться</button>
+                    <button class="registration-button">Зарегистрироваться</button>
                 </div>
                 <div class="image">
                     <img src="images/lock.svg" alt="lock">
@@ -218,8 +218,8 @@
                     </div>
                     <div class="buttons">
                         <div class="not-login d-flex">
-                            <button class="button-login">Войти</button>
-                            <button class="button-registration">Зарегистрироваться</button>
+                            <button class="button-login login-button">Войти</button>
+                            <button class="button-registration registration-button">Зарегистрироваться</button>
                         </div>
                         <div class="login d-none">
                             <div class="avatar">
@@ -266,41 +266,40 @@
                 </div>
             </div>
             <div class="reg-form-inputs d-flex">
-                <form action="user.html" method="get" id="reg"></form>
+                <form action="user.html" method="get" id="form-reg"></form>
                 <div class="inputs">
-                    <input type="text" name="f" placeholder="Фамилия*" form="reg" required>
-                    <input type="text" name="i" placeholder="Имя*" form="reg" required>
-                    <input type="tel" name="tel" placeholder="Телефон*" form="reg" required>
+                    <input type="text" name="f" placeholder="Фамилия*" form="form-reg" id="form-reg-f">
+                    <input type="text" name="i" placeholder="Имя*" form="form-reg" id="form-reg-i">
+                    <input type="tel" name="tel" placeholder="Телефон*" form="form-reg" id="form-reg-tel">
                 </div>
                 <div class="checkbox">
-                    <input type="checkbox" id="rules" name="rules" form="reg">
+                    <input type="checkbox" id="rules" name="rules" form="form-reg">
                     <label for="rules">С условиями участия ознакомлен</label>
                 </div>
                 <div class="submit">
-                    <input type="submit" value="Зарегистрироваться" form="reg">
+                    <input type="submit" value="Зарегистрироваться" form="form-reg" id="modal-reg-button">
                 </div>
                 <div class="text">
                     <p>Отправляя данные, вы даете согласие на обработку персональных данных и соглашаетесь c политикой конфиденциальности</p>
                 </div>
             </div>
             <div class="reg-form-check-tel d-none">
-                <form action="user.html" method="get" id="check-tel"></form>
                 <h2>Введите пароль</h2>
                 <div class="text">
                     <p>Мы отправили пароль в СМС на номер</p>
                     <p>+7 (912) 345-67-89</p>
                 </div>
                 <div class="input">
-                    <input type="text" name="code" placeholder="Пароль из СМС*" form="check-tel" required>
+                    <input type="text" name="code" placeholder="Пароль из СМС*" form="form-reg"  id="form-reg-code">
                 </div>
                 <div class="timer">
                     <p>Отправить повторно через <span>59</span> сек.</p>
                 </div>
                 <div class="submit">
-                    <input type="submit" value="Продолжить"  form="check-tel">
+                    <input type="submit" value="Продолжить" form="form-reg" id="modal-reg-button-confirm">
                 </div>
             </div>
-            <div class="close">
+            <div class="close close-modal">
                 <img src="images/icon-cross-black.svg" alt="icon-cross-black">
             </div>
         </div>
@@ -329,7 +328,7 @@
                 </div>
 
             </div>
-            <div class="close">
+            <div class="close close-modal">
                 <img src="images/icon-cross-black.svg" alt="icon-cross-black">
             </div>
         </div>
@@ -354,7 +353,7 @@
                 </div>
 
             </div>
-            <div class="close">
+            <div class="close close-modal">
                 <img src="images/icon-cross-black.svg" alt="icon-cross-black">
             </div>
         </div>
@@ -380,7 +379,7 @@
                 </div>
 
             </div>
-            <div class="close">
+            <div class="close close-modal">
                 <img src="images/icon-cross-black.svg" alt="icon-cross-black">
             </div>
         </div>
@@ -402,7 +401,7 @@
                 </div>
 
             </div>
-            <div class="close">
+            <div class="close close-modal">
                 <img src="images/icon-cross-black.svg" alt="icon-cross-black">
             </div>
         </div>
@@ -416,7 +415,7 @@
                 </div>
                 <p>Данные успешно отправлены, мы свяжемся с вами в ближайшее время.</p>
             </div>
-            <div class="close">
+            <div class="close close-modal">
                 <img src="images/icon-cross-black.svg" alt="icon-cross-black">
             </div>
         </div>

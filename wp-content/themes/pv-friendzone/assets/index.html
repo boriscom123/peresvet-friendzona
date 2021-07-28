@@ -95,7 +95,7 @@
                     <div class="main-block-2-container-info">
                         <h2>Что такое FRIENDзона?</h2>
                         <h3>FRIENDзона — это уникальное сообщество людей, вдохновленных темой недвижимости</h3>
-                        <div class="main-block-2-container-info-button">
+                        <div class="main-block-2-container-info-button" id="play-video-button-small">
                             <p>Смотреть видео</p>
                             <div class="circle">
                                 <img src="images/play.svg" alt="play">
@@ -104,7 +104,16 @@
                     </div>
                     <div class="main-block-2-container-image">
                         <img src="images/block-2-image-notebook.svg" alt="notebook">
-                        <div>
+                        <div class="video">
+                            <video controls="controls" poster="images/test-image.jpg" id="video-container-small">
+<!--                                <source src="video/duel.ogv" type='video/ogg; codecs="theora, vorbis"'>-->
+                                <source src="images/test-video.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+<!--                                <source src="video/duel.webm" type='video/webm; codecs="vp8, vorbis"'>-->
+                                Тег video не поддерживается вашим браузером.
+                                <a href="images/test-video.mp4">Скачайте видео</a>.
+                            </video>
+                        </div>
+                        <div class="decoration">
                             <img src="images/block-2-image-bg.svg" alt="block-2-image-bg">
                         </div>
                     </div>
@@ -372,7 +381,12 @@
             <div class="container">
                 <div class="main-block-6-3">
                     <div class="main-block-6-video">
-                        <img src="images/play.svg" alt="play-video-button">
+                        <img src="images/play.svg" alt="play-video-button" id="play-video-button-big">
+                        <video poster="images/test-image.jpg" id="video-container-big" id="video-container-big">
+                            <source src="images/test-video.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+                            Тег video не поддерживается вашим браузером.
+                            <a href="images/test-video.mp4">Скачайте видео</a>.
+                        </video>
                     </div>
                     <div class="main-block-6-button">
                         <button>Смотреть еще</button>
@@ -547,38 +561,37 @@
                     </div>
                 </div>
                 <div class="reg-form-inputs d-flex">
-                    <form action="user.html" method="get" id="reg"></form>
+                    <form action="user.html" method="get" id="form-reg"></form>
                     <div class="inputs">
-                        <input type="text" name="f" placeholder="Фамилия*" form="reg" required>
-                        <input type="text" name="i" placeholder="Имя*" form="reg" required>
-                        <input type="tel" name="tel" placeholder="Телефон*" form="reg" required>
+                        <input type="text" name="f" placeholder="Фамилия*" form="form-reg" id="form-reg-f">
+                        <input type="text" name="i" placeholder="Имя*" form="form-reg" id="form-reg-i">
+                        <input type="tel" name="tel" placeholder="Телефон*" form="form-reg" id="form-reg-tel">
                     </div>
                     <div class="checkbox">
-                        <input type="checkbox" id="rules" name="rules" form="reg">
+                        <input type="checkbox" id="rules" name="rules" form="form-reg">
                         <label for="rules">С условиями участия ознакомлен</label>
                     </div>
                     <div class="submit">
-                        <input type="submit" value="Зарегистрироваться" form="reg">
+                        <input type="submit" value="Зарегистрироваться" form="form-reg" id="modal-reg-button">
                     </div>
                     <div class="text">
                         <p>Отправляя данные, вы даете согласие на обработку персональных данных и соглашаетесь c политикой конфиденциальности</p>
                     </div>
                 </div>
                 <div class="reg-form-check-tel d-none">
-                    <form action="user.html" method="get" id="check-tel"></form>
                     <h2>Введите пароль</h2>
                     <div class="text">
                         <p>Мы отправили пароль в СМС на номер</p>
                         <p>+7 (912) 345-67-89</p>
                     </div>
                     <div class="input">
-                        <input type="text" name="code" placeholder="Пароль из СМС*" form="check-tel" required>
+                        <input type="text" name="code" placeholder="Пароль из СМС*" form="form-reg"  id="form-reg-code">
                     </div>
                     <div class="timer">
                         <p>Отправить повторно через <span>59</span> сек.</p>
                     </div>
                     <div class="submit">
-                        <input type="submit" value="Продолжить"  form="check-tel">
+                        <input type="submit" value="Продолжить" form="form-reg" id="modal-reg-button-confirm">
                     </div>
                 </div>
                 <div class="close close-modal">
@@ -603,7 +616,7 @@
                         <input type="password" name="u-pass" placeholder="Пароль" form="login" required>
                     </div>
                     <div class="text">
-                        <a href="#">Забыли пароль?</a>
+                        <a href="#" id="modal-pass-forget">Забыли пароль?</a>
                     </div>
                     <div class="submit">
                         <input type="submit" value="Войти" form="login">
@@ -628,7 +641,7 @@
                         <input type="tel" name="u-tel" placeholder="Номер телефона*" form="pass-restore" required>
                     </div>
                     <div class="text">
-                        <a href="#">Я вспомнил пароль</a>
+                        <a href="#" class="login-button">Я вспомнил пароль</a>
                     </div>
                     <div class="submit">
                         <input type="submit" value="Продолжить" form="pass-restore">
@@ -648,16 +661,16 @@
                     <p>Оставьте заявку и мы вам перезвоним,<br>ваш 1 бонусный балл = 1 рублю</p>
                 </div>
                 <div class="money-form-inputs d-flex">
-                    <form action="user.html" method="get" id="money"></form>
+                    <form action="user.html" method="get" id="form-money"></form>
                     <div class="inputs">
-                        <input type="tel" name="u-summ" placeholder="Сумма" form="money" required>
+                        <input type="tel" name="u-summ" placeholder="Сумма" form="form-money" id="form-money-u-summ">
                     </div>
                     <div class="checkbox">
-                        <input type="checkbox" id="agree" name="agree" form="money" required>
+                        <input type="checkbox" id="agree" name="agree" form="form-money" id="form-money-u-agree">
                         <label for="agree">Я подтверждаю снятие баллов</label>
                     </div>
                     <div class="submit">
-                        <input type="submit" value="Отправить" form="money">
+                        <input type="submit" value="Отправить" form="form-money" id="form-money-submit">
                     </div>
 
                 </div>
