@@ -15,7 +15,7 @@
         <div class="container">
         <div class="footer-links">
             <div class="image">
-                <a href="index.php">
+                <a href="http://peresvet-friendzona/">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer-logo.svg" alt="footer-logo">
                 </a>
             </div>
@@ -51,11 +51,11 @@
     <div class="modals d-none">
 
         <div class="header-menu d-none">
-        <div class="container-modal">
+            <div class="container-modal">
             <div class="container">
                 <div class="modal-menu-buttons">
                     <div class="image">
-                        <a href="index.html">
+                        <a href="http://peresvet-friendzona/">
                             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer-logo.svg" alt="footer-logo">
                         </a>
                     </div>
@@ -98,7 +98,7 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div>
 
         <div class="form-reg d-none">
         <div class="container">

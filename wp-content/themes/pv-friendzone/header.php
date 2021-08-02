@@ -27,7 +27,7 @@
         </div>
         <div class="container">
             <div class="header-logo">
-                <a class="header-logo-image" href="index.html">
+                <a class="header-logo-image" href="http://peresvet-friendzona/">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.svg" alt="FRIENDзона">
                 </a>
             </div>
