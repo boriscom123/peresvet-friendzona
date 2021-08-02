@@ -20,40 +20,43 @@
 	<?php wp_head(); ?>
 </head>
 
+<header class="header">
+    <div class="header-fixed">
+        <div class="header-progress-bar">
+            <div class="header-progress-bar-line"></div>
+        </div>
+        <div class="container">
+            <div class="header-logo">
+                <a class="header-logo-image" href="index.html">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.svg" alt="FRIENDзона">
+                </a>
+            </div>
+            <div class="header-buttons">
+                <div class="header-login d-flex">
+                    <button class="header-button-login login-button">Войти</button>
+                    <button class="header-button-reg registration-button">Зарегистрироваться</button>
+                </div>
+                <div class="login d-none">
+                    <div class="avatar">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/user-avatar.svg" alt="user-avatar">
+                    </div>
+                    <div class="user">Иван</div>
+                    <div class="actions">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/chevron-down-black.svg" alt="chevron-down">
+                    </div>
+                </div>
+                <div class="close d-none">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon-cross.svg" alt="icon-cross">
+                </div>
+                <div class="header-burger-menu">
+                    <div class="header-burger-menu-line"></div>
+                    <div class="header-burger-menu-line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'pv-friendzone' ); ?></a>
 
-	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$pv_friendzone_description = get_bloginfo( 'description', 'display' );
-			if ( $pv_friendzone_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $pv_friendzone_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
-
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'pv-friendzone' ); ?></button>
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
-				)
-			);
-			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
