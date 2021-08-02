@@ -17,7 +17,7 @@ get_header();
 
 	<main id="primary" class="site-main">
 
-        Главная страница
+        Страница новостей - index
 
 	</main><!-- #main -->
 
