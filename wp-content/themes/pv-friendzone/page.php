@@ -401,7 +401,7 @@ get_header();
                         </div>
                     </div>
                     <div class="main-block-7-button">
-                        <a href="news.html">Все новости</a>
+                        <a href="http://bynextpr.ru/news/">Все новости</a>
                     </div>
                 </div>
             </div>

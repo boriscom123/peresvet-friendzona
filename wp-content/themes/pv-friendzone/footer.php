@@ -15,15 +15,15 @@
         <div class="container">
         <div class="footer-links">
             <div class="image">
-                <a href="http://peresvet-friendzona/">
+                <a href="http://bynextpr.ru/">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer-logo.svg" alt="footer-logo">
                 </a>
             </div>
             <div class="links">
                 <div>
-                    <a href="index.html">О программе</a>
+                    <a href="">О программе</a>
                     <a href="#">Условия</a>
-                    <a href="news.html">Новости</a>
+                    <a href="http://bynextpr.ru/news/">Новости</a>
                     <a href="#">Контакты</a>
                 </div>
                 <div>
@@ -55,7 +55,7 @@
             <div class="container">
                 <div class="modal-menu-buttons">
                     <div class="image">
-                        <a href="http://peresvet-friendzona/">
+                        <a href="http://bynextpr.ru/">
                             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer-logo.svg" alt="footer-logo">
                         </a>
                     </div>
@@ -86,9 +86,9 @@
                         <a href="#">Youtube</a>
                     </div>
                     <div class="active">
-                        <a href="index.html">О программе</a>
+                        <a href="#">О программе</a>
                         <a href="#">Условия</a>
-                        <a href="news.html">Новости</a>
+                        <a href="http://bynextpr.ru/news/">Новости</a>
                         <a href="#">Контакты</a>
                     </div>
                 </div>
@@ -254,7 +254,7 @@
         <div class="container">
             <div class="confirm-message">
                 <div class="checked">
-                    <img src="images/check.svg" alt="check">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/check.svg" alt="check">
                 </div>
                 <p>Данные успешно отправлены, мы свяжемся с вами в ближайшее время.</p>
             </div>
