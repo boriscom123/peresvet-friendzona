@@ -138,8 +138,6 @@ for(let i=0; i<registrationButtonsEl.length; i++){
 // кнопки регистрации - конец
 // ответы на вопросы
 function questionAction(el){
-    console.log(el);
-    console.log('questionAction');
     if(el.classList.contains('brief')) {
         el.classList.remove('brief');
     } else {
@@ -151,6 +149,33 @@ for(let i=0; i<questionEl.length; i++){
     questionEl[i].addEventListener('click', function (){ questionAction(this) });
 }
 // ответы на вопросы - конец
+// показать все вопросы
+function showAllQuestionsAction(el){
+    if(el.show){
+        el.show = false;
+        for (let i=3; i < el.parentNode.parentNode.children.length - 1; i++){
+            if(el.parentNode.parentNode.children[i].classList.contains('brief')){
+                el.parentNode.parentNode.children[i].classList.remove('brief');
+            }
+            el.parentNode.parentNode.children[i].classList.add('hidden');
+        }
+        el.textContent = 'Смотреть еще';
+    } else {
+        el.show = true;
+        for (let i=0; i < el.parentNode.parentNode.children.length; i++){
+            if(el.parentNode.parentNode.children[i].classList.contains('hidden')){
+                el.parentNode.parentNode.children[i].classList.remove('hidden');
+                el.parentNode.parentNode.children[i].classList.add('brief');
+            }
+        }
+        el.textContent = 'Скрыть';
+    }
+}
+const showAllQuestionsButtonEl = document.getElementById('show-all-questions');
+if(showAllQuestionsButtonEl) {
+    showAllQuestionsButtonEl.addEventListener('click', function (){ showAllQuestionsAction(this) });
+}
+// показать все вопросы - конец
 // воспроизведение видео
 function playVideoSmall(el){
     videoContainerSmallEl.play();
@@ -279,3 +304,9 @@ function modalConfirmAction(el){
     setTimeout(()=>{ closeModal(); }, 3000);
 }
 // модальное окно подтверждения - конец
+// закрытие всплывающего меню при нажатии на ссылки-якоря
+let userAncorLinkEl = document.getElementsByClassName('ancor-link');
+for(let i=0; i<userAncorLinkEl.length; i++){
+    userAncorLinkEl[i].addEventListener('click', function (){ closeModal(this); burgerMenuEl.status = false; });
+}
+// закрытие всплывающего меню при нажатии на ссылки-якоря - конец

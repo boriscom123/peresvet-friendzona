@@ -58,7 +58,8 @@ get_header();
         </div>
 
             <div class="main-block-2">
-            <div class="main-block-2-top">
+                <a href="#" name="block-2" class="ancor"></a>
+                <div class="main-block-2-top">
                 <div class="container">
                     <div class="main-block-2-container-info">
                         <h2>Что такое FRIENDзона?</h2>
@@ -87,7 +88,7 @@ get_header();
                     </div>
                 </div>
             </div>
-            <div class="main-block-2-bottom">
+                <div class="main-block-2-bottom">
                 <div class="container">
                     <div class="main-block-2-bottom-items">
                         <div class="main-block-2-bottom-item">
@@ -115,20 +116,20 @@ get_header();
         </div>
 
             <div class="main-block-3">
-            <div class="container">
-                <div class="main-block-3-1">
-                    <h2>Ключевое слово <br>FRIEND - друг</h2>
-                    <div class="text">
-                        <p>
-                            FRIENDзона основана на взаимовыгодном сотрудничестве - мы даем вам эксклюзивную информацию и качественную аналитику,
-                            вы рекомендуете нас друзьям и получаете вознаграждение, ваши друзья приобретают у нас комфортные квартиры со скидкой,
-                            а у нас растет количество клиентов
-                        </p>
-                        <div class="decoration"></div>
+                <div class="container">
+                    <div class="main-block-3-1">
+                        <h2>Ключевое слово <br>FRIEND - друг</h2>
+                        <div class="text">
+                            <p>
+                                FRIENDзона основана на взаимовыгодном сотрудничестве - мы даем вам эксклюзивную информацию и качественную аналитику,
+                                вы рекомендуете нас друзьям и получаете вознаграждение, ваши друзья приобретают у нас комфортные квартиры со скидкой,
+                                а у нас растет количество клиентов
+                            </p>
+                            <div class="decoration"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="container">
+                <div class="container">
                 <div class="main-block-3-2">
                     <div class="main-block-3-info-item main-item">
                         <h2>FRIENDзона</h2>
@@ -159,20 +160,21 @@ get_header();
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="main-block-3-3">
-                    <h2>Как работает <br>FRIENDзона?</h2>
-                    <div class="text">
-                        <p>
-                            Участие абсолютно бесплатно, более того, вы получаете вознаграждение за свои рекомендации
-                        </p>
-                        <div class="decoration"></div>
+                <div class="container">
+                    <div class="main-block-3-3">
+                        <h2>Как работает <br>FRIENDзона?</h2>
+                        <div class="text">
+                            <p>
+                                Участие абсолютно бесплатно, более того, вы получаете вознаграждение за свои рекомендации
+                            </p>
+                            <div class="decoration"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="container">
-                <div class="main-block-3-4">
-                    <div class="main-block-3-4-item">
+                <div class="container">
+                    <div class="main-block-3-4">
+                        <a href="#" name="block-3-4" class="ancor"></a>
+                        <div class="main-block-3-4-item">
                         <div class="image">
                             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/block-3-image-5.svg" alt="block-3-image-5">
                         </div>
@@ -184,7 +186,7 @@ get_header();
                             <p>01</p>
                         </div>
                     </div>
-                    <div class="main-block-3-4-item">
+                        <div class="main-block-3-4-item">
                         <div class="image">
                             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/block-3-image-6.svg" alt="block-3-image-6">
                         </div>
@@ -196,7 +198,7 @@ get_header();
                             <p>02</p>
                         </div>
                     </div>
-                    <div class="main-block-3-4-item">
+                        <div class="main-block-3-4-item">
                         <div class="image">
                             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/block-3-image-7.svg" alt="block-3-image-7">
                         </div>
@@ -208,8 +210,8 @@ get_header();
                             <p>03</p>
                         </div>
                     </div>
+                    </div>
                 </div>
-            </div>
         </div>
 
             <div class="main-block-4">
@@ -299,65 +301,41 @@ get_header();
             </div>
             <div class="container">
                 <div class="main-block-6-2">
-                    <div class="item-question">
-                        <h2>Здесь нужно разместить текст какого-нибудь вопроса?</h2>
-                        <p>
-                            Каждый платёж по кредиту состоит из двух частей: одна часть идёт на погашение основного долга,
-                            другая — на погашение банковских процентов по нему (той самой ставки по кредиту).
-                            Большинство банков в России сейчас работают с аннуитетными платежами:
-                            в этом случае банк сначала стремится получить все выплаты по процентам,
-                            которые вы должны, и только потом - по основному телу долга.
-                            Через несколько лет выплаты кредита основное тело долга может уменьшиться совсем немного,
-                            так как основная часть взносов идёт на погашение процентов.
-                        </p>
-                        <div class="close">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon-cross.svg" alt="icon-cross">
-                        </div>
-                    </div>
-                    <div class="item-question brief">
-                        <h2>Здесь нужно разместить текст какого-нибудь вопроса?</h2>
-                        <p>
-                            Каждый платёж по кредиту состоит из двух частей: одна часть идёт на погашение основного долга,
-                            другая — на погашение банковских процентов по нему (той самой ставки по кредиту).
-                            Большинство банков в России сейчас работают с аннуитетными платежами:
-                            в этом случае банк сначала стремится получить все выплаты по процентам,
-                            которые вы должны, и только потом - по основному телу долга.
-                            Через несколько лет выплаты кредита основное тело долга может уменьшиться совсем немного,
-                            так как основная часть взносов идёт на погашение процентов.
-                        </p>
-                        <div class="close">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon-cross.svg" alt="icon-cross">
-                        </div>
-                    </div>
-                    <div class="item-question brief">
-                        <h2>Здесь нужно разместить текст какого-нибудь вопроса?</h2>
-                        <p>
-                            Каждый платёж по кредиту состоит из двух частей: одна часть идёт на погашение основного долга,
-                            другая — на погашение банковских процентов по нему (той самой ставки по кредиту).
-                            Большинство банков в России сейчас работают с аннуитетными платежами:
-                            в этом случае банк сначала стремится получить все выплаты по процентам,
-                            которые вы должны, и только потом - по основному телу долга.
-                            Через несколько лет выплаты кредита основное тело долга может уменьшиться совсем немного,
-                            так как основная часть взносов идёт на погашение процентов.
-                        </p>
-                        <div class="close">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon-cross.svg" alt="icon-cross">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="main-block-6-3">
-                    <div class="main-block-6-video">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/play.svg" alt="play-video-button" id="play-video-button-big">
-                        <video poster="<?php echo get_template_directory_uri(); ?>/assets/images/test-image.jpg" id="video-container-big" id="video-container-big">
-                            <source src="<?php echo get_template_directory_uri(); ?>/assets/images/test-video.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-                            Тег video не поддерживается вашим браузером.
-                            <a href="<?php echo get_template_directory_uri(); ?>/assets/images/test-video.mp4">Скачайте видео</a>.
-                        </video>
-                    </div>
+                    <?php
+                        // формируем данные для вывода в блоке ответы на вопросы
+                        // выводим категорию ВОПРОСЫ
+                        $cat = get_categories(array(
+                            'orderby' => 'term_id', // сортируем по ID
+                            'order' => 'DESC', // направление получения данных
+                            'hide_empty' => '0', // показывать пустые
+                            'number' => '', // количество необходимых категорий
+                        ));
+                        // print_r($cat);
+                        foreach ($cat as $caterory){
+                            if($caterory->name === 'Вопросы'){
+                                $cat_id = $caterory->term_id;
+                            }
+                        }
+                        // print_r($cat_id);
+                        $all_posts = get_posts(array(
+                            'category' => $cat_id, // вывод постов только из текущей категории (текущего конкурса)
+                            'numberposts' => -1, // снимаем ограничения на показ постов
+                            'orderby'     => 'date', // сортируем по ID
+                            'order'       => 'ASC', // порядок сортировки
+                        ));
+                        $i = 0;
+                        foreach ($all_posts as $post){ ?>
+                            <div class="item-question <?php if($i > 0){ if($i<3) {echo 'brief';} else {echo 'hidden';} } ?>">
+                                <h2><?php print $post->post_title; ?></h2>
+                                <p><?php print $post->post_content; ?></p>
+                                <div class="close">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon-cross.svg" alt="icon-cross">
+                                </div>
+                            </div>
+                        <?php $i++; }
+                    ?>
                     <div class="main-block-6-button">
-                        <button>Смотреть еще</button>
+                        <button id="show-all-questions">Смотреть еще</button>
                     </div>
                 </div>
             </div>
@@ -378,27 +356,44 @@ get_header();
             <div class="container">
                 <div class="main-block-7-2">
                     <div class="main-block-7-news">
-                        <div class="item-news">
-                            <div class="image">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/test-image.jpg" alt="test-image">
-                            </div>
-                            <p>8 февраля 2021</p>
-                            <h2>Оформление новостройки в собственность</h2>
-                        </div>
-                        <div class="item-news">
-                            <div class="image">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/test-image.jpg" alt="test-image">
-                            </div>
-                            <p>8 февраля 2021</p>
-                            <h2>Новостройка или вторичка? Муки выбора</h2>
-                        </div>
-                        <div class="item-news">
-                            <div class="image">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/test-image.jpg" alt="test-image">
-                            </div>
-                            <p>8 февраля 2021</p>
-                            <h2>Как купить квартиру без первоначального взноса по ипотеке</h2>
-                        </div>
+                        <?php
+                            // формируем данные для вывода в блоке избранные новости
+                            $all_posts = get_posts(array(
+                                'tag' => 'top', // вывод постов только с текущей меткой
+                                'numberposts' => 3, // снимаем ограничения на показ постов
+                                'orderby'     => 'date', // сортируем по дате
+                                'order'       => 'ASC', // порядок сортировки
+                            ));
+                            // print_r($all_posts);
+                            $monthsList = array(
+                                ".01." => "января",
+                                ".02." => "февраля",
+                                ".03." => "марта",
+                                ".04." => "апреля",
+                                ".05." => "мая",
+                                ".06." => "июня",
+                                ".07." => "июля",
+                                ".08." => "августа",
+                                ".09." => "сентября",
+                                ".10." => "октября",
+                                ".11." => "ноября",
+                                ".12." => "декабря"
+                            );
+                            foreach ($all_posts as $post){ ?>
+                                <div class="item-news">
+                                    <a class="image" href="<?php echo get_permalink(); ?>">
+                                        <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="test-image">
+                                    </a>
+                                    <p>
+                                        <?php
+                                            $date = DateTime::createFromFormat('Y-m-d H:i:s', $post->post_date);
+                                            echo str_replace($date->format('.m.'), " ".$monthsList[$date->format('.m.')]." ", $date->format('j.m.Y'));
+                                        ?>
+                                    </p>
+                                    <a href="<?php echo get_permalink(); ?>"><?php print $post->post_title; ?></a>
+                                </div>
+                            <?php $i++; }
+                        ?>
                     </div>
                     <div class="main-block-7-button">
                         <a href="http://bynextpr.ru/news/">Все новости</a>
@@ -408,26 +403,27 @@ get_header();
         </div>
 
             <div class="main-block-8">
-            <div class="container">
-                <div class="about">
-                    <h2>Хотите узнать больше?</h2>
-                    <div>
-                        <p>Телефон: <a href="tel:+79825377331">+7 982 537-73-31</a></p>
-                        <p>Почта: <a href="mailto:frend.zona2020@mail.ru">frend.zona2020@mail.ru</a></p>
+                <a href="#" name="block-8" class="ancor"></a>
+                <div class="container">
+                    <div class="about">
+                        <h2>Хотите узнать больше?</h2>
+                        <div>
+                            <p>Телефон: <a href="tel:+79825377331">+7 982 537-73-31</a></p>
+                            <p>Почта: <a href="mailto:frend.zona2020@mail.ru">frend.zona2020@mail.ru</a></p>
+                        </div>
+                        <a href="https://pv-real.ru/kontaktyi/" target="_blank">Адреса наших офисов</a>
                     </div>
-                    <a href="#">Адреса наших офисов</a>
-                </div>
-                <div class="registration">
-                    <div class="text">
-                        <h2>Ждем вас в нашей команде</h2>
-                        <button class="registration-button">Зарегистрироваться</button>
-                    </div>
-                    <div class="image">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/block-8-img-1.svg" alt="block-8-img-1">
+                    <div class="registration">
+                        <div class="text">
+                            <h2>Ждем вас в нашей команде</h2>
+                            <button class="registration-button">Зарегистрироваться</button>
+                        </div>
+                        <div class="image">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/block-8-img-1.svg" alt="block-8-img-1">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
         </div>
 

@@ -21,16 +21,16 @@
             </div>
             <div class="links">
                 <div>
-                    <a href="">О программе</a>
-                    <a href="#">Условия</a>
+                    <a href="http://bynextpr.ru/#block-2">О программе</a>
+                    <a href="http://bynextpr.ru/#block-3-4">Условия</a>
                     <a href="http://bynextpr.ru/news/">Новости</a>
-                    <a href="#">Контакты</a>
+                    <a href="http://bynextpr.ru/#block-8">Контакты</a>
                 </div>
                 <div>
-                    <a href="#">Vkontakte</a>
-                    <a href="#">Facebook</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">Youtube</a>
+                    <a href="https://vk.com/pvreal" target="_blank">Vkontakte</a>
+                    <a href="https://www.facebook.com/pvreal1/" target="_blank">Facebook</a>
+                    <a href="https://www.instagram.com/pvreal/" target="_blank">Instagram</a>
+                    <a href="https://www.youtube.com/channel/UCNeW3BEXBvySPZjzuEmWvrg" target="_blank">Youtube</a>
                 </div>
             </div>
         </div>
@@ -52,52 +52,52 @@
 
         <div class="header-menu d-none">
             <div class="container-modal">
-            <div class="container">
-                <div class="modal-menu-buttons">
-                    <div class="image">
-                        <a href="http://bynextpr.ru/">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer-logo.svg" alt="footer-logo">
-                        </a>
-                    </div>
-                    <div class="buttons">
-                        <div class="not-login d-flex">
-                            <button class="button-login login-button">Войти</button>
-                            <button class="button-registration registration-button">Зарегистрироваться</button>
+                <div class="container">
+                    <div class="modal-menu-buttons">
+                        <div class="image">
+                            <a href="http://bynextpr.ru/">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer-logo.svg" alt="footer-logo">
+                            </a>
                         </div>
-                        <div class="login d-none">
-                            <div class="avatar">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/user-avatar.svg" alt="user-avatar">
+                        <div class="buttons">
+                            <div class="not-login d-flex">
+                                <button class="button-login login-button">Войти</button>
+                                <button class="button-registration registration-button">Зарегистрироваться</button>
                             </div>
-                            <div class="user">Иван</div>
-                            <div class="actions">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/chevron-down.svg" alt="chevron-down">
+                            <div class="login d-none">
+                                <div class="avatar">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/user-avatar.svg" alt="user-avatar">
+                                </div>
+                                <div class="user">Иван</div>
+                                <div class="actions">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/chevron-down.svg" alt="chevron-down">
+                                </div>
+                            </div>
+                            <div class="close" id="close-burger-menu">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon-cross.svg" alt="icon-cross">
                             </div>
                         </div>
-                        <div class="close" id="close-burger-menu">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon-cross.svg" alt="icon-cross">
+                    </div>
+                    <div class="modal-menu-links">
+                        <div>
+                            <a href="https://vk.com/pvreal" target="_blank">Vkontakte</a>
+                            <a href="https://www.facebook.com/pvreal1/" target="_blank">Facebook</a>
+                            <a href="https://www.instagram.com/pvreal/" target="_blank">Instagram</a>
+                            <a href="https://www.youtube.com/channel/UCNeW3BEXBvySPZjzuEmWvrg" target="_blank">Youtube</a>
+                        </div>
+                        <div class="active">
+                            <a href="http://bynextpr.ru/#block-2" class="ancor-link">О программе</a>
+                            <a href="http://bynextpr.ru/#block-3-4" class="ancor-link">Условия</a>
+                            <a href="http://bynextpr.ru/news/">Новости</a>
+                            <a href="http://bynextpr.ru/#block-8" class="ancor-link">Контакты</a>
                         </div>
                     </div>
-                </div>
-                <div class="modal-menu-links">
-                    <div>
-                        <a href="#">Vkontakte</a>
-                        <a href="#">Facebook</a>
-                        <a href="#">Instagram</a>
-                        <a href="#">Youtube</a>
+                    <div class="modal-menu-copyright">
+                        <a href="#">© 2012-2021 Пересвет.Недвижимость</a>
+                        <a href="#">Политика конфиденциальности</a>
                     </div>
-                    <div class="active">
-                        <a href="#">О программе</a>
-                        <a href="#">Условия</a>
-                        <a href="http://bynextpr.ru/news/">Новости</a>
-                        <a href="#">Контакты</a>
-                    </div>
-                </div>
-                <div class="modal-menu-copyright">
-                    <a href="#">© 2012-2021 Пересвет.Недвижимость</a>
-                    <a href="#">Политика конфиденциальности</a>
                 </div>
             </div>
-        </div>
         </div>
 
         <div class="form-reg d-none">
