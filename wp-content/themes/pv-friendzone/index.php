@@ -122,25 +122,33 @@ get_header();
                 </div>
             </div>
 
-            <div class="promo">
-                <div class="container">
-                    <div>
-                        <div class="text">
-                            <h2>Зарегистрируйтесь, чтобы получить доступ ко всем полезным статьям</h2>
-                            <button class="registration-button">Зарегистрироваться</button>
-                        </div>
-                        <div class="image">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lock.svg" alt="lock">
+            <?php
+                if( is_user_logged_in() ) { ?>
+
+                    <div class="more-news">
+                        <div class="container">
+                            <button id="show-more-news">Показать еще</button>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="more-news">
-                <div class="container">
-                    <button>Показать еще</button>
-                </div>
-            </div>
+                <?php  } else { ?>
+
+                    <div class="promo">
+                        <div class="container">
+                            <div>
+                                <div class="text">
+                                    <h2>Зарегистрируйтесь, чтобы получить доступ ко всем полезным статьям</h2>
+                                    <button class="registration-button">Зарегистрироваться</button>
+                                </div>
+                                <div class="image">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lock.svg" alt="lock">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <?php }
+            ?>
 
         </div>
 

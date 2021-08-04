@@ -1,4 +1,23 @@
 console.log('blank');
+// обработка всех кликов
+function documentClickListener(el, event){
+    if(document.click){
+        document.click++
+    } else {
+        document.click = 1;
+    }
+    console.log('document.click', document.click);
+    if(document.showUserInfo) {
+        for(let i=0; i<showUserInfoEl.length; i++){
+            showUserInfoEl[i].lastElementChild.classList.remove('d-flex');
+            showUserInfoEl[i].lastElementChild.classList.add('d-none');
+        }
+        document.showUserInfo = false;
+    } else {
+    }
+}
+document.addEventListener('click',  function(){documentClickListener(this, event)} );
+// обработка всех кликов - конец
 // прокрутка
 function scroll(){
     let scrollHeight = Math.max(
@@ -201,45 +220,178 @@ if(playVideoButtonBigEl){
 }
 // воспроизведение видео - конец
 // модальное окно регистрации
-function modalRegistrationAction(el){
-    if(!modalRegInputF.value){
-        console.log('net familii');
-        formRegistrationEl.confirmf = false;
-    } else {
+function checkFInputElAction(){
+    let value = modalRegInputF.value;
+    console.log('Фамилия: ', value);
+    if(value && value.length > 2) {
         formRegistrationEl.confirmf = true;
-    }
-    if(!modalRegInputI.value){
-        console.log('net imeny');
-        formRegistrationEl.confirmi = false;
-    } else {
-        formRegistrationEl.confirmi = true;
-    }
-    if(!modalRegInputTel.value){
-        console.log('net telefona');
-        formRegistrationEl.confirmtel = false;
-    } else {
-        formRegistrationEl.confirmtel = true;
-    }
-    if(formRegistrationRulesEl.checked) {
-        console.log('checked');
-        if(formRegistrationEl.confirmf && formRegistrationEl.confirmi && formRegistrationEl.confirmtel){
-            formRegistrationEl.addEventListener('submit', (event)=>{ event.preventDefault(); });
-            modalRegistrationInputsEl.classList.remove('d-flex');
-            modalRegistrationInputsEl.classList.add('d-none');
-            modalRegistrationTelCheckEl.classList.remove('d-none');
-            modalRegistrationTelCheckEl.classList.add('d-flex');
+        if(modalRegInputF.classList.contains('alert')) {
+            modalRegInputF.classList.remove('alert');
         }
+        if(!modalRegInputF.classList.contains('ok')) {
+            modalRegInputF.classList.add('ok');
+        }
+    } else {
+        formRegistrationEl.confirmf = false;
+        if(modalRegInputF.classList.contains('ok')) {
+            modalRegInputF.classList.remove('ok');
+        }
+        if(!modalRegInputF.classList.contains('alert')) {
+            modalRegInputF.classList.add('alert');
+        }
+    }
+}
+function checkIInputElAction(){
+    let value = modalRegInputI.value;
+    console.log('Имя: ', value);
+    if(value && value.length > 1) {
+        formRegistrationEl.confirmi = true;
+        if(modalRegInputI.classList.contains('alert')) {
+            modalRegInputI.classList.remove('alert');
+        }
+        if(!modalRegInputI.classList.contains('ok')) {
+            modalRegInputI.classList.add('ok');
+        }
+    } else {
+        formRegistrationEl.confirmi = false;
+        if(modalRegInputI.classList.contains('ok')) {
+            modalRegInputI.classList.remove('ok');
+        }
+        if(!modalRegInputI.classList.contains('alert')) {
+            modalRegInputI.classList.add('alert');
+        }
+    }
+}
+function checkTelInputElAction(){
+    let value = modalRegInputTel.value;
+    console.log('Телефон: ', value);
+    let re = /^\+?[78][-\(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/;
+    let valid = re.test(modalRegInputTel.value);
+    if(value && valid) {
+        formRegistrationEl.confirmtel = true;
+        if(modalRegInputTel.classList.contains('alert')) {
+            modalRegInputTel.classList.remove('alert');
+        }
+        if(!modalRegInputTel.classList.contains('ok')) {
+            modalRegInputTel.classList.add('ok');
+        }
+    } else {
+        formRegistrationEl.confirmtel = false;
+        if(modalRegInputTel.classList.contains('ok')) {
+            modalRegInputTel.classList.remove('ok');
+        }
+        if(!modalRegInputTel.classList.contains('alert')) {
+            modalRegInputTel.classList.add('alert');
+        }
+    }
+}
+function modalRegistrationAction(el){
+    checkFInputElAction();
+    checkIInputElAction();
+    checkTelInputElAction();
+    if(formRegistrationRulesEl.checked) {
+        // console.log('checked');
+        formRegistrationEl.addEventListener('submit', (event)=>{ event.preventDefault(); });
+        // подготавливаем номер телефона в формате: +7 (912) 345-67-89
+        let tel = '';
+        for (let i = 0; i < modalRegInputTel.value.length; i++){
+            if(i == 0) {
+                if (modalRegInputTel.value[i] === '+') { tel += '+7'; i++; continue; }
+                else if (modalRegInputTel.value[i] === '8') { tel += '+7'; continue; }
+            }
+            if(!isNaN(modalRegInputTel.value[i])) {
+                tel += modalRegInputTel.value[i];
+            }
+        }
+        tel = tel.slice(0, 2) + ' (' + tel.slice(2, 5) + ') ' + tel.slice(5, 8) + '-' + tel.slice(8, 10) + '-' + tel.slice(10);
+        // подготавливаем и отправляем запрос на проверку номера телефона
+        let formData = new FormData();
+        formData.set('action', 'registration');
+        formData.set('tel', tel);
+        let request = fetch(siteAjaxUrl, {
+            method: 'POST',
+            body: formData
+        }).then(response => response.text()).then((response)=> {
+            console.log(response);
+            response = response.slice(0, 2)
+            if(response === 'error') {
+                console.log('Номер занят');
+                if(modalRegInputTel.classList.contains('ok')) {
+                    modalRegInputTel.classList.remove('ok');
+                }
+                if(!modalRegInputTel.classList.contains('alert')) {
+                    modalRegInputTel.classList.add('alert');
+                }
+            }
+            else if (response === 'ok') {
+                console.log('Номер свободен');
+                if(formRegistrationEl.confirmf && formRegistrationEl.confirmi && formRegistrationEl.confirmtel){
+                    modalRegistrationInputsEl.classList.remove('d-flex');
+                    modalRegistrationInputsEl.classList.add('d-none');
+                    modalRegistrationTelCheckEl.classList.remove('d-none');
+                    modalRegistrationTelCheckEl.classList.add('d-flex');
+                    modalRegistrationTelCheckEl.children[1].children[1].textContent = tel;
+                    let count = modalRegistrationTelCheckEl.children[3].children[0].children[0].textContent;
+                    let timerId = setInterval(() => {
+                        count--;
+                        modalRegistrationTelCheckEl.children[3].children[0].children[0].textContent = count;
+                        if(count == 0) {
+                            clearInterval(timerId);
+                            modalRegistrationTelCheckEl.children[3].children[0].addEventListener('click', reSendTelCode );
+                        }
+                    }, 1000);
+                }
+            }
+        });
     } else {
         console.log('ne checked');
         formRegistrationEl.addEventListener('submit', (event)=>{ event.preventDefault(); });
     }
 }
+function reSendTelCode(){
+    modalRegistrationTelCheckEl.children[3].children[0].children[0].textContent = 60;
+    modalRegistrationAction();
+    modalRegistrationTelCheckEl.children[3].children[0].removeEventListener('click', reSendTelCode );
+}
 function modalRegistrationConfirmAction(el){
     if(!modalRegInputCode.value){
         console.log('net coda');
         modalRegInputCode.confirmcode = false;
+        if(modalRegInputCode.classList.contains('ok')) {
+            modalRegInputCode.classList.remove('ok');
+        }
+        if(!modalRegInputCode.classList.contains('alert')) {
+            modalRegInputCode.classList.add('alert');
+        }
     } else {
-        formRegistrationEl.confirmcode = true;
+        if(modalRegInputCode.value.length === 6){
+            // formRegistrationEl.confirmcode = true;
+            console.log('Проверяем код с зарегистрированным пользователем');
+            let formData = new FormData();
+            formData.set('action', 'code-check');
+            formData.set('tel', modalRegistrationTelCheckEl.children[1].children[1].textContent);
+            formData.set('code', modalRegInputCode.value);
+            let request = fetch(siteAjaxUrl, {
+                method: 'POST',
+                body: formData
+            }).then(response => response.text()).then((response)=> {
+                console.log(response);
+                if(response === 'ok'){
+                    console.log('Код совпал. Подтверждаем регистрацию для пользователя');
+                    formRegistrationEl.submit();
+                } else if (response === 'error') {
+                    console.log('Код Не совпал. Попробуйте еще раз');
+                    if(modalRegInputCode.classList.contains('ok')) {
+                        modalRegInputCode.classList.remove('ok');
+                    }
+                    if(!modalRegInputCode.classList.contains('alert')) {
+                        modalRegInputCode.classList.add('alert');
+                    }
+                }
+            });
+        } else {
+            console.log('Неправильная длина кода');
+        }
     }
     if(formRegistrationEl.confirmf && formRegistrationEl.confirmi && formRegistrationEl.confirmtel && formRegistrationEl.confirmcode)
     {
@@ -247,8 +399,11 @@ function modalRegistrationConfirmAction(el){
     }
 }
 const modalRegInputF = document.getElementById('form-reg-f');
+modalRegInputF.addEventListener('keyup', function (){ checkFInputElAction() });
 const modalRegInputI = document.getElementById('form-reg-i');
+modalRegInputI.addEventListener('keyup', function (){ checkIInputElAction() });
 const modalRegInputTel = document.getElementById('form-reg-tel');
+modalRegInputTel.addEventListener('keyup', function (){ checkTelInputElAction() });
 const modalRegInputCode = document.getElementById('form-reg-code');
 const modalRegistrationInputsEl = document.getElementsByClassName('reg-form-inputs')[0];
 const modalRegistrationTelCheckEl = document.getElementsByClassName('reg-form-check-tel')[0];
@@ -310,3 +465,62 @@ for(let i=0; i<userAncorLinkEl.length; i++){
     userAncorLinkEl[i].addEventListener('click', function (){ closeModal(this); burgerMenuEl.status = false; });
 }
 // закрытие всплывающего меню при нажатии на ссылки-якоря - конец
+// показать больше новостей
+function showMoreNewsAction(el){
+    let count = 0;
+    for (let i = 3; i < el.parentNode.parentNode.previousElementSibling.children[0].children.length; i++){
+        if(count > 2) { break; }
+        if(el.parentNode.parentNode.previousElementSibling.children[0].children[i].classList.contains('hidden')){
+            el.parentNode.parentNode.previousElementSibling.children[0].children[i].classList.remove('hidden');
+            count++;
+        }
+    }
+    if(!el.parentNode.parentNode.previousElementSibling.children[0].lastElementChild.classList.contains('hidden')){
+        el.classList.add('d-none');
+    }
+}
+const showMoreNewsButtonEl = document.getElementById('show-more-news');
+if(showMoreNewsButtonEl){
+    showMoreNewsButtonEl.addEventListener('click', function (){ showMoreNewsAction(this); });
+}
+// показать больше новостей - конец
+// показать меню пользователя
+function userInfoAction(el){
+    if(document.showUserInfo){
+        document.showUserInfo = false;
+        for(let i=0; i<showUserInfoEl.length; i++){
+            showUserInfoEl[i].lastElementChild.classList.remove('d-flex');
+            showUserInfoEl[i].lastElementChild.classList.add('d-none');
+        }
+    } else {
+        document.showUserInfo = true;
+        for(let i=0; i<showUserInfoEl.length; i++){
+            showUserInfoEl[i].lastElementChild.classList.remove('d-none');
+            showUserInfoEl[i].lastElementChild.classList.add('d-flex');
+        }
+    }
+    event.stopPropagation();
+}
+const showUserInfoEl = document.getElementsByClassName('user-info');
+for(let i=0; i<showUserInfoEl.length; i++){
+    showUserInfoEl[i].addEventListener('click', function (){ userInfoAction(this); });
+}
+// показать меню пользователя - конец
+// асинхронные запросы
+function ajaxRequest(url, data){
+    let requestUrl = url;
+    console.log('URL: ', requestUrl);
+    let requestData = data;
+    console.log('DATA: ', requestData);
+    let formData = new FormData();
+    for (let key in requestData) {
+        formData.set(key, requestData[key]);
+    }
+    let request = fetch(requestUrl, {
+        method: 'POST',
+        // headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: formData
+    }).then(response => response.text()).then((response)=> { console.log(response); return response; });
+}
+let siteAjaxUrl = 'http://bynextpr.ru/ajax/';
+// асинхронные запросы - конец

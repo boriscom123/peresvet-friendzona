@@ -185,4 +185,9 @@ require get_template_directory() . '/inc/customizer.php';
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
-
+/**
+ * Отключаем панель для всех кроме администратора
+ */
+if ( ! current_user_can( 'manage_options' ) ) {
+    show_admin_bar( false );
+}

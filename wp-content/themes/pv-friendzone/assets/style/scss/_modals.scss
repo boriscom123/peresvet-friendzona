@@ -18,15 +18,18 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
-          @media (max-width: 850px) { height: 180px; }
+          @media (max-width: 600px) { height: 180px; }
           > .image {
             width: 50%;
             max-width: 280px;
-            @media (max-width: 850px) { margin-bottom: 60px; }
             @media (max-width: 600px) { width: #{calc(100% - 60px)}; }
+            @media (max-width: 600px) { margin-bottom: 60px; }
+            transition: $transition;
+            &:hover {
+              cursor: pointer;
+              transform: scale(1.1);
+            }
             > a {
-              height: 100%;
-              width: 100%;
               > img {
                 height: 100%;
                 width: 100%;
@@ -38,9 +41,13 @@
             width: 50%;
             display: flex;
             justify-content: space-between;
-            @media (max-width: 850px) { flex-direction: column-reverse; align-items: flex-end; }
+            @media (max-width: 650px) { flex-direction: column-reverse; align-items: flex-end; }
             @media (max-width: 600px) { width: 60px; }
             > .not-login {
+              > button {
+                padding: 0;
+                box-sizing: border-box;
+              }
               > .button-login {
                 height: 40px;
                 padding: 0 36px;
@@ -52,7 +59,7 @@
                 font-size: 13px;
                 color: $alterFontColor;
                 transition: $transition;
-                @media (max-width: 400px) { padding: 0 10px; }
+                @media (max-width: 850px) { padding: 0 10px; }
                 &:hover {
                   border: 1px solid $alterFontColor;
                   background-color: $mainBgColor;
@@ -71,7 +78,7 @@
                 color: $alterFontColor;
                 margin: 0 0 0 20px;
                 transition: $transition;
-                @media (max-width: 400px) { padding: 0 10px; }
+                @media (max-width: 850px) { padding: 0 10px; }
                 &:hover {
                   color: $mainFontColor;
                 }
@@ -80,6 +87,7 @@
             > .login {
               // display: flex;
               align-items: center;
+              position: relative;
               > .avatar {
                 height: 45px;
                 min-height: 45px;
@@ -116,16 +124,49 @@
                   object-fit: contain;
                 }
               }
+              > .drop-down-menu {
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 15px 20px;
+                box-sizing: border-box;
+                border-radius: 10px;
+                position: absolute;
+                top: #{calc(100% + 20px)};
+                left: 0;
+                > .user-link {
+                  font-family: $mainFontFamily;
+                  font-weight: 500;
+                  font-size: 13px;
+                  color: $mainFontColor;
+                  margin: 5px 0;
+                }
+                > .decoration {
+                  height: 1px;
+                  width: 100%;
+                  // min-width: 115px;
+                  background-color: rgba(165, 165, 165, 0.5);
+                  margin: 10px 0;
+                }
+                > .user-logout {
+                  font-family: $mainFontFamily;
+                  font-weight: 500;
+                  font-size: 13px;
+                  color: rgba(27, 27, 27, 0.5);
+                  margin: 5px 0;
+                }
+              }
             }
             > .close {
               height: 40px;
               width: 40px;
+              min-width: 40px;
               background: $alterColor2;
               border-radius: 5px;
               display: flex;
               justify-content: center;
               align-items: center;
-              @media (max-width: 850px) { margin-bottom: 20px; }
+              @media (max-width: 650px) { margin: 0 0 15px 0; }
               &:hover {
                 cursor: pointer;
               }
@@ -250,7 +291,7 @@
           > input {
             height: 40px;
             width: 100%;
-            border: 1px solid #A5A5A5;
+            border: 1px solid $alterColor2;
             box-sizing: border-box;
             border-radius: 5px;
             background: none;
@@ -264,6 +305,12 @@
             &:not(:last-child) {
             margin: 0 0 20px 0;
             }
+          }
+          > .alert {
+            border: 1px solid $alterColor3;
+          }
+          > .ok {
+            border: 1px solid green;
           }
         }
         > .checkbox {
@@ -386,6 +433,9 @@
             &:not(:last-child) {
               margin: 0 0 20px 0;
             }
+          }
+          > .alert {
+            border: 1px solid $alterColor3;
           }
         }
         > .timer {

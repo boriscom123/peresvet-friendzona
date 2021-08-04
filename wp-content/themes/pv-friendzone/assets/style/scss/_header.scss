@@ -26,26 +26,25 @@
     }
     > .container {
       height: 120px;
-      // background-color: #0d66c2;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      @media (max-width: 550px) { height: 180px; }
+      @media (max-width: 600px) { height: 180px; }
       > .header-logo {
         width: 50%;
         max-width: 280px;
         transition: $transition;
         @media (max-width: 600px) { width: #{calc(100% - 60px)}; }
-        @media (max-width: 550px) { margin-bottom: 60px; }
+        @media (max-width: 600px) { margin-bottom: 60px; }
         &:hover {
           cursor: pointer;
           transform: scale(1.1);
           // background-color: pink;
         }
         > .header-logo-image {
-          height: 100%;
-          width: 100%;
-          display: flex;
+          //height: 100%;
+          //width: 100%;
+          //display: flex;
           > img {
             height: 100%;
             width: 100%;
@@ -57,14 +56,11 @@
         width: 50%;
         display: flex;
         justify-content: space-between;
-        @media (max-width: 850px) { justify-content: flex-end; }
+        @media (max-width: 650px) { flex-direction: column-reverse; align-items: flex-end; }
         @media (max-width: 600px) { width: 60px; }
-        @media (max-width: 550px) { flex-direction: column-reverse; align-items: flex-end; }
+        // @media (max-width: 550px) { flex-direction: column-reverse; align-items: flex-end; }
         > .header-login {
-          // display: flex;
-          @media (max-width: 850px) { display: none; }
           > button {
-            //margin: 0 10px;
             padding: 0;
             box-sizing: border-box;
           }
@@ -83,6 +79,7 @@
             color: $mainFontColor;
             transition: $transition;
             box-sizing: border-box;
+            @media (max-width: 850px) { padding: 0 10px; }
             &:hover {
               border: 1px solid $alterFontColor;
               background-color: $alterBgColor3;
@@ -101,6 +98,7 @@
             color: $alterFontColor;
             margin: 0 0 0 20px;
             transition: $transition;
+            @media (max-width: 850px) { padding: 0 10px; }
             &:hover {
               color: $mainFontColor;
             }
@@ -109,7 +107,9 @@
         > .login {
           // display: flex;
           align-items: center;
-          @media (max-width: 550px) { justify-content: flex-end; }
+          // margin: 0 20px 0 0;
+          // @media (max-width: 550px) { justify-content: flex-end; margin: 0 0 0 0; }
+          position: relative;
           > .avatar {
             height: 45px;
             min-height: 45px;
@@ -147,6 +147,38 @@
               object-fit: contain;
             }
           }
+          > .drop-down-menu {
+            width: 100%;
+            background-color: white;
+            flex-direction: column;
+            padding: 15px 20px;
+            box-sizing: border-box;
+            border-radius: 10px;
+            position: absolute;
+            top: #{calc(100% + 20px)};
+            left: 0;
+            > .user-link {
+              font-family: $mainFontFamily;
+              font-weight: 500;
+              font-size: 13px;
+              color: $mainFontColor;
+              margin: 5px 0;
+            }
+            > .decoration {
+              height: 1px;
+              width: 100%;
+              // min-width: 115px;
+              background-color: rgba(165, 165, 165, 0.5);
+              margin: 10px 0;
+            }
+            > .user-logout {
+              font-family: $mainFontFamily;
+              font-weight: 500;
+              font-size: 13px;
+              color: rgba(27, 27, 27, 0.5);
+              margin: 5px 0;
+            }
+          }
         }
         > .header-burger-menu {
           height: 40px;
@@ -160,7 +192,7 @@
           align-items: center;
           padding: 10px 0;
           box-sizing: border-box;
-          @media (max-width: 550px) { margin: 0 0 60px 0; }
+          @media (max-width: 650px) { margin: 0 0 15px 0; }
           &:hover {
             cursor: pointer;
             > .header-burger-menu-line {

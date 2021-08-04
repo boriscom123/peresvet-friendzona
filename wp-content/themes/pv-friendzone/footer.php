@@ -60,19 +60,31 @@
                             </a>
                         </div>
                         <div class="buttons">
-                            <div class="not-login d-flex">
-                                <button class="button-login login-button">Войти</button>
-                                <button class="button-registration registration-button">Зарегистрироваться</button>
-                            </div>
-                            <div class="login d-none">
-                                <div class="avatar">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/user-avatar.svg" alt="user-avatar">
-                                </div>
-                                <div class="user">Иван</div>
-                                <div class="actions">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/chevron-down.svg" alt="chevron-down">
-                                </div>
-                            </div>
+                            <?php
+                                if( is_user_logged_in() ){ ?>
+                                    <div class="login d-flex user-info">
+                                        <div class="avatar">
+                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/user-avatar.svg" alt="user-avatar">
+                                        </div>
+                                        <div class="user">Иван</div>
+                                        <div class="actions">
+                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/chevron-down.svg" alt="chevron-down">
+                                        </div>
+                                        <div class="drop-down-menu d-none">
+                                            <a class="user-link" href="#">Профиль</a>
+                                            <a class="user-link" href="#">Друзья</a>
+                                            <a class="user-link" href="#">Настройки</a>
+                                            <div class="decoration"></div>
+                                            <a class="user-logout" href="<?php echo wp_logout_url( home_url() ); ?>">Выйти</a>
+                                        </div>
+                                    </div>
+                                <?php } else { ?>
+                                    <div class="not-login d-flex">
+                                        <button class="button-login login-button">Войти</button>
+                                        <button class="button-registration registration-button">Зарегистрироваться</button>
+                                    </div>
+                                <?php }
+                            ?>
                             <div class="close" id="close-burger-menu">
                                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon-cross.svg" alt="icon-cross">
                             </div>
@@ -109,7 +121,8 @@
                 </div>
             </div>
             <div class="reg-form-inputs d-flex">
-                <form action="user.html" method="get" id="form-reg"></form>
+                <form method="post" id="form-reg"></form>
+                <input type="hidden" name="action" value="registration" form="form-reg">
                 <div class="inputs">
                     <input type="text" name="f" placeholder="Фамилия*" form="form-reg" id="form-reg-f">
                     <input type="text" name="i" placeholder="Имя*" form="form-reg" id="form-reg-i">
@@ -120,7 +133,7 @@
                     <label for="rules">С условиями участия ознакомлен</label>
                 </div>
                 <div class="submit">
-                    <input type="submit" value="Зарегистрироваться" form="form-reg" id="modal-reg-button">
+                    <input type="button" value="Зарегистрироваться" form="form-reg" id="modal-reg-button">
                 </div>
                 <div class="text">
                     <p>Отправляя данные, вы даете согласие на обработку персональных данных и соглашаетесь c политикой конфиденциальности</p>
@@ -158,7 +171,8 @@
                 </div>
             </div>
             <div class="login-form-inputs d-flex">
-                <form action="user.html" method="get" id="login"></form>
+                <form method="post" id="login"></form>
+                <input type="hidden" name="action" value="login" form="login">
                 <div class="inputs">
                     <input type="text" name="u-login" placeholder="Телефон или почта" form="login" required>
                     <input type="password" name="u-pass" placeholder="Пароль" form="login" required>

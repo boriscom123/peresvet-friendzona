@@ -9,6 +9,42 @@
 
 get_header();
 ?>
+<?php
+    $post = get_post();
+    // print_r($post);
+    $monthsList = array(
+        ".01." => "января",
+        ".02." => "февраля",
+        ".03." => "марта",
+        ".04." => "апреля",
+        ".05." => "мая",
+        ".06." => "июня",
+        ".07." => "июля",
+        ".08." => "августа",
+        ".09." => "сентября",
+        ".10." => "октября",
+        ".11." => "ноября",
+        ".12." => "декабря"
+    );
+    $args = array(
+        'date_query' => $post->post_date,
+        'numberposts' => 3,
+        'exclude' => $post->ID,
+    );
+    $posts_by_date = get_posts( $args );
+    $tags = wp_get_post_tags( $post->ID );
+    $tag_list = '';
+    foreach ($tags as $tag){
+        $tag_list .= $tag->slug.', ';
+    }
+    $tag_list = substr($tag_list, 0, -2);
+    $args = array(
+        'tag' => $tag_list,
+        'numberposts' => 4,
+        'exclude' => $post->ID,
+    );
+    $posts_by_tags = get_posts( $args );
+?>
 
 	<main id="primary" class="site-main">
 
@@ -30,78 +66,108 @@ get_header();
             <div class="main-articles">
                 <div class="container">
                     <div class="article">
-                        <h3>10 марта 2021</h3>
-                        <h1>Досрочное погашение ипотеки. Как выгоднее и быстрее рассчитаться с банком</h1>
-                        <div class="main-article-image">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/test-article.svg" alt="test-article">
-                        </div>
-                        <p>Средний срок, на который жители России берут ипотечный кредит, в 2020 году составляет примерно 18,4 года. Но рассчитываются с долгами россияне намного быстрее — за 7–10 лет. Выгодно ли досрочно расплачиваться с банком и как это лучше делать? Давайте разберёмся.</p>
-                        <p>Чтобы досрочно погасить ипотеку, надо сначала взять ипотеку. И, кажется, сейчас подходящее время.</p>
-                        <p>К лету средняя ставка по ипотеке в России достигла 7,4% и продолжает снижаться, во многом за счёт льготной ипотеки со ставкой 6,5%.</p>
-                        <p>Таких низких ипотечных ставок в России не было ещё никогда. Это прекрасная возможность купить квартиру на максимально выгодных условиях для тех, кто давно собирался сделать это.</p>
-                        <p>Для пользователей Яндекс.Недвижимости в Альфа-Банке действуют специальные условия (то есть ставки снижены ещё больше).</p>
-                        <p>Можно взять ипотеку:</p>
-                        <p>на новостройки — ставка от 6,5%;</p>
-                        <p>на вторичку — ставка от 8,39%.</p>
-
-                        <h2>Ежемесячный платёж по кредиту. Сколько вы платите за сам кредит, а сколько — за проценты по нему </h2>
-                        <p>Каждый платёж по кредиту состоит из двух частей: одна часть идёт на погашение основного долга, другая — на погашение банковских процентов по нему (той самой ставки по кредиту). Большинство банков в России сейчас работают с аннуитетными платежами: в этом случае банк сначала стремится получить все выплаты по процентам, которые вы должны, и только потом — по основному телу долга. Через несколько лет выплаты кредита основное тело долга может уменьшиться совсем немного, так как основная часть взносов идёт на погашение процентов.</p>
-                        <p>В графике платежей обычно указано, сколько денег направляется на уменьшение основного долга, а сколько — на выплату процентов по ипотеке.</p>
-                        <p>Выглядит это так:                </p>
-
-                        <div class="image">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/art-image.svg" alt="art-image">
+                        <h3>
+                            <?php
+                                $date = DateTime::createFromFormat('Y-m-d H:i:s', $post->post_date);
+                                echo str_replace($date->format('.m.'), " ".$monthsList[$date->format('.m.')]." ", $date->format('j.m.Y'));
+                            ?>
+                        </h3>
+                        <h1><?php print $post->post_title; ?></h1>
+                        <div class="post-content">
+                            <?php
+                                if( is_user_logged_in() ){
+                                    print $post->post_content;
+                                } else {
+                                    print '<p>'.$post->post_excerpt.'</p>';
+                                }
+                            ?>
                         </div>
 
-                        <div class="lock">
-                            <div class="text">
-                                <h2>Зарегистрируйтесь, чтобы получить доступ к полной статье</h2>
-                                <button class="registration-button">Зарегистрироваться</button>
-                            </div>
-                            <div class="image">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lock.svg" alt="lock">
-                            </div>
-                        </div>
+                        <?php
+                            if( is_user_logged_in() ){
+
+                            } else { ?>
+
+                                <div class="lock">
+                                    <div class="text">
+                                        <h2>Зарегистрируйтесь, чтобы получить доступ к полной статье</h2>
+                                        <button class="registration-button">Зарегистрироваться</button>
+                                    </div>
+                                    <div class="image">
+                                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lock.svg" alt="lock">
+                                    </div>
+                                </div>
+
+                            <?php }
+                        ?>
+
                     </div>
                     <div class="mini-articles">
 
-                        <div class="mini-art">
-                            <div class="image">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/test-image.jpg" alt="test-image">
-                            </div>
-                            <h3>8 февраля 2021</h3>
-                            <h2>Оформление новостройки в собственность</h2>
-                        </div>
+                        <?php
+                            foreach ($posts_by_tags as $p) { ?>
 
-                        <div class="mini-art">
-                            <div class="image">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/test-image.jpg" alt="test-image">
-                            </div>
-                            <h3>8 февраля 2021</h3>
-                            <h2>Новостройка или вторичка? Муки выбора</h2>
-                        </div>
+                                <div class="mini-art">
+                                    <a class="image" href="<?php echo get_permalink($p->ID); ?>">
+                                        <img src="<?php echo get_the_post_thumbnail_url($p->ID); ?>" alt="test-image">
+                                    </a>
+                                    <h3>
+                                        <?php
+                                            $date = DateTime::createFromFormat('Y-m-d H:i:s', $p->post_date);
+                                            echo str_replace($date->format('.m.'), " ".$monthsList[$date->format('.m.')]." ", $date->format('j.m.Y'));
+                                        ?>
+                                    </h3>
+                                    <h2><?php print $p->post_title; ?></h2>
+                                    <?php
+                                        if( !is_user_logged_in() ){ ?>
+                                            <div class="lock">
+                                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lock.svg" alt="lock">
+                                            </div>
+                                        <?php }
+                                    ?>
 
-                        <div class="mini-art">
-                            <div class="image">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/test-image.jpg" alt="test-image">
-                            </div>
-                            <h3>8 февраля 2021</h3>
-                            <h2>«Развидеть эти косяки я уже не мог»</h2>
-                            <div class="lock">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lock.svg" alt="lock">
-                            </div>
-                        </div>
+                                </div>
 
-                        <div class="mini-art">
-                            <div class="image">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/test-image.jpg" alt="test-image">
-                            </div>
-                            <h3>8 февраля 2021</h3>
-                            <h2>Электронные сделки с недвижимостью: как это работает и стоит ли бояться мошенников</h2>
-                            <div class="lock">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lock.svg" alt="lock">
-                            </div>
-                        </div>
+                            <?php   }
+                        ?>
+
+<!--                        <div class="mini-art">-->
+<!--                            <div class="image">-->
+<!--                                <img src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/test-image.jpg" alt="test-image">-->
+<!--                            </div>-->
+<!--                            <h3>8 февраля 2021</h3>-->
+<!--                            <h2>Оформление новостройки в собственность</h2>-->
+<!--                        </div>-->
+<!---->
+<!--                        <div class="mini-art">-->
+<!--                            <div class="image">-->
+<!--                                <img src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/test-image.jpg" alt="test-image">-->
+<!--                            </div>-->
+<!--                            <h3>8 февраля 2021</h3>-->
+<!--                            <h2>Новостройка или вторичка? Муки выбора</h2>-->
+<!--                        </div>-->
+<!---->
+<!--                        <div class="mini-art">-->
+<!--                            <div class="image">-->
+<!--                                <img src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/test-image.jpg" alt="test-image">-->
+<!--                            </div>-->
+<!--                            <h3>8 февраля 2021</h3>-->
+<!--                            <h2>«Развидеть эти косяки я уже не мог»</h2>-->
+<!--                            <div class="lock">-->
+<!--                                <img src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/lock.svg" alt="lock">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!---->
+<!--                        <div class="mini-art">-->
+<!--                            <div class="image">-->
+<!--                                <img src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/test-image.jpg" alt="test-image">-->
+<!--                            </div>-->
+<!--                            <h3>8 февраля 2021</h3>-->
+<!--                            <h2>Электронные сделки с недвижимостью: как это работает и стоит ли бояться мошенников</h2>-->
+<!--                            <div class="lock">-->
+<!--                                <img src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/lock.svg" alt="lock">-->
+<!--                            </div>-->
+<!--                        </div>-->
 
                     </div>
                 </div>
@@ -115,38 +181,60 @@ get_header();
                     </div>
                     <div class="art-info">
 
-                        <div class="art">
-                            <h3>8 февраля 2021</h3>
-                            <h2>Как купить квартиру без первоначального взноса по ипотеке</h2>
-                            <div class="link">
-                                <a href="#">Читать статью</a>
-                                <a href="#">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-right-red.svg" alt="arrow-right-red">
-                                </a>
-                            </div>
-                        </div>
+                        <?php
+                             foreach ($posts_by_date as $p){ ?>
 
-                        <div class="art">
-                            <h3>8 февраля 2021</h3>
-                            <h2>Стоит ли вкладывать материнский капитал в покупку недвижимости и какие тут подводные камни</h2>
-                            <div class="link">
-                                <a href="#">Читать статью</a>
-                                <a href="#">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-right-red.svg" alt="arrow-right-red">
-                                </a>
-                            </div>
-                        </div>
+                                 <div class="art">
+                                     <h3>
+                                         <?php
+                                             $date = DateTime::createFromFormat('Y-m-d H:i:s', $p->post_date);
+                                             echo str_replace($date->format('.m.'), " ".$monthsList[$date->format('.m.')]." ", $date->format('j.m.Y'));
+                                         ?>
+                                     </h3>
+                                     <h2><?php print $p->post_title; ?></h2>
+                                     <div class="link">
+                                         <a href="<?php echo get_permalink($p->ID); ?>">Читать статью</a>
+                                         <a href="<?php echo get_permalink($p->ID); ?>">
+                                             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-right-red.svg" alt="arrow-right-red">
+                                         </a>
+                                     </div>
+                                 </div>
 
-                        <div class="art">
-                            <h3>8 февраля 2021</h3>
-                            <h2>Рефинансирование ипотеки. Пошаговая инструкция</h2>
-                            <div class="link">
-                                <a href="#">Читать статью</a>
-                                <a href="#">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-right-red.svg" alt="arrow-right-red">
-                                </a>
-                            </div>
-                        </div>
+                             <?php }
+                        ?>
+
+<!--                        <div class="art">-->
+<!--                            <h3>8 февраля 2021</h3>-->
+<!--                            <h2>Как купить квартиру без первоначального взноса по ипотеке</h2>-->
+<!--                            <div class="link">-->
+<!--                                <a href="#">Читать статью</a>-->
+<!--                                <a href="#">-->
+<!--                                    <img src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/arrow-right-red.svg" alt="arrow-right-red">-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!---->
+<!--                        <div class="art">-->
+<!--                            <h3>8 февраля 2021</h3>-->
+<!--                            <h2>Стоит ли вкладывать материнский капитал в покупку недвижимости и какие тут подводные камни</h2>-->
+<!--                            <div class="link">-->
+<!--                                <a href="#">Читать статью</a>-->
+<!--                                <a href="#">-->
+<!--                                    <img src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/arrow-right-red.svg" alt="arrow-right-red">-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!---->
+<!--                        <div class="art">-->
+<!--                            <h3>8 февраля 2021</h3>-->
+<!--                            <h2>Рефинансирование ипотеки. Пошаговая инструкция</h2>-->
+<!--                            <div class="link">-->
+<!--                                <a href="#">Читать статью</a>-->
+<!--                                <a href="#">-->
+<!--                                    <img src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/arrow-right-red.svg" alt="arrow-right-red">-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                        </div>-->
 
                     </div>
                 </div>
