@@ -2251,7 +2251,7 @@ button {
 .modals > .form-reg > .container > .reg-form-inputs > .checkbox > input:checked + label::before {
   background-color: #A5A5A5;
   border: 1px solid #FFFFFF;
-  box-shadow: 0px 0px 0px 1px #A5A5A5;
+  box-shadow: 0 0 0 1px #A5A5A5;
 }
 .modals > .form-reg > .container > .reg-form-inputs > .checkbox > label {
   cursor: pointer;
@@ -2544,6 +2544,12 @@ button {
 }
 .modals > .form-login > .container > .login-form-inputs > .inputs > input:not(:last-child) {
   margin: 0 0 20px 0;
+}
+.modals > .form-login > .container > .login-form-inputs > .inputs > .alert {
+  border: 1px solid #FA1E38;
+}
+.modals > .form-login > .container > .login-form-inputs > .inputs > .ok {
+  border: 1px solid green;
 }
 .modals > .form-login > .container > .login-form-inputs > .submit {
   display: flex;
@@ -2902,7 +2908,7 @@ button {
 .modals > .form-money > .container > .money-form-inputs > .checkbox > input:checked + label::before {
   background-color: #A5A5A5;
   border: 1px solid #FFFFFF;
-  box-shadow: 0px 0px 0px 1px #A5A5A5;
+  box-shadow: 0 0 0 1px #A5A5A5;
 }
 .modals > .form-money > .container > .money-form-inputs > .checkbox > label {
   cursor: pointer;
@@ -4668,6 +4674,77 @@ button {
 }
 .main > .main-user > .container > .user-pages > .user-pass > .pass-field-submit > input:hover {
   color: #1B1B1B;
+}
+
+.pop-up {
+  height: calc(100vh - 5px);
+  width: 100%;
+  position: fixed;
+  top: 5px;
+  left: 0;
+  padding: 190px 0 0 0;
+  background-color: rgba(27, 27, 27, 0.8);
+  z-index: 9000;
+}
+.pop-up > .message {
+  width: 90%;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 60px 0 60px 0;
+  position: relative;
+}
+.pop-up > .message > .icon {
+  height: 42px;
+  min-height: 42px;
+  width: 42px;
+  min-width: 42px;
+  border-radius: 50%;
+  background-color: #EDEDED;
+  margin: 0 auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50%;
+}
+.pop-up > .message > .text {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 25px;
+  color: #FFFFFF;
+  text-align: center;
+  max-width: 330px;
+  margin: 22px auto 0;
+}
+.pop-up > .message > .close {
+  height: 20px;
+  min-height: 20px;
+  width: 20px;
+  min-width: 20px;
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.pop-up > .message > .close:hover {
+  transform: scale(1.5);
+}
+.pop-up > .message > .close > img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.pop-up > .ok {
+  background-color: green;
+}
+.pop-up > .ok > .icon {
+  background-image: url("../images/check.svg");
+}
+.pop-up > .alert {
+  background-color: #FA1E38;
+}
+.pop-up > .alert > .icon {
+  background-image: url("../images/icon-cross-red.svg");
 }
 
 /*# sourceMappingURL=index.css.map */

@@ -219,6 +219,87 @@ if(playVideoButtonBigEl){
     playVideoButtonBigEl.addEventListener('click', function (){ playVideoBig(this) });
 }
 // воспроизведение видео - конец
+// модальное окно Вход
+function checkLoginTelInputElAction(){
+    let value = modalLoginInputTel.value;
+    // console.log('Телефон: ', value);
+    let re = /^\+?[78][-\(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/;
+    let valid = re.test(modalLoginInputTel.value);
+    if(value && valid) {
+        formLoginEl.confirmlogintel = true;
+        if(modalLoginInputTel.classList.contains('alert')) {
+            modalLoginInputTel.classList.remove('alert');
+        }
+        if(!modalLoginInputTel.classList.contains('ok')) {
+            modalLoginInputTel.classList.add('ok');
+        }
+    } else {
+        formLoginEl.confirmlogintel = false;
+        if(modalLoginInputTel.classList.contains('ok')) {
+            modalLoginInputTel.classList.remove('ok');
+        }
+        if(!modalLoginInputTel.classList.contains('alert')) {
+            modalLoginInputTel.classList.add('alert');
+        }
+    }
+}
+function checkPassInputElAction(){
+    // console.log('Проверяем пароль');
+    if(modalLoginInputPass.value.length >= 6) {
+        formLoginEl.confirmpass = true;
+        if(modalLoginInputPass.classList.contains('alert')) {
+            modalLoginInputPass.classList.remove('alert');
+        }
+        if(!modalLoginInputPass.classList.contains('ok')) {
+            modalLoginInputPass.classList.add('ok');
+        }
+    } else {
+        formLoginEl.confirmpass = false;
+        if(modalLoginInputPass.classList.contains('ok')) {
+            modalLoginInputPass.classList.remove('ok');
+        }
+        if(!modalLoginInputPass.classList.contains('alert')) {
+            modalLoginInputPass.classList.add('alert');
+        }
+    }
+}
+function formLoginChekValues(){
+    console.log('formLoginChekValues');
+    checkLoginTelInputElAction();
+    checkPassInputElAction();
+    formLoginEl.addEventListener('submit', (event)=>{ event.preventDefault(); });
+    if(formLoginEl.confirmlogintel && formLoginEl.confirmpass){
+        console.log('Отправляем данные AJAX для проверки логина и пароля пользователя');
+        let formData = new FormData();
+        formData.set('action', 'user-login');
+        formData.set('u-tel', modalLoginInputTel.value);
+        formData.set('u-pass', modalLoginInputPass.value);
+        let request = fetch(siteAjaxUrl, {
+            method: 'POST',
+            body: formData
+        }).then(response => response.text()).then((response)=> {
+            console.log(response);
+            if(response === 'ok'){
+                console.log('Данные пользователя совпали. Подтверждаем вход для пользователя');
+                formLoginEl.submit();
+            } else {
+                console.log('Данные пользователя Не совпали');
+                showPopUpMessageEl('alert', 'Неправильный логин или пароль');
+                setTimeout(()=>{ closePopUpMessageEl(); }, 3000);
+            }
+        });
+    }
+}
+const modalLoginInputTel = document.getElementById('form-login-u-login');
+modalLoginInputTel.addEventListener('keyup', function (){ checkLoginTelInputElAction() });
+const modalLoginInputPass = document.getElementById('form-login-u-pass');
+modalLoginInputPass.addEventListener('keyup', function (){ checkPassInputElAction() });
+const formLoginEl = document.getElementById('form-login');
+let modalLoginConfirmButtonEl = document.getElementById('form-login-submit');
+if(modalLoginConfirmButtonEl){
+    modalLoginConfirmButtonEl.addEventListener('click', function (){ formLoginChekValues(this) });
+}
+// модальное окно Вход - конец
 // модальное окно регистрации
 function checkFInputElAction(){
     let value = modalRegInputF.value;
@@ -426,6 +507,7 @@ function modalPassForget(el){
 }
 const modalPassForgetEl = document.getElementById('modal-pass-forget');
 modalPassForgetEl.addEventListener('click', function (){ modalPassForget(this) });
+const formPassRestoreEl = document.getElementById('form-pass-restore');
 // модальное окно забыли пароль - конец
 // модально окно задать вопрос
 function modalQuestionAction(el){
@@ -524,3 +606,29 @@ function ajaxRequest(url, data){
 }
 let siteAjaxUrl = 'http://bynextpr.ru/ajax/';
 // асинхронные запросы - конец
+// pop-up сообщения
+function closePopUpMessageEl(){
+    console.log('closePopUpMessageEl');
+    console.log('Скрываем информационное сообщение');
+    if(!popUpEl.classList.contains('d-none')){
+        popUpEl.classList.add('d-none');
+    }
+    if(popUpEl.children[0].classList.contains('ok')){
+        popUpEl.children[0].classList.remove('ok');
+    }
+    if(popUpEl.children[0].classList.contains('alert')){
+        popUpEl.children[0].classList.remove('alert');
+    }
+}
+function showPopUpMessageEl(status, message){
+    popUpEl.classList.remove('d-none');
+    if(status === 'ok'){
+        popUpEl.children[0].classList.add('ok');
+    }
+    if(status === 'alert'){
+        popUpEl.children[0].classList.add('alert');
+    }
+    popUpEl.children[0].children[1].textContent = message;
+}
+const popUpEl = document.getElementById('pop-up');
+// pop-up сообщения - конец

@@ -323,7 +323,7 @@
             &:checked + label::before {
               background-color: $alterColor2;
               border: 1px solid $alterColor1;
-              box-shadow: 0px 0px 0px 1px $alterColor2;
+              box-shadow: 0 0 0 1px $alterColor2;
             }
           }
           > label {
@@ -577,6 +577,12 @@
             &:not(:last-child) {
               margin: 0 0 20px 0;
             }
+          }
+          > .alert {
+            border: 1px solid $alterColor3;
+          }
+          > .ok {
+            border: 1px solid green;
           }
         }
         > .submit {
@@ -868,7 +874,7 @@
             &:checked + label::before {
               background-color: $alterColor2;
               border: 1px solid $alterColor1;
-              box-shadow: 0px 0px 0px 1px $alterColor2;
+              box-shadow: 0 0 0 1px $alterColor2;
             }
           }
           > label {

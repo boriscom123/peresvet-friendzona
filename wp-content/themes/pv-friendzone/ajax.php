@@ -34,9 +34,9 @@ Template Name: ByNextPr - User Actions
         $data->to = $tel;
         $data->text = $pass; // Текст сообщения
         $data->from = 'PERESVET'; // Если у вас уже одобрен буквенный отправитель, его можно указать здесь, в противном случае будет использоваться ваш отправитель по умолчанию
-        // $sms = $smsru->send_one($data); // Отправка сообщения и возврат данных в переменную
-        $sms = new stdClass();
-        $sms->status = "Test";
+        $sms = $smsru->send_one($data); // Отправка сообщения и возврат данных в переменную
+        // $sms = new stdClass();
+        // $sms->status = "Test";
         if ($sms->status == "OK") { // Запрос выполнен успешно
             echo $pass;
             // echo "Сообщение отправлено успешно. ";
@@ -99,6 +99,15 @@ Template Name: ByNextPr - User Actions
                     }
                 } else {
                     echo 'Не достаточно данных';
+                }
+            }
+            if($_POST['action'] === 'user-login'){
+                // print_r($_POST);
+                $user = wp_authenticate( prepareLogin($_POST['u-tel']), $_POST['u-pass'] );
+                if ( is_wp_error($user) ) {
+                    echo 'Неправильный логин или пароль';
+                } else {
+                    echo 'ok';
                 }
             }
         }

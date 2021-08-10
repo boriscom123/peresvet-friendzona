@@ -111,9 +111,9 @@
                                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/chevron-down-black.svg" alt="chevron-down">
                             </div>
                             <div class="drop-down-menu d-none">
-                                <a class="user-link" href="#">Профиль</a>
-                                <a class="user-link" href="#">Друзья</a>
-                                <a class="user-link" href="#">Настройки</a>
+                                <a class="user-link" href="http://bynextpr.ru/user/?n=1">Профиль</a>
+                                <a class="user-link" href="http://bynextpr.ru/user/?n=2">Друзья</a>
+                                <a class="user-link" href="http://bynextpr.ru/user/?n=3">Настройки</a>
                                 <div class="decoration"></div>
                                 <a class="user-logout" href="<?php echo wp_logout_url( home_url() ); ?>">Выйти</a>
                             </div>
@@ -133,7 +133,7 @@
         </div>
     </div>
 </header>
-<body <?php body_class(); ?>>
+<!--<body --><?php //body_class(); ?>
 <?php //wp_body_open(); ?>
-<!--<div id="page" class="site">-->
+<div id="page" class="site">
 
