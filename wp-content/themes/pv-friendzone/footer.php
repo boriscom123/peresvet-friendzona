@@ -10,6 +10,12 @@
  */
 
 ?>
+<?php
+    if( is_user_logged_in() ){
+        $user_data = get_userdata( get_current_user_id() );
+        $all_meta_for_user = get_user_meta( get_current_user_id() );
+    }
+?>
 
     <footer class="footer">
         <div class="container">
@@ -64,16 +70,16 @@
                                 if( is_user_logged_in() ){ ?>
                                     <div class="login d-flex user-info">
                                         <div class="avatar">
-                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/user-avatar.svg" alt="user-avatar">
+                                            <img src="<?php if(isset($all_meta_for_user['user_avatar'])){print wp_get_attachment_image_url($all_meta_for_user['user_avatar'][0]);} else {echo get_template_directory_uri().'/assets/images/question-red.svg';} ?>" alt="user-avatar">
                                         </div>
-                                        <div class="user">Иван</div>
+                                        <div class="user"><?php echo $user_data->get('display_name'); ?></div>
                                         <div class="actions">
                                             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/chevron-down.svg" alt="chevron-down">
                                         </div>
                                         <div class="drop-down-menu d-none">
-                                            <a class="user-link" href="#">Профиль</a>
-                                            <a class="user-link" href="#">Друзья</a>
-                                            <a class="user-link" href="#">Настройки</a>
+                                            <a class="user-link" href="http://bynextpr.ru/user/?n=1">Профиль</a>
+                                            <a class="user-link" href="http://bynextpr.ru/user/?n=2">Друзья</a>
+                                            <a class="user-link" href="http://bynextpr.ru/user/?n=3">Настройки</a>
                                             <div class="decoration"></div>
                                             <a class="user-logout" href="<?php echo wp_logout_url( home_url() ); ?>">Выйти</a>
                                         </div>

@@ -3824,21 +3824,21 @@ button {
     align-items: center;
   }
 }
-.main > .main-user > .container > .user-info {
+.main > .main-user > .container > .user-main-info {
   width: 100%;
   max-width: 360px;
 }
 @media (max-width: 900px) {
-  .main > .main-user > .container > .user-info {
+  .main > .main-user > .container > .user-main-info {
     max-width: 280px;
   }
 }
 @media (max-width: 750px) {
-  .main > .main-user > .container > .user-info {
+  .main > .main-user > .container > .user-main-info {
     margin: 0 0 20px 0;
   }
 }
-.main > .main-user > .container > .user-info > div {
+.main > .main-user > .container > .user-main-info > div {
   width: 100%;
   border-radius: 10px;
   background-color: #FFFFFF;
@@ -3849,23 +3849,23 @@ button {
   padding: 55px 0 0 0;
 }
 @media (max-width: 850px) {
-  .main > .main-user > .container > .user-info > div {
+  .main > .main-user > .container > .user-main-info > div {
     padding: 25px 0 0 0;
   }
 }
-.main > .main-user > .container > .user-info > div > .avatar {
+.main > .main-user > .container > .user-main-info > div > .avatar {
   height: 150px;
   width: 150px;
   position: relative;
   margin: 0 0 55px 0;
 }
-.main > .main-user > .container > .user-info > div > .avatar > img {
+.main > .main-user > .container > .user-main-info > div > .avatar > img {
   height: 100%;
   width: 100%;
   object-fit: contain;
   border-radius: 50%;
 }
-.main > .main-user > .container > .user-info > div > .avatar > .avatar-add {
+.main > .main-user > .container > .user-main-info > div > .avatar > .avatar-add {
   height: 40px;
   width: 40px;
   border-radius: 50%;
@@ -3877,20 +3877,20 @@ button {
   justify-content: center;
   align-items: center;
 }
-.main > .main-user > .container > .user-info > div > .avatar > .avatar-add:hover {
+.main > .main-user > .container > .user-main-info > div > .avatar > .avatar-add:hover {
   cursor: pointer;
 }
-.main > .main-user > .container > .user-info > div > .avatar > .avatar-add:hover > img {
+.main > .main-user > .container > .user-main-info > div > .avatar > .avatar-add:hover > img {
   transform: rotate(45deg) scale(1.3);
 }
-.main > .main-user > .container > .user-info > div > .avatar > .avatar-add > img {
+.main > .main-user > .container > .user-main-info > div > .avatar > .avatar-add > img {
   height: 50%;
   width: 50%;
   object-fit: contain;
   transform: rotate(45deg);
   transition: 0.3s;
 }
-.main > .main-user > .container > .user-info > div > .user-pages > .page {
+.main > .main-user > .container > .user-main-info > div > .user-pages > .page {
   height: 40px;
   width: 244px;
   display: flex;
@@ -3901,20 +3901,20 @@ button {
   border-radius: 5px;
   overflow: hidden;
 }
-.main > .main-user > .container > .user-info > div > .user-pages > .page:hover {
+.main > .main-user > .container > .user-main-info > div > .user-pages > .page:hover {
   cursor: pointer;
   background-color: #A5A5A5;
 }
-.main > .main-user > .container > .user-info > div > .user-pages > .page:hover > .bodies {
+.main > .main-user > .container > .user-main-info > div > .user-pages > .page:hover > .bodies {
   background-image: url("../images/bodies-w.svg");
 }
-.main > .main-user > .container > .user-info > div > .user-pages > .page:hover > .options {
+.main > .main-user > .container > .user-main-info > div > .user-pages > .page:hover > .options {
   background-image: url("../images/options-w.svg");
 }
-.main > .main-user > .container > .user-info > div > .user-pages > .page:hover > .text {
+.main > .main-user > .container > .user-main-info > div > .user-pages > .page:hover > .text {
   color: #FFFFFF;
 }
-.main > .main-user > .container > .user-info > div > .user-pages > .page > .icon {
+.main > .main-user > .container > .user-main-info > div > .user-pages > .page > .icon {
   height: 100%;
   width: 50px;
   display: flex;
@@ -3924,33 +3924,39 @@ button {
   background-position: center;
   background-size: 30%;
 }
-.main > .main-user > .container > .user-info > div > .user-pages > .page > .icon > img {
+.main > .main-user > .container > .user-main-info > div > .user-pages > .page > .icon > img {
   height: 50%;
   width: 50%;
   object-fit: contain;
 }
-.main > .main-user > .container > .user-info > div > .user-pages > .page > .body {
+.main > .main-user > .container > .user-main-info > div > .user-pages > .page > .body {
   background-image: url("../images/body.svg");
 }
-.main > .main-user > .container > .user-info > div > .user-pages > .page > .bodies {
+.main > .main-user > .container > .user-main-info > div > .user-pages > .page > .bodies {
   background-image: url("../images/bodies.svg");
 }
-.main > .main-user > .container > .user-info > div > .user-pages > .page > .options {
+.main > .main-user > .container > .user-main-info > div > .user-pages > .page > .options {
   background-image: url("../images/options.svg");
 }
-.main > .main-user > .container > .user-info > div > .user-pages > .page > .text {
+.main > .main-user > .container > .user-main-info > div > .user-pages > .page > .text {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 13px;
   color: #A5A5A5;
 }
-.main > .main-user > .container > .user-info > div > .user-pages > .active {
+.main > .main-user > .container > .user-main-info > div > .user-pages > .active {
   background-color: #A5A5A5;
 }
-.main > .main-user > .container > .user-info > div > .user-pages > .active > .text {
+.main > .main-user > .container > .user-main-info > div > .user-pages > .active > .bodies {
+  background-image: url("../images/bodies-w.svg");
+}
+.main > .main-user > .container > .user-main-info > div > .user-pages > .active > .options {
+  background-image: url("../images/options-w.svg");
+}
+.main > .main-user > .container > .user-main-info > div > .user-pages > .active > .text {
   color: #FFFFFF;
 }
-.main > .main-user > .container > .user-info > div > .question {
+.main > .main-user > .container > .user-main-info > div > .question {
   height: 126px;
   width: 100%;
   display: flex;
@@ -3959,7 +3965,7 @@ button {
   background-color: #FA1E38;
   margin: 30px 0 0 0;
 }
-.main > .main-user > .container > .user-info > div > .question > button {
+.main > .main-user > .container > .user-main-info > div > .question > button {
   height: 40px;
   padding: 0 36px;
   border-radius: 5px;
@@ -3971,7 +3977,7 @@ button {
   color: #FFFFFF;
   transition: 0.3s;
 }
-.main > .main-user > .container > .user-info > div > .question > button:hover {
+.main > .main-user > .container > .user-main-info > div > .question > button:hover {
   color: #1B1B1B;
   transform: scale(1.3);
 }
@@ -4425,7 +4431,7 @@ button {
 .main > .main-user > .container > .user-pages > .user-friends > .friends-list > .friend-item > .active > .friend-hover {
   display: flex;
 }
-.main > .main-user > .container > .user-pages > .user-info {
+.main > .main-user > .container > .user-pages > .user-contacts {
   width: 100%;
   background-color: #FFFFFF;
   border-radius: 10px;
@@ -4435,31 +4441,31 @@ button {
   margin: 0 0 30px 0;
 }
 @media (max-width: 850px) {
-  .main > .main-user > .container > .user-pages > .user-info {
+  .main > .main-user > .container > .user-pages > .user-contacts {
     padding: 25px;
   }
 }
-.main > .main-user > .container > .user-pages > .user-info > h2 {
+.main > .main-user > .container > .user-pages > .user-contacts > h2 {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 18px;
   color: #1B1B1B;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field {
   display: flex;
   flex-direction: column;
   margin: 15px 0 0 0;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field > p {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field > p {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 13px;
   color: #A5A5A5;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field > p > span {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field > p > span {
   color: #FA1E38;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field > input {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field > input {
   height: 40px;
   width: 100%;
   max-width: 323px;
@@ -4475,27 +4481,27 @@ button {
   font-size: 12px;
   color: #1B1B1B;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field > input::placeholder {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field > input::placeholder {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 12px;
   color: #A5A5A5;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field-date {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field-date {
   display: flex;
   flex-direction: column;
   margin: 15px 0 0 0;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field-date > p {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field-date > p {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 13px;
   color: #A5A5A5;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field-date > p > span {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field-date > p > span {
   color: #FA1E38;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field-date > div > select {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field-date > div > select {
   height: 40px;
   border: 1px solid #A5A5A5;
   box-sizing: border-box;
@@ -4510,10 +4516,10 @@ button {
   color: #A5A5A5;
   cursor: pointer;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field-date > div > select > option:disabled {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field-date > div > select > option:disabled {
   color: #A5A5A5;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field-date > div > input {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field-date > div > input {
   height: 40px;
   border: 1px solid #A5A5A5;
   box-sizing: border-box;
@@ -4528,34 +4534,34 @@ button {
   color: #A5A5A5;
   cursor: pointer;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field-gender {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field-gender {
   display: flex;
   flex-direction: column;
   margin: 15px 0 0 0;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field-gender > p {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field-gender > p {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 13px;
   color: #A5A5A5;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field-gender > p > span {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field-gender > p > span {
   color: #FA1E38;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field-gender > div {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field-gender > div {
   margin: 12px 0 0 0;
   display: flex;
   align-items: center;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field-gender > div > input {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field-gender > div > input {
   display: none;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field-gender > div > input:checked + label::before {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field-gender > div > input:checked + label::before {
   background-color: #A5A5A5;
   border: 1px solid #FFFFFF;
   box-shadow: 0px 0px 0px 1px #A5A5A5;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field-gender > div > label {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field-gender > div > label {
   cursor: pointer;
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
@@ -4563,7 +4569,7 @@ button {
   color: #1B1B1B;
   margin: 0 25px 0 0;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field-gender > div > label::before {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field-gender > div > label::before {
   content: "";
   display: inline-flex;
   height: 10px;
@@ -4573,12 +4579,12 @@ button {
   margin: 0 5px 0 0;
   box-sizing: border-box;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field-submit {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field-submit {
   display: flex;
   flex-direction: column;
   margin: 15px 0 0 0;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field-submit > input {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field-submit > input {
   width: 100%;
   max-width: 226px;
   height: 40px;
@@ -4593,7 +4599,7 @@ button {
   transition: 0.3s;
   cursor: pointer;
 }
-.main > .main-user > .container > .user-pages > .user-info > .info-field-submit > input:hover {
+.main > .main-user > .container > .user-pages > .user-contacts > .info-field-submit > input:hover {
   color: #1B1B1B;
 }
 .main > .main-user > .container > .user-pages > .user-pass {

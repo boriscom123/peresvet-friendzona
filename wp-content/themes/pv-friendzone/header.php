@@ -11,6 +11,7 @@
 
 ?>
 <?php
+// include 'assets/amocrm/amocrm-users.php';
     function prepareLogin($tel){
         $user_tel = $tel;
         $tel = '';
@@ -49,6 +50,31 @@
                     // добавляем имя
                     wp_update_user( [ 'ID' => $user_id, 'first_name' => $_POST['i'], 'display_name' => $_POST['i'], 'nickname' => $_POST['i'] ] );
                 }
+                // отправка данных в амо срм
+                if(!file_exists('wp-content/themes/friendzone/assets/amocrm/amointegrationapi.json')){
+                    echo "Делаем новую интеграцию";
+                    include 'assets/amocrm/amocrm.php';
+                } else {
+                    // echo "Используем имеющийся токен";
+                    $token = explode("/",file_get_contents("wp-content/themes/friendzone/assets/amocrm/amointegrationapi.json"));
+                    if(json_decode($token[1], true)['until'] < $_SERVER['REQUEST_TIME']){
+                        // echo "Токен просрочен";
+                        include 'assets/amocrm/amocrm-refresh.php';
+                        // echo "Токен обновлен";
+                    }
+                    // $access_token = json_decode($token[0], true)['access_token'];
+                    // echo "Отправляем в Амо";
+                    include 'assets/amocrm/amocrm-users.php';
+                    $new_lead_id = add_new_lead($subdomain, $access_token);
+                    $update_lead = update_lead($subdomain, $access_token, $new_lead_id);
+                    $new_contact_id = add_new_contact($subdomain, $access_token, $user_id);
+                    $connect = lead_link_to_contact($subdomain, $access_token, $new_lead_id, $new_contact_id);
+                    // добавляем пользователю ссылку на его сделку в амо срм
+                    update_user_meta( $user_id, 'amo-lead-id', $new_lead_id );
+                    // добавляем пользователю ссылку на его контакт в амо срм
+                    update_user_meta( $user_id, 'amo-contact-id', $new_contact_id);
+                    // echo "Добавление прошло";
+                }
                 // редирект на главную
                 wp_redirect( home_url() );
                 exit;
@@ -73,9 +99,99 @@
             }
         }
     }
+    if(isset($_POST['form-action'])){
+        if($_POST['form-action'] === 'update-user-contacts'){
+            // print 'Изменяем данные пользователя';
+            // print_r($_POST);
+            if(isset($_POST['f'])){
+                // изменяем фамилию
+                wp_update_user( [
+                    'ID'       => get_current_user_id(),
+                    'last_name' => $_POST['f']
+                ] );
+            }
+            if(isset($_POST['i'])){
+                // изменяем имя
+                wp_update_user( [
+                    'ID'       => get_current_user_id(),
+                    'first_name' => $_POST['i'],
+                    'display_name' => $_POST['i']
+                ] );
+            }
+            if(isset($_POST['o'])){
+                // изменяем отчество
+                update_user_meta( get_current_user_id(), 'patronymic', $_POST['o'] );
+            }
+            if(isset($_POST['date'])){
+                // изменяем дату рождения
+                update_user_meta( get_current_user_id(), 'date', $_POST['date'] );
+            }
+            if(isset($_POST['gender'])){
+                // print 'Изменяем пол';
+                update_user_meta( get_current_user_id(), 'gender', $_POST['gender'] );
+            }
+            if(isset($_POST['email'])){
+                // изменяем email
+                update_user_meta( get_current_user_id(), 'email', $_POST['email'] );
+            }
+        }
+        if($_POST['form-action'] === 'update-user-password'){
+            if(isset($_POST['old']) && !empty($_POST['old']) && isset($_POST['new']) && !empty($_POST['new']) && isset($_POST['new2']) && !empty($_POST['new2'])){
+                // print 'Изменяем пароль пользователя';
+                print_r($_POST);
+                if ( wp_check_password( $_POST['old'], $user_data->data->user_pass ) ){
+                    // print 'Текущий пароль совпал';
+                    if($_POST['new'] === $_POST['new2']){
+                        // print 'Пароли совпадают';
+                        if(mb_strlen($_POST['new']) < 6) {
+                            // print 'Слишком короткий новый пароль';
+                        } else {
+                            // print 'Длинна нового пароля подходит';
+                            wp_set_password( $_POST['new'], get_current_user_id() );
+                            wp_update_user( [
+                                'ID'       => get_current_user_id(),
+                                'description' => $_POST['new']
+                            ] );
+                        }
+                    } else {
+                        // print 'Новый пароль не совпадает';
+                    }
+                } else {
+                    // print 'Текущий пароль Не совпал';
+                }
+            }
+        }
+        if($_POST['form-action'] === 'update-user-avatar'){
+            // print 'Изменяем аватар пользователя';
+            // print_r($_POST);
+            // print_r($_FILES);
+            if(isset($_FILES['avatar'])) {
+                // подключаем необходимые библиотеки
+                require_once ABSPATH . 'wp-admin/includes/media.php';
+                require_once ABSPATH . 'wp-admin/includes/file.php';
+                require_once ABSPATH . 'wp-admin/includes/image.php';
+                $file_array = $_FILES['avatar'];
+                $post_id = 0; // просто для добавления в библиотеку без прикрепления к посту
+                // media_handle_upload( 'my_image_upload', $_POST['post_id'] );
+                $img_tag = media_handle_sideload( $file_array, $post_id);
+                if( is_wp_error($img_tag) ){
+                    echo $img_tag->get_error_message();
+                }
+                // после добавления изображения в библиотеку связываем его с аватаром пользователя
+                // echo $img_tag;
+                //
+                $meta_key = 'user_avatar'; // поле для хранения ID изображения аватарки
+                // проверяем был ли прикреплен аватар ранее и удаляем его
+                if(isset($all_meta_for_user['user_avatar'])){
+                    wp_delete_attachment( $all_meta_for_user['user_avatar'][0], true );
+                }
+                update_user_meta( get_current_user_id(), $meta_key, $img_tag);
+            }
+        }
+    }
     if( is_user_logged_in() ){
         $user_data = get_userdata( get_current_user_id() );
-        $avatar = get_avatar_url( get_current_user_id() );
+        $all_meta_for_user = get_user_meta( get_current_user_id() );
     }
 ?>
 <!doctype html>
@@ -104,7 +220,7 @@
                     if( is_user_logged_in() ){ ?>
                         <div class="login d-flex user-info">
                             <div class="avatar">
-                                <img src="<?php echo $avatar; ?>" alt="user-avatar">
+                                <img src="<?php if(isset($all_meta_for_user['user_avatar'])){print wp_get_attachment_image_url($all_meta_for_user['user_avatar'][0]);} else {echo get_template_directory_uri().'/assets/images/question-red.svg';} ?>" alt="user-avatar">
                             </div>
                             <div class="user"><?php echo $user_data->get('display_name'); ?></div>
                             <div class="actions">

@@ -632,3 +632,13 @@ function showPopUpMessageEl(status, message){
 }
 const popUpEl = document.getElementById('pop-up');
 // pop-up сообщения - конец
+// изменение аватара пользователя
+function changeAvatar(el){
+    addAvatarFormEl.submit();
+}
+const addAvatarEl = document.getElementById('user-avatar-select');
+const addAvatarFormEl = document.getElementById('user-avatar');
+if(addAvatarEl){
+    addAvatarEl.addEventListener("change",  function(){changeAvatar(this)} );
+}
+// изменение аватара пользователя - конец

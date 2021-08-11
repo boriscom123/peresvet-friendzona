@@ -38,7 +38,7 @@ Template Name: ByNextPr - User Actions
         // $sms = new stdClass();
         // $sms->status = "Test";
         if ($sms->status == "OK") { // Запрос выполнен успешно
-            echo $pass;
+            // echo $pass;
             // echo "Сообщение отправлено успешно. ";
             // echo "ID сообщения: $sms->sms_id. ";
             // echo "Ваш новый баланс: $sms->balance";
@@ -78,7 +78,7 @@ Template Name: ByNextPr - User Actions
                             $user_id = wp_insert_user( $userdata );
                             if( ! is_wp_error( $user_id ) ) {
                                 echo 'ok';
-                                echo $pass;
+                                // echo $pass;
                             }
                         }
                     }

@@ -6,7 +6,7 @@
       display: flex;
       justify-content: space-between;
       @media (max-width: 750px) { flex-direction: column; align-items: center; }
-      > .user-info {
+      > .user-main-info {
         width: 100%;
         max-width: 360px;
         @media (max-width: 900px) { max-width: 280px; }
@@ -31,6 +31,7 @@
               width: 100%;
               object-fit: contain;
               border-radius: 50%;
+              // background-color: $alterColor2;
             }
             > .avatar-add {
               height: 40px;
@@ -116,6 +117,12 @@
             }
             > .active {
               background-color: $alterColor2;
+              > .bodies {
+                background-image: url("../images/bodies-w.svg");
+              }
+              > .options {
+                background-image: url("../images/options-w.svg");
+              }
               > .text {
                 color: $alterFontColor;
               }
@@ -555,7 +562,7 @@
             }
           }
         }
-        > .user-info {
+        > .user-contacts {
           width: 100%;
           background-color: $alterColor1;
           border-radius: 10px;
