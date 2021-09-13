@@ -1,6 +1,6 @@
 <?php
     // echo "Подготовка необходимых данных для работы с амосрм";
-    $subdomain = 'adminailikeru'; //Поддомен нужного аккаунта - как в амосрм
+    $subdomain = 'testfirebladeru'; //Поддомен нужного аккаунта - как в амосрм
     $token = explode("/",file_get_contents("wp-content/themes/friendzone/assets/amocrm/amointegrationapi.json"));
     $access_token = json_decode($token[0], true)['access_token'];
     // проверка доступности аккаунта
@@ -60,7 +60,7 @@
         $data = '[
             {
                 "name": "Ваш номер участника FRIENDзона ID ",
-                "pipeline_id": 4548283
+                "pipeline_id": 4646092
             }
         ]';
         $curl = curl_init(); #Сохраняем дескриптор сеанса cURL

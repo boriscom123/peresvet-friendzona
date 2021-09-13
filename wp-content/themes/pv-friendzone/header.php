@@ -17,8 +17,21 @@
         $tel = '';
         for($i=0; $i<mb_strlen($user_tel); $i++){
             // echo $user_tel[$i];
-            if(is_numeric($user_tel[$i])) {
-                $tel .= $user_tel[$i];
+            if($i==0){
+                if($user_tel[$i] === '+'){
+                    $tel .= 7;
+                    $i++;
+                } elseif ($user_tel[$i] === '8'){
+                    $tel .= 7;
+                } else {
+                    if(is_numeric($user_tel[$i])) {
+                        $tel .= $user_tel[$i];
+                    }
+                }
+            } else {
+                if(is_numeric($user_tel[$i])) {
+                    $tel .= $user_tel[$i];
+                }
             }
         }
         return $tel;
@@ -35,7 +48,7 @@
             $user = wp_signon( $user_info );
             // print_r($user);
             if ( is_wp_error($user) ) {
-                echo 'Не удалось зарегистрировать пользователя. Попробуйте в другой раз';
+                echo 'Не удалось найти зарегистрированного пользователя. Попробуйте в другой раз';
             } else {
                 // echo 'Пользователь успешно зарегистрирован';
                 // необходимо обновить дополнительные данные пользователя Фамилия + Имя
@@ -52,7 +65,7 @@
                 }
                 // отправка данных в амо срм
                 if(!file_exists('wp-content/themes/friendzone/assets/amocrm/amointegrationapi.json')){
-                    echo "Делаем новую интеграцию";
+                    // echo "Делаем новую интеграцию";
                     include 'assets/amocrm/amocrm.php';
                 } else {
                     // echo "Используем имеющийся токен";

@@ -9,8 +9,21 @@ Template Name: ByNextPr - User Actions
         $tel = '';
         for($i=0; $i<mb_strlen($user_tel); $i++){
             // echo $user_tel[$i];
-            if(is_numeric($user_tel[$i])) {
-                $tel .= $user_tel[$i];
+            if($i==0){
+                if($user_tel[$i] === '+'){
+                    $tel .= 7;
+                    $i++;
+                } elseif ($user_tel[$i] === '8'){
+                    $tel .= 7;
+                } else {
+                    if(is_numeric($user_tel[$i])) {
+                        $tel .= $user_tel[$i];
+                    }
+                }
+            } else {
+                if(is_numeric($user_tel[$i])) {
+                    $tel .= $user_tel[$i];
+                }
             }
         }
         return $tel;
@@ -18,8 +31,8 @@ Template Name: ByNextPr - User Actions
     function gen_password($length = 6){
         $password = '';
         $arr = array(
-            // 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
-            // 'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+            'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+            'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
             '1','2','3','4','5','6','7','8','9','0'
         );
         for ($i = 0; $i < $length; $i++) {
