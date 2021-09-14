@@ -66,6 +66,8 @@ function sliderChangeLeft(el){
                 sliderImagesBlock.children[sliderPaginationBlock.children.length - 1].classList.remove('d-none');
                 sliderTextBlock.children[i].classList.add('d-none');
                 sliderTextBlock.children[sliderPaginationBlock.children.length - 1].classList.remove('d-none');
+                sliderPaginationBlock.previousElementSibling.previousElementSibling.href = sliderHrefLinks[2];
+                sliderPaginationBlock.previousElementSibling.previousElementSibling.dataset.link = 2;
                 break;
             } else {
                 sliderPaginationBlock.children[i].classList.remove('active');
@@ -74,6 +76,8 @@ function sliderChangeLeft(el){
                 sliderImagesBlock.children[i-1].classList.remove('d-none');
                 sliderTextBlock.children[i].classList.add('d-none');
                 sliderTextBlock.children[i-1].classList.remove('d-none');
+                sliderPaginationBlock.previousElementSibling.previousElementSibling.href = sliderHrefLinks[sliderPaginationBlock.previousElementSibling.previousElementSibling.dataset.link - 1];
+                sliderPaginationBlock.previousElementSibling.previousElementSibling.dataset.link = sliderPaginationBlock.previousElementSibling.previousElementSibling.dataset.link - 1;
             }
         }
     }
@@ -88,6 +92,8 @@ function sliderChangeRight(el){
                 sliderImagesBlock.children[0].classList.remove('d-none');
                 sliderTextBlock.children[i].classList.add('d-none');
                 sliderTextBlock.children[0].classList.remove('d-none');
+                sliderPaginationBlock.previousElementSibling.previousElementSibling.href = sliderHrefLinks[0];
+                sliderPaginationBlock.previousElementSibling.previousElementSibling.dataset.link = '0';
             } else {
                 sliderPaginationBlock.children[i].classList.remove('active');
                 sliderPaginationBlock.children[i+1].classList.add('active');
@@ -95,6 +101,8 @@ function sliderChangeRight(el){
                 sliderImagesBlock.children[i+1].classList.remove('d-none');
                 sliderTextBlock.children[i].classList.add('d-none');
                 sliderTextBlock.children[i+1].classList.remove('d-none');
+                sliderPaginationBlock.previousElementSibling.previousElementSibling.href = sliderHrefLinks[Number(sliderPaginationBlock.previousElementSibling.previousElementSibling.dataset.link) + 1];
+                sliderPaginationBlock.previousElementSibling.previousElementSibling.dataset.link = Number(sliderPaginationBlock.previousElementSibling.previousElementSibling.dataset.link) + 1;
                 break;
             }
         }
@@ -113,6 +121,7 @@ if (sliderRightButtonEl) {
 let sliderPaginationBlock = document.getElementById('slider-pagination');
 let sliderImagesBlock = document.getElementById('slider-images');
 let sliderTextBlock = document.getElementById('slider-text');
+let sliderHrefLinks = ['http://bynextpr.ru/#block-3-4-ancor', 'http://bynextpr.ru/#block-2-ancor', 'http://bynextpr.ru/#block-4-ancor'];
 // блок 1 - слайдер - конец
 // закрытие модальных окон
 function closeModal(el){
@@ -197,9 +206,11 @@ if(showAllQuestionsButtonEl) {
 // показать все вопросы - конец
 // воспроизведение видео
 function playVideoSmall(el){
-    videoContainerSmallEl.play();
+    console.log(el.parentNode.nextElementSibling.children[1].children[0]);
+    el.parentNode.nextElementSibling.children[1].children[0].play();
+    // videoContainerSmallEl.play();
 }
-let videoContainerSmallEl = document.getElementById('video-container-small');
+// let videoContainerSmallEl = document.getElementById('video-container-small');
 let playVideoButtonSmallEl = document.getElementById('play-video-button-small');
 if(playVideoButtonSmallEl) {
     playVideoButtonSmallEl.addEventListener('click', function (){ playVideoSmall(this) });

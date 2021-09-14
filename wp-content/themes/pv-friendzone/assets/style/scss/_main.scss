@@ -9,7 +9,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      @media (max-width: 600px) { flex-direction: column; }
+      @media (max-width: 600px) { flex-direction: column-reverse; }
       > .main-block-1-container-info {
         width: 50%;
         @media (max-width: 600px) { width: 100%; }
@@ -36,7 +36,7 @@
         }
         > .main-block-1-container-info-navigation {
           display: flex;
-          > button {
+          > a {
             height: 40px;
             padding: 0 36px;
             border-radius: 5px;
@@ -47,6 +47,10 @@
             font-size: 13px;
             color: $alterFontColor;
             transition: $transition;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            white-space: nowrap;
             @media (max-width: 450px) { padding: 0 10px; }
             &:hover {
               color: $mainFontColor;
@@ -129,6 +133,7 @@
     > .ancor {
       position: absolute;
       top: -120px;
+      @media (max-width: 600px) { top: -185px; }
     }
     > .main-block-2-top {
       height: 500px;
@@ -214,7 +219,7 @@
         > .main-block-2-container-image {
           position: relative;
           width: 50%;
-          @media (max-width: 600px) { width: 100%; padding: 20px 0; box-sizing: border-box; }
+          @media (max-width: 600px) { width: 100%; padding: 50px 0; box-sizing: border-box; }
           > img {
             height: 100%;
             width: 100%;
@@ -231,6 +236,23 @@
             left: 12%;
             background-color: black;
             @media (max-width: 600px) { top: 11%; height: 73%; }
+            > video {
+              height: 100%;
+              width: 100%;
+              object-fit: cover;
+            }
+          }
+          > .wp-block-video {
+            height: 81%;
+            width: 76%;
+            position: absolute;
+            z-index: 5;
+            top: 7%;
+            left: 12%;
+            background-color: black;
+            @media (max-width: 600px) { top: 15%; height: 67%; }
+            @media (max-width: 500px) { top: 18%; height: 62%; }
+            @media (max-width: 400px) { top: 21%; height: 56%; }
             > video {
               height: 100%;
               width: 100%;
@@ -271,6 +293,7 @@
           > .main-block-2-bottom-item {
             display: flex;
             align-items: center;
+            @media (max-width: 600px) { margin: 10px 0 10px 0; }
             &:last-child > p {  margin: 0 0 0 20px; }
             > .main-block-2-bottom-item-icon {
               height: 36px;
@@ -327,6 +350,7 @@
             font-size: 15px;
             line-height: 26px;
             color: $mainFontColor;
+            @media (max-width: 600px) { margin: 25px 0 0 0; }
           }
           > .decoration {
             height: 1px;
@@ -342,6 +366,7 @@
         justify-content: space-between;
         margin: 55px 0 0 0;
         @media (max-width: 1160px) { justify-content: space-around; }
+
         @media (max-width: 600px) { flex-direction: column; align-items: center; }
         > .main-block-3-info-item {
           height: 275px;
@@ -349,6 +374,9 @@
           border-radius: 10px;
           margin: 0 0 20px 0;
           transition: $transition;
+          @media (max-width: 1140px) { &:nth-child(5) {display: none;} }
+          @media (max-width: 864px) { &:nth-child(5) {display: block;} }
+          @media (max-width: 600px) { &:nth-child(5) {display: none;} }
           &:hover {
             transform: scale(1.1);
           }
@@ -447,6 +475,7 @@
         > .ancor {
           position: absolute;
           top: -150px;
+          @media (max-width: 600px) { top: -185px; }
         }
         > .main-block-3-4-item {
           height: 500px;
@@ -519,6 +548,12 @@
   > .main-block-4 {
     width: 100%;
     background-color: $alterBgColor4;
+    position: relative;
+    > .ancor {
+      position: absolute;
+      top: -120px;
+      @media (max-width: 600px) { top: -185px; }
+    }
     > .container {
       display: flex;
       > .main-block-4-1 {
@@ -941,10 +976,11 @@
             @media (max-width: 600px) { margin: 0 0 20px 0; }
             &:not(:first-child) {
               margin: 0 0 0 20px;
-              @media (max-width: 600px) { margin: 0 0 20px 0; }
+              @media (max-width: 600px) { margin: 50px 0 20px 0; }
             }
             &:last-child {
               @media (max-width: 800px) { display: none; }
+              @media (max-width: 600px) { display: block; }
             }
             > .image {
               height: 240px;
@@ -1018,6 +1054,7 @@
     > .ancor {
       position: absolute;
       top: -120px;
+      @media (max-width: 600px) { top: -185px; }
     }
     > .container {
       height: 100%;
@@ -1070,7 +1107,7 @@
         padding: 0 0 0 45px;
         box-sizing: border-box;
         @media (max-width: 800px) { flex-direction: column; padding: 20px 0 20px 20px; margin: 20px 0 0 0; }
-        @media (max-width: 600px) { width: 100%; }
+        @media (max-width: 600px) { width: 100%; margin: 50px 0 0 0; }
         > .text {
           display: flex;
           flex-direction: column;

@@ -13,7 +13,7 @@
     width: 100%;
     background-color: rgba(248, 245, 234, 0.9);
     z-index: 1000;
-    @media (max-width: 550px) { max-height: 185px; }
+    @media (max-width: 600px) { max-height: 185px; }
     > .header-progress-bar {
       width: 100%;
       height: 5px;

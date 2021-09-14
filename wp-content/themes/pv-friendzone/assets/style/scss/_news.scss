@@ -148,7 +148,7 @@
   > .promo {
     background-color: $mainColor;
     margin: 55px 0 75px 0;
-    @media (max-width: 600px) { margin: 0 0 0 0; }
+    @media (max-width: 600px) { margin: 20px 0 20px 0; }
     > .container {
       > div {
         background: $alterColor2;

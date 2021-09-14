@@ -37,7 +37,7 @@ get_header();
                             </div>
                         </div>
                         <div class="main-block-1-container-info-navigation">
-                            <button>Узнать подробнее</button>
+                            <a href="http://bynextpr.ru/#block-3-4-ancor" data-link="0">Узнать подробнее</a>
                             <div class="scroll-buttons">
                                 <button class="left" id="slider-left-button"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/chevron-left.svg" alt="chevron-left"></button>
                                 <button class="right" id="slider-right-button"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/chevron-right.svg" alt="chevron-right"></button>
@@ -73,13 +73,20 @@ get_header();
                         </div>
                         <div class="main-block-2-container-image">
                             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/block-2-image-notebook.svg" alt="notebook">
-                            <div class="video">
-                                <video controls="controls" poster="<?php echo get_template_directory_uri(); ?>/assets/images/test-image.jpg" id="video-container-small">
-                                    <source src="<?php echo get_template_directory_uri(); ?>/assets/images/test-video.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-                                    Тег video не поддерживается вашим браузером.
-                                    <a href="<?php echo get_template_directory_uri(); ?>/assets/images/test-video.mp4">Скачайте видео</a>.
-                                </video>
-                            </div>
+                            <?php
+                                // Делаем запрос на вывод видео со страницы
+                                $page_title = 'Блок 2 - Видео';
+                                $page = get_page_by_title( $page_title);
+                                // print_r($page);
+                                echo $page->post_content;
+                            ?>
+<!--                            <div class="video">-->
+<!--                                <video controls="controls" poster="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/test-image.jpg" id="video-container-small">-->
+<!--                                    <source src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/test-video.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>-->
+<!--                                    Тег video не поддерживается вашим браузером.-->
+<!--                                    <a href="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/test-video.mp4">Скачайте видео</a>.-->
+<!--                                </video>-->
+<!--                            </div>-->
                             <div class="decoration">
                                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/block-2-image-bg.svg" alt="block-2-image-bg">
                             </div>
@@ -213,6 +220,7 @@ get_header();
             </div>
 
             <div class="main-block-4">
+                <a id="block-4-ancor" class="ancor"></a>
                 <div class="container">
                     <div class="main-block-4-1">
                         <h2>В чем уникальность <br>FRIENDзоны?</h2>

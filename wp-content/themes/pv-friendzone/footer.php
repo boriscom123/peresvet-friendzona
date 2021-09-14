@@ -104,10 +104,10 @@
                             <a href="https://www.youtube.com/channel/UCNeW3BEXBvySPZjzuEmWvrg" target="_blank">Youtube</a>
                         </div>
                         <div class="active">
-                            <a href="http://bynextpr.ru/#block-2" class="ancor-link">О программе</a>
-                            <a href="http://bynextpr.ru/#block-3-4" class="ancor-link">Условия</a>
+                            <a href="http://bynextpr.ru/#block-2-ancor" class="ancor-link">О программе</a>
+                            <a href="http://bynextpr.ru/#block-3-4-ancor" class="ancor-link">Условия</a>
                             <a href="http://bynextpr.ru/news/">Новости</a>
-                            <a href="http://bynextpr.ru/#block-8" class="ancor-link">Контакты</a>
+                            <a href="http://bynextpr.ru/#block-8-ancor" class="ancor-link">Контакты</a>
                         </div>
                     </div>
                     <div class="modal-menu-copyright">
