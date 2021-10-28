@@ -121,7 +121,7 @@ if (sliderRightButtonEl) {
 let sliderPaginationBlock = document.getElementById('slider-pagination');
 let sliderImagesBlock = document.getElementById('slider-images');
 let sliderTextBlock = document.getElementById('slider-text');
-let sliderHrefLinks = ['http://bynextpr.ru/#block-3-4-ancor', 'http://bynextpr.ru/#block-2-ancor', 'http://bynextpr.ru/#block-4-ancor'];
+let sliderHrefLinks = ['https://fz2020.ru/#block-3-4-ancor', 'https://fz2020.ru/#block-2-ancor', 'https://fz2020.ru/#block-4-ancor'];
 // блок 1 - слайдер - конец
 // закрытие модальных окон
 function closeModal(el){
@@ -615,7 +615,7 @@ function ajaxRequest(url, data){
         body: formData
     }).then(response => response.text()).then((response)=> { console.log(response); return response; });
 }
-let siteAjaxUrl = 'http://bynextpr.ru/ajax/';
+let siteAjaxUrl = 'https://fz2020.ru/ajax/';
 // асинхронные запросы - конец
 // pop-up сообщения
 function closePopUpMessageEl(){

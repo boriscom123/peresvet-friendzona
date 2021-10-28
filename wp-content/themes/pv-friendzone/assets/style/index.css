@@ -1081,6 +1081,7 @@ button {
 @media (max-width: 600px) {
   .main > .main-block-4 > .container > .main-block-4-1 {
     flex-direction: column;
+    margin: 20px 0 0 0;
   }
 }
 .main > .main-block-4 > .container > .main-block-4-1 > h2 {
@@ -3390,7 +3391,7 @@ button {
 }
 @media (max-width: 600px) {
   .main > .brief-news > .container > .item-news {
-    margin: 0 0 20px 0;
+    margin: 0 0 50px 0;
   }
 }
 .main > .brief-news > .container > .item-news > .image {

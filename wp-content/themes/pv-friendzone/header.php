@@ -11,6 +11,7 @@
 
 ?>
 <?php
+// include 'assets/amocrm/amocrm.php';
 // include 'assets/amocrm/amocrm-users.php';
     function prepareLogin($tel){
         $user_tel = $tel;
@@ -64,12 +65,12 @@
                     wp_update_user( [ 'ID' => $user_id, 'first_name' => $_POST['i'], 'display_name' => $_POST['i'], 'nickname' => $_POST['i'] ] );
                 }
                 // отправка данных в амо срм
-                if(!file_exists('wp-content/themes/friendzone/assets/amocrm/amointegrationapi.json')){
+                if(!file_exists('wp-content/themes/pv-friendzone/assets/amocrm/amointegrationapi.json')){
                     // echo "Делаем новую интеграцию";
                     include 'assets/amocrm/amocrm.php';
                 } else {
                     // echo "Используем имеющийся токен";
-                    $token = explode("/",file_get_contents("wp-content/themes/friendzone/assets/amocrm/amointegrationapi.json"));
+                    $token = explode("/",file_get_contents("wp-content/themes/pv-friendzone/assets/amocrm/amointegrationapi.json"));
                     if(json_decode($token[1], true)['until'] < $_SERVER['REQUEST_TIME']){
                         // echo "Токен просрочен";
                         include 'assets/amocrm/amocrm-refresh.php';
@@ -78,7 +79,7 @@
                     // $access_token = json_decode($token[0], true)['access_token'];
                     // echo "Отправляем в Амо";
                     include 'assets/amocrm/amocrm-users.php';
-                    $new_lead_id = add_new_lead($subdomain, $access_token);
+                    $new_lead_id = add_new_lead($subdomain, $access_token, $pipeline_id);
                     $update_lead = update_lead($subdomain, $access_token, $new_lead_id);
                     $new_contact_id = add_new_contact($subdomain, $access_token, $user_id);
                     $connect = lead_link_to_contact($subdomain, $access_token, $new_lead_id, $new_contact_id);
@@ -224,7 +225,7 @@
         </div>
         <div class="container">
             <div class="header-logo">
-                <a class="header-logo-image" href="http://bynextpr.ru/">
+                <a class="header-logo-image" href="https://fz2020.ru/">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.svg" alt="FRIENDзона">
                 </a>
             </div>
@@ -240,9 +241,9 @@
                                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/chevron-down-black.svg" alt="chevron-down">
                             </div>
                             <div class="drop-down-menu d-none">
-                                <a class="user-link" href="http://bynextpr.ru/user/?n=1">Профиль</a>
-                                <a class="user-link" href="http://bynextpr.ru/user/?n=2">Друзья</a>
-                                <a class="user-link" href="http://bynextpr.ru/user/?n=3">Настройки</a>
+                                <a class="user-link" href="https://fz2020.ru/user/?n=1">Профиль</a>
+                                <a class="user-link" href="https://fz2020.ru/user/?n=2">Друзья</a>
+                                <a class="user-link" href="https://fz2020.ru/user/?n=3">Настройки</a>
                                 <div class="decoration"></div>
                                 <a class="user-logout" href="<?php echo wp_logout_url( home_url() ); ?>">Выйти</a>
                             </div>

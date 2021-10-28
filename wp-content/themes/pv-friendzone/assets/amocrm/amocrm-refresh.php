@@ -1,16 +1,16 @@
 <?php
-    // echo "REFRESH начало";
-    $subdomain = 'adminailikeru'; //Поддомен нужного аккаунта - как в амосрм
+    echo "REFRESH начало";
+    $subdomain = 'zakirov'; //Поддомен нужного аккаунта - как в амосрм
     $link = 'https://' . $subdomain . '.amocrm.ru/oauth2/access_token'; //Формируем URL для запроса
-    $token = explode("/",file_get_contents("wp-content/themes/friendzone/assets/amocrm/amointegrationapi.json"));
+    $token = explode("/",file_get_contents("wp-content/themes/pv-friendzone/assets/amocrm/amointegrationapi.json"));
     $refresh_token = json_decode($token[0], true)['refresh_token'];
     /** Соберем данные для запроса */
     $data = [
-        'client_id' => '0fdf96e2-46e1-46c4-9cb4-776b59b4b23e',
-        'client_secret' => 'qtNYabSKTqeKvsKqJKXTJ7Ce9UNvqepfqtNGeL4uQqS2WDnbWDNJ7wu5puhfxXKG',
+        'client_id' => 'e0bb2e1e-5816-400a-bb7a-d0cb085142d3',
+        'client_secret' => 'oc4RV2wYYvovSySd3qv3FpQerdnlkElMD1CcCHhL2cbGYPO1LIllxzz2RWjodMzh',
         'grant_type' => 'refresh_token',
         'refresh_token' => $refresh_token,
-        'redirect_uri' => 'http://bynextpr.ru/',
+        'redirect_uri' => 'https://fz2020.ru/',
     ];
 
     /**
@@ -57,9 +57,9 @@
         die('Файл: amoreffesh Строка: 57 Ошибка: ' . $e->getMessage() . PHP_EOL . 'Код ошибки: ' . $e->getCode());
     }
     // сохраняем ответ от сервера в файл.
-    unlink("wp-content/themes/friendzone/assets/amocrm/amointegrationapi.json");
+    unlink("wp-content/themes/pv-friendzone/assets/amocrm/amointegrationapi.json");
     $addtofile = $out.'/{"until":'. ($_SERVER['REQUEST_TIME'] + 86400) .'}';
-    $handle = fopen("wp-content/themes/friendzone/assets/amocrm/amointegrationapi.json", "a");
+    $handle = fopen("wp-content/themes/pv-friendzone/assets/amocrm/amointegrationapi.json", "a");
     fwrite($handle, $addtofile);
     fclose($handle);
     // echo "REFRESH конец";

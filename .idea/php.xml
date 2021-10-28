@@ -2,12 +2,12 @@
 <project version="4">
   <component name="PhpInterpreters">
     <interpreters>
-      <interpreter id="92794e84-87d1-4662-9ff8-c655ebf0ce7a" name="PHP" home="C:\OpenServer\modules\php\PHP_8.0\php.exe" debugger_id="php.debugger.XDebug" debugger_extension="C:\OpenServer\modules\php\PHP_8.0\ext\php_xdebug.dll" />
+      <interpreter id="92794e84-87d1-4662-9ff8-c655ebf0ce7a" name="PHP (project level)" home="C:\OpenServer\modules\php\PHP_8.0\php.exe" debugger_id="php.debugger.XDebug" debugger_extension="C:\OpenServer\modules\php\PHP_8.0\ext\php_xdebug.dll" />
     </interpreters>
   </component>
   <component name="PhpInterpretersPhpInfoCache">
     <phpInfoCache>
-      <interpreter name="PHP">
+      <interpreter name="PHP (project level)">
         <phpinfo binary_type="PHP" php_cgi="C:\OpenServer\modules\php\PHP_8.0\php-cgi.exe" php_cli="C:\OpenServer\modules\php\PHP_8.0\php.exe" path_separator=";" version="8.0.8">
           <additional_php_ini />
           <configuration_file>C:\OpenServer\modules\php\PHP_8.0\php.ini</configuration_file>

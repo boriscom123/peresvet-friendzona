@@ -1,13 +1,14 @@
 <?php
-    $subdomain = 'testfirebladeru'; //Поддомен нужного аккаунта - как в амосрм
+    echo "Настройки интеграции";
+    $subdomain = 'zakirov'; //Поддомен нужного аккаунта - как в амосрм
     $link = 'https://' . $subdomain . '.amocrm.ru/oauth2/access_token'; //Формируем URL для запроса
     /** Соберем данные для запроса */
     $data = [
-        'client_id' => '8011009d-0be6-4f52-afe0-e289ab9be428',
-        'client_secret' => 'KyTK0szB8MJCyqHT6FPXsGUGEbSHhTQRqMT80OGxgn7IUXwlgWwuDRVoUM6e24KM',
+        'client_id' => 'ad57c5dd-f50a-4649-a6f3-1e1fc44480bd',
+        'client_secret' => 'Hd0bYwVgDLFY850AAqo8bCshZgWOCVJLN0iD8E1gEB05UCxkgJ6t9PAh7n4BTiSW',
         'grant_type' => 'authorization_code',
-        'code' => 'def50200025d90f3e6ed73980ec056ef84a307bb1cffd3b05557ed012b7717357b2527004154a53f1f76c15caab75af910366a7cf466b473bf43776edbef4a3c8d765b1889c78045a0c4b8dda6478d4d9cfe59584f23be4d37c7020333ee91e4743cf5a0e64b27ebc807608df72ba146e30b70fbe2defced9e21dd2931cefb5f3f6d560b4f68272d224489794f9141e1c8da99dd376ffcae27c5db44eb64007dd1403d255384aec76719ab2ee427db0132a21ff1b436cf0c24bc45048b906916b22853d698d954778cc68a7b6e50b214540bc9663a478fbe55a2055fcf9ce97d688c0fa00feb5102b87073a8c8614f61f06d1f787350ac3502547dd8e2a0827a3cea03fe771cbb0db8f3401d3e8c40478e8c2e167ad2c0e990c25aa9c6c9c46dc6bba4c46b044c6e8238c499eccf5716a661bef9def8fb59758212b383810b7b593db7d61b76b40f5b4efd8ca0ff38049e422cba1659d3c8111f08fe1d32ed6bc8c3eaa302fe393c844a11ec8fd70507ce40173fec50e104e946dc2f6a0b5d9a732b92f93b28ca0dce0b1ed00c75ac1a1efcac4e16a4d152bbe12c357472fd5f3eff713a61642ce27fe2143460d67a09d9f2167744367b7989356bc1cf8b',
-        'redirect_uri' => 'http://bynextpr.ru/',
+        'code' => 'def50200203727428142afc773825bcef14f6dbb5ec9b0f58dd3417895345e8ea7c7f60241010faa9838802aa6d2d6211ca598c5f1bb858674e74c8ec5e5325653c3acc7ce5090fd926bfbcf3e254913f704101862bdb9ec3a1440959adae213221278bdd7b7f8095456a2154167fdf810bd7a50d92d3543d09c2407dac831391417b0e6a99d04ddb33c2c1b21e1e1352fc9bb83a91e2df5d4d9b07b1e6a9afc5b75f78dad28c6e3ca2caadce166caae4d140d9651557e32d66748f7d567f1a248985ef0baae5858b8f9cd92492380fe43b7e3fb8a92094b782050a58ca4b8e914a84b314992bf1a5c27010c53408e70325093b55ab5d340dd7659fc4c7275bab2107986476a929069acf43d4411a59035d79dd6fea547894bbb760bb478e63e22a98eede067caa7f3b52caea060db726cd7c3f64cce1f329ba15c154bb8438050873d4129b876445a0f9308d12c2a998ebe4165011bff0e0f7677f5f760d133e569f9159b5917a256a7a5316d33e00f6913f6d97c3633b0fc0d8bef97ce64d45a14e121cfcb1e103f9c30cf20703debe73b3d6a175bf9cef1b68138f6198b82cb85d69305a5baebed38390464e27bba0e8b3497b46c3f3f9232642571',
+        'redirect_uri' => 'https://fz2020.ru/',
     ];
 
     /**
@@ -55,8 +56,8 @@
     }
     // сохраняем ответ от сервера в файл.
     $addtofile = $out.'/{"until":'. ($_SERVER['REQUEST_TIME'] + 86400) .'}';
-    $handle = fopen("wp-content/themes/friendzone/assets/amocrm/amointegrationapi.json", "a");
+    $handle = fopen("wp-content/themes/pv-friendzone/assets/amocrm/amointegrationapi.json", "a");
     fwrite($handle, $addtofile);
     fclose($handle);
-    // echo "Токен Получен";
+    echo "Токен Получен";
 ?>

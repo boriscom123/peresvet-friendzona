@@ -1,10 +1,13 @@
 <?php
     // echo "Подготовка необходимых данных для работы с амосрм";
-    $subdomain = 'testfirebladeru'; //Поддомен нужного аккаунта - как в амосрм
-    $token = explode("/",file_get_contents("wp-content/themes/friendzone/assets/amocrm/amointegrationapi.json"));
+    $subdomain = 'zakirov'; //Поддомен нужного аккаунта - как в амосрм
+    $pipeline_id = '1974898';
+    $token = explode("/",file_get_contents("wp-content/themes/pv-friendzone/assets/amocrm/amointegrationapi.json"));
     $access_token = json_decode($token[0], true)['access_token'];
+    // echo 'TOKEN:' . $access_token;
     // проверка доступности аккаунта
     function check_account($subdomain, $access_token){
+        // echo 'check_account';
         $link = 'https://' . $subdomain . '.amocrm.ru/api/v2/account'; //Формируем URL для запроса
         /** Формируем заголовки */
         $headers = [
@@ -47,10 +50,12 @@
             print $out;
             die('Файл: addcontact Строка: 44 Ошибка: ' . $e->getMessage() . PHP_EOL . 'Код ошибки: ' . $e->getCode());
         }
+        // echo 'check_account - end'.$out.'<br>';
         return $out;
     }
     // добавление новой сделки
-    function add_new_lead($subdomain, $access_token){
+    function add_new_lead($subdomain, $access_token, $pipeline_id){
+        // echo 'add_new_lead';
         $lead_link = 'https://' . $subdomain . '.amocrm.ru/api/v4/leads'; // добавление сделки
         /** Формируем заголовки */
         $headers = [
@@ -60,7 +65,7 @@
         $data = '[
             {
                 "name": "Ваш номер участника FRIENDзона ID ",
-                "pipeline_id": 4646092
+                "pipeline_id": ' . $pipeline_id . '
             }
         ]';
         $curl = curl_init(); #Сохраняем дескриптор сеанса cURL
@@ -81,12 +86,13 @@
         $out_link = json_decode($out, true);
         // echo "id сделки: ";
         $id_link = $out_link['_embedded']['leads'][0]['id'];
-        // echo $id_link;
+        // echo '<br>'.$out.'<br>';
+        // echo 'add_new_lead - end'.$id_link.'<br>';
         return $id_link;
     }
     // обновление названия сделки в соответствии с полученным id
     function update_lead($subdomain, $access_token, $lead_id){
-        // print 'Обновляем сделку ID '.$lead_id;
+        // print 'update_lead - Обновляем сделку ID '.$lead_id;
         $link = 'https://' . $subdomain . '.amocrm.ru/api/v4/leads/'.$lead_id;
         /** Формируем заголовки */
         $headers = [
@@ -111,12 +117,13 @@
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
         $out = curl_exec($curl); #Инициируем запрос к API и сохраняем ответ в переменную
         curl_close($curl);
+        // echo 'update_lead - Обновляем сделку '.$out.'<br>';
         return $out;
     }
     // получить сделку по ID
     function get_lead_by_id($subdomain, $access_token, $lead_id){
         // получить сделку по ID
-        print 'Выводим сделку с ID '.$lead_id;
+        // print 'Выводим сделку с ID '.$lead_id;
         $link = 'https://' . $subdomain . '.amocrm.ru/api/v4/leads/'.$lead_id;
         /** Формируем заголовки */
         $headers = [
@@ -137,12 +144,12 @@
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
         $out = curl_exec($curl); #Инициируем запрос к API и сохраняем ответ в переменную
         curl_close($curl);
+        // print $out;
         print $out;
-        print '<br>';
     }
     // добавляем новый контакт
     function add_new_contact($subdomain, $access_token, $user_id){
-        // добавление нового контакта
+        // echo 'добавление нового контакта';
         $contact_custom_fields = json_decode(contact_custom_fields($subdomain, $access_token), true);
         $user_data = get_userdata( $user_id );
         $link = 'https://' . $subdomain . '.amocrm.ru/api/v4/contacts';
@@ -211,13 +218,13 @@
         catch(\Exception $e)
         {
             print $out;
-            die('Файл: addcontact Строка: 146 Ошибка: ' . $e->getMessage() . PHP_EOL . 'Код ошибки: ' . $e->getCode());
+            die('Файл: amocrm-users add_new_contact Строка: 221 Ошибка: ' . $e->getMessage() . PHP_EOL . 'Код ошибки: ' . $e->getCode());
         }
         return json_decode($out, true)['_embedded']['contacts'][0]['id'];
     }
     // получение дополнительных полей контакта
     function contact_custom_fields($subdomain, $access_token){
-        // получаем дополнительные поля использования при добавлении контакта
+        // echo 'получаем дополнительные поля использования при добавлении контакта';
         $link = 'https://' . $subdomain . '.amocrm.ru/api/v4/contacts/custom_fields';
         /** Формируем заголовки */
         $headers = [
@@ -236,11 +243,12 @@
         curl_setopt($curl,CURLOPT_SSL_VERIFYHOST, 2);
         $out = curl_exec($curl); //Инициируем запрос к API и сохраняем ответ в переменную
         curl_close($curl);
+        // var_dump($out);
         return $out;
     }
     // связь сделки с контактом пользователя
     function lead_link_to_contact($subdomain, $access_token, $lead_id, $contact_id){
-        // связь сделки с контактом пользователя
+        // echo 'связь сделки с контактом пользователя';
         $link = 'https://' . $subdomain . '.amocrm.ru/api/v4/leads/'.$lead_id.'/link';
         /** Формируем заголовки */
         $headers = [

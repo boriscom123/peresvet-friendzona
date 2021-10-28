@@ -21,16 +21,16 @@
         <div class="container">
             <div class="footer-links">
                 <div class="image">
-                    <a href="http://bynextpr.ru/">
+                    <a href="https://fz2020.ru/">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer-logo.svg" alt="footer-logo">
                     </a>
                 </div>
                 <div class="links">
                     <div>
-                        <a href="http://bynextpr.ru/#block-2-ancor">О программе</a>
-                        <a href="http://bynextpr.ru/#block-3-4-ancor">Условия</a>
-                        <a href="http://bynextpr.ru/news/">Новости</a>
-                        <a href="http://bynextpr.ru/#block-8-ancor">Контакты</a>
+                        <a href="https://fz2020.ru/#block-2-ancor">О программе</a>
+                        <a href="https://fz2020.ru/#block-3-4-ancor">Условия</a>
+                        <a href="https://fz2020.ru/news/">Новости</a>
+                        <a href="https://fz2020.ru/#block-8-ancor">Контакты</a>
                     </div>
                     <div>
                         <a href="https://vk.com/pvreal" target="_blank">Vkontakte</a>
@@ -61,7 +61,7 @@
                 <div class="container">
                     <div class="modal-menu-buttons">
                         <div class="image">
-                            <a href="http://bynextpr.ru/">
+                            <a href="https://fz2020.ru/">
                                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer-logo.svg" alt="footer-logo">
                             </a>
                         </div>
@@ -77,9 +77,9 @@
                                             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/chevron-down.svg" alt="chevron-down">
                                         </div>
                                         <div class="drop-down-menu d-none">
-                                            <a class="user-link" href="http://bynextpr.ru/user/?n=1">Профиль</a>
-                                            <a class="user-link" href="http://bynextpr.ru/user/?n=2">Друзья</a>
-                                            <a class="user-link" href="http://bynextpr.ru/user/?n=3">Настройки</a>
+                                            <a class="user-link" href="https://fz2020.ru/user/?n=1">Профиль</a>
+                                            <a class="user-link" href="https://fz2020.ru/user/?n=2">Друзья</a>
+                                            <a class="user-link" href="https://fz2020.ru/user/?n=3">Настройки</a>
                                             <div class="decoration"></div>
                                             <a class="user-logout" href="<?php echo wp_logout_url( home_url() ); ?>">Выйти</a>
                                         </div>
@@ -104,10 +104,10 @@
                             <a href="https://www.youtube.com/channel/UCNeW3BEXBvySPZjzuEmWvrg" target="_blank">Youtube</a>
                         </div>
                         <div class="active">
-                            <a href="http://bynextpr.ru/#block-2-ancor" class="ancor-link">О программе</a>
-                            <a href="http://bynextpr.ru/#block-3-4-ancor" class="ancor-link">Условия</a>
-                            <a href="http://bynextpr.ru/news/">Новости</a>
-                            <a href="http://bynextpr.ru/#block-8-ancor" class="ancor-link">Контакты</a>
+                            <a href="https://fz2020.ru/#block-2-ancor" class="ancor-link">О программе</a>
+                            <a href="https://fz2020.ru/#block-3-4-ancor" class="ancor-link">Условия</a>
+                            <a href="https://fz2020.ru/news/">Новости</a>
+                            <a href="https://fz2020.ru/#block-8-ancor" class="ancor-link">Контакты</a>
                         </div>
                     </div>
                     <div class="modal-menu-copyright">
@@ -180,7 +180,7 @@
                     <form method="post" id="form-login"></form>
                     <input type="hidden" name="action" value="login" form="form-login">
                     <div class="inputs">
-                        <input type="text" name="u-login" placeholder="Телефон или почта" form="form-login" id="form-login-u-login">
+                        <input type="text" name="u-login" placeholder="Телефон" form="form-login" id="form-login-u-login">
                         <input type="password" name="u-pass" placeholder="Пароль" form="form-login" id="form-login-u-pass">
                     </div>
                     <div class="text">

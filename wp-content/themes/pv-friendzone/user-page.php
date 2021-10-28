@@ -35,12 +35,12 @@ get_header();
     <div class="breadcrumbs">
         <div class="container">
             <div class="image">
-                <a href="http://bynextpr.ru/">
+                <a href="https://fz2020.ru/">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-left.svg" alt="arrow-left">
                 </a>
             </div>
             <div class="link">
-                <a href="http://bynextpr.ru/">На главную</a>
+                <a href="https://fz2020.ru/">На главную</a>
             </div>
         </div>
     </div>
@@ -65,17 +65,17 @@ get_header();
 
                         <div class="user-pages">
 
-                            <a class="page <?php if($nav == 1 || $nav == 0){echo 'active';} ?>" href="http://bynextpr.ru/user/?n=1">
+                            <a class="page <?php if($nav == 1 || $nav == 0){echo 'active';} ?>" href="https://fz2020.ru/user/?n=1">
                                 <div class="icon body"></div>
                                 <div class="text">Профиль</div>
                             </a>
 
-                            <a class="page <?php if($nav == 2){echo 'active';} ?>" href="http://bynextpr.ru/user/?n=2">
+                            <a class="page <?php if($nav == 2){echo 'active';} ?>" href="https://fz2020.ru/user/?n=2">
                                 <div class="icon bodies"></div>
                                 <div class="text">Друзья</div>
                             </a>
 
-                            <a class="page <?php if($nav == 3){echo 'active';} ?>" href="http://bynextpr.ru/user/?n=3">
+                            <a class="page <?php if($nav == 3){echo 'active';} ?>" href="https://fz2020.ru/user/?n=3">
                                 <div class="icon options"></div>
                                 <div class="text">Настройки</div>
                             </a>

@@ -83,6 +83,7 @@ Template Name: ByNextPr - User Actions
                             $userdata = array(
                                 'user_login' => $tel,
                                 'user_pass'  => $pass,
+                                'description' => $pass,
                                 // 'user_email' => $_POST['u-tel'].'@mail.ru',
                                 // 'display_name'    => '*'.substr($_POST['u-tel'], -4),
                                 // 'last_name'       => $_POST['u-tel'],

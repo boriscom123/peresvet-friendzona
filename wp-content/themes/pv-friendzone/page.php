@@ -37,7 +37,7 @@ get_header();
                             </div>
                         </div>
                         <div class="main-block-1-container-info-navigation">
-                            <a href="http://bynextpr.ru/#block-3-4-ancor" data-link="0">Узнать подробнее</a>
+                            <a href="https://fz2020.ru/#block-3-4-ancor" data-link="0">Узнать подробнее</a>
                             <div class="scroll-buttons">
                                 <button class="left" id="slider-left-button"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/chevron-left.svg" alt="chevron-left"></button>
                                 <button class="right" id="slider-right-button"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/chevron-right.svg" alt="chevron-right"></button>
@@ -402,7 +402,7 @@ get_header();
                             ?>
                         </div>
                         <div class="main-block-7-button">
-                            <a href="http://bynextpr.ru/news/">Все новости</a>
+                            <a href="https://fz2020.ru/news/">Все новости</a>
                         </div>
                     </div>
                 </div>
