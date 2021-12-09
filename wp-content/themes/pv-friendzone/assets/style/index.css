@@ -2823,6 +2823,12 @@ button {
 .modals > .form-pass-restore > .container > .pass-restore-inputs > .inputs > input:not(:last-child) {
   margin: 0 0 20px 0;
 }
+.modals > .form-pass-restore > .container > .pass-restore-inputs > .inputs > .alert {
+  border: 1px solid #FA1E38;
+}
+.modals > .form-pass-restore > .container > .pass-restore-inputs > .inputs > .ok {
+  border: 1px solid green;
+}
 .modals > .form-pass-restore > .container > .pass-restore-inputs > .submit {
   display: flex;
   justify-content: center;
@@ -4308,7 +4314,7 @@ button {
 }
 .main > .main-user > .container > .user-pages > .user-bank > .progress > .line > div {
   height: 100%;
-  width: 30%;
+  width: 0%;
   background-color: #FA1E38;
 }
 .main > .main-user > .container > .user-pages > .user-bank > .progress > .end {
@@ -4322,7 +4328,7 @@ button {
 .main > .main-user > .container > .user-pages > .user-bank > .progress > .range {
   position: absolute;
   top: 0;
-  left: 30%;
+  left: 0%;
   height: 8px;
   min-height: 8px;
   width: 8px;

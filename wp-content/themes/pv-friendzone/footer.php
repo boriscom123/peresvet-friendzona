@@ -70,7 +70,7 @@
                                 if( is_user_logged_in() ){ ?>
                                     <div class="login d-flex user-info">
                                         <div class="avatar">
-                                            <img src="<?php if(isset($all_meta_for_user['user_avatar'])){print wp_get_attachment_image_url($all_meta_for_user['user_avatar'][0]);} else {echo get_template_directory_uri().'/assets/images/question-red.svg';} ?>" alt="user-avatar">
+                                            <img src="<?php if(isset($all_meta_for_user['user_avatar'])){print wp_get_attachment_image_url($all_meta_for_user['user_avatar'][0]);} else {echo get_template_directory_uri().'/assets/images/avatar-new.svg';} ?>" alt="user-avatar">
                                         </div>
                                         <div class="user"><?php echo $user_data->get('display_name'); ?></div>
                                         <div class="actions">
@@ -130,9 +130,12 @@
                     <form method="post" id="form-reg"></form>
                     <input type="hidden" name="action" value="registration" form="form-reg">
                     <div class="inputs">
-                        <input type="text" name="f" placeholder="Фамилия*" form="form-reg" id="form-reg-f">
-                        <input type="text" name="i" placeholder="Имя*" form="form-reg" id="form-reg-i">
-                        <input type="tel" name="tel" placeholder="Телефон*" form="form-reg" id="form-reg-tel">
+<!--                        <input type="text" name="f" placeholder="Фамилия *" form="form-reg" id="form-reg-f">-->
+<!--                        <input type="text" name="i" placeholder="Имя *" form="form-reg" id="form-reg-i">-->
+                        <input type="text" name="fio" placeholder="ФИО *" form="form-reg" id="form-reg-fio">
+                        <input type="tel" name="tel" placeholder="Телефон *" form="form-reg" id="form-reg-tel">
+                        <input type="text" name="city" placeholder="Город *" form="form-reg" id="form-reg-city">
+                        <input type="text" name="card" placeholder="Карта клиента" form="form-reg" id="form-reg-card">
                     </div>
                     <div class="checkbox">
                         <input type="checkbox" id="rules" name="rules" form="form-reg">
@@ -206,13 +209,13 @@
                 <div class="pass-restore-inputs d-flex">
                     <form action="user.html" method="get" id="form-pass-restore"></form>
                     <div class="inputs">
-                        <input type="tel" name="u-tel" placeholder="Номер телефона*" form="form-pass-restore" required>
+                        <input type="tel" id="form-pass-restore-tel" name="u-tel" placeholder="Номер телефона*" form="form-pass-restore" required>
                     </div>
                     <div class="text">
                         <a href="#" class="login-button">Я вспомнил пароль</a>
                     </div>
                     <div class="submit">
-                        <input type="submit" value="Продолжить" form="form-pass-restore">
+                        <input type="button" value="Продолжить" form="form-pass-restore" id="form-pass-restore-tel-button">
                     </div>
 
                 </div>

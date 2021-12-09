@@ -1,0 +1,89 @@
+.footer {
+  width: 100%;
+  background-color: $alterBgColor4;
+  padding: 55px 0 0 0;
+  > .container {
+    > .footer-links {
+      display: flex;
+      justify-content: space-between;
+      @media (max-width: 600px) { flex-direction: column; }
+      > .image {
+        width: 50%;
+        // background-color: pink;
+        max-width: 280px;
+        @media (max-width: 800px) { min-width: 280px; }
+        > a {
+          > img {
+            width: 100%;
+            object-fit: contain;
+            transition: $transition;
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
+        }
+      }
+      > .links {
+        width: 50%;
+        // max-width: #{calc(100% - 280px)};
+        @media (max-width: 800px) { width: #{calc(100% - 60px)}; }
+        @media (max-width: 600px) { width: 100%; margin: 20px 0 0 0; }
+        display: flex;
+        > div {
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          @media (max-width: 600px) {  }
+          > a {
+            font-family: $mainFontFamily;
+            font-weight: 500;
+            font-size: 13px;
+            color: $alterFontColor;
+            margin: 0 0 22px 50%;
+            white-space: nowrap;
+            @media (max-width: 800px) { margin: 0 0 20px 25%; }
+            @media (max-width: 600px) { margin: 0 0 20px 10%; }
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+    > .footer-copyright {
+      display: flex;
+      justify-content: space-between;
+      margin: 50px 0;
+      @media (max-width: 600px) { flex-direction: column; align-items: center; min-height: 50px; }
+      > a {
+        width: 50%;
+        font-family: $mainFontFamily;
+        font-weight: 500;
+        font-size: 13px;
+        color: $alterFontColor2;
+        @media (max-width: 600px) { width: 100%; }
+        &:last-child {
+          margin: 0 0 0 25%;
+          @media (max-width: 600px) { margin: 0 0 0 0;}
+        }
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    > .made-by {
+      display: flex;
+      justify-content: center;
+      padding: 0 0 5px 0;
+      > a {
+        font-family: $mainFontFamily;
+        font-weight: 500;
+        font-size: 8px;
+        color: $alterFontColor2;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

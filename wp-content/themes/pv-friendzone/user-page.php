@@ -11,6 +11,26 @@ get_header();
         $avatar = get_avatar_url( get_current_user_id() );
         // print_r($user_data);
         // print_r($all_meta_for_user);
+
+        // получаем ссылку на форму
+        $amo_integration_page = get_page_by_title('Интеграция с АМО СРМ');
+        $content = $amo_integration_page->post_content;
+        $content = mb_substr($content, mb_strpos($content, '{'), mb_strpos($content, '}') - mb_strpos($content, '{') + 1);
+        $content = json_decode($content);
+        $new_lead_id = $all_meta_for_user['amo-lead-id'][0];
+        // include 'assets/amocrm/amocrm-users.php';
+        $lead = get_lead_by_id($content->domain, $content->access_token, $new_lead_id);
+
+        // получаем массив id сделок зарегистрированных через форму
+        // https://zakirov.amocrm.ru/api/v4/leads?filter[query]=21367677
+        $all_leads = get_all_linked_leads($content->domain, $content->access_token, $all_meta_for_user['amo-lead-id'][0]);
+        $user_connected_leads_id = [];
+        foreach ($all_leads['_embedded']['leads'] as $lead) {
+            // print_r($lead['name']);
+            if($lead['id'] != $all_meta_for_user['amo-lead-id'][0]){
+                $user_connected_leads_id[] = $lead['id'];
+            }
+        }
     } else {
         // echo 'Вы всего лишь пользователь!';
         wp_redirect( home_url() ); // перенаправляем на главную страницу
@@ -53,7 +73,7 @@ get_header();
                 <div class="user-main-info">
                     <div>
                         <div class="avatar">
-                            <img src="<?php if(isset($all_meta_for_user['user_avatar'])){print wp_get_attachment_image_url($all_meta_for_user['user_avatar'][0]);} else {echo get_template_directory_uri().'/assets/images/question-red.svg';} ?>" alt="user-avatar">
+                            <img src="<?php if(isset($all_meta_for_user['user_avatar'])){print wp_get_attachment_image_url($all_meta_for_user['user_avatar'][0]);} else {echo get_template_directory_uri().'/assets/images/avatar-new.svg';} ?>" alt="user-avatar">
                             <form enctype="multipart/form-data" method="post" id="user-avatar">
                                 <input type="hidden" name="form-action" value="update-user-avatar" form="user-avatar">
                                 <input class="d-none" type="file" name="avatar" id="user-avatar-select" form="user-avatar">
@@ -93,15 +113,20 @@ get_header();
                         <h2>Уникальный код</h2>
                         <h3><?php if(isset($all_meta_for_user['amo-lead-id'])){ print $all_meta_for_user['amo-lead-id'][0]; } ?></h3>
                         <div class="info">
-                            <div>Ваша индивидуальная ссылка и код</div>
-                            <button>Копировать</button>
+                            <div>
+                                <?php
+                                    // echo $lead['custom_fields_values'][2]['values'][0]['value'];
+                                    echo "Ваша индивидуальная ссылка и код";
+                                ?>
+                            </div>
+                            <button data-link="<?php echo $lead['custom_fields_values'][2]['values'][0]['value']; ?>" id="copy-link">Копировать</button>
                         </div>
                     </div>
 
                     <div class="user-bonus <?php if($nav != 1 || $nav != 1){echo 'd-none';} ?>">
                         <h2>Бонусный счет</h2>
                         <div class="info">
-                            <h3>105 000 баллов</h3>
+                            <h3>0 баллов</h3>
                             <button id="user-money-button">Вывести</button>
                         </div>
                         <a href="#">Операции по счету</a>
@@ -119,7 +144,7 @@ get_header();
                         <div class="info">
                             <div>
                                 <h3>Текущий баланс</h3>
-                                <h2 class="color-red">105 000</h2>
+                                <h2 class="color-red">0</h2>
                             </div>
                             <div>
                                 <h3>Осталось до скидки</h3>
@@ -132,155 +157,212 @@ get_header();
                         <h2>Список друзей</h2>
                         <div class="friends-list">
 
-                            <div class="friend-item">
-                                <div class="friend-main not-confirm">
-                                    <div class="title">
-                                        <h2>Виктория</h2>
-                                        <h3>+7 (902) 344-23-15</h3>
-                                    </div>
-                                    <h4>Ожидайте проведения переговоров</h4>
-                                    <div class="circle"></div>
-                                    <div class="friend-hover">
-                                        <div class="info">
-                                            <h2>Консультация</h2>
-                                            <h3>Назначена на 21 мая 2021</h3>
+                            <?php
+                                if (count($user_connected_leads_id) > 0){
+                                    // print_r($user_connected_leads_id);
+                                    foreach ($user_connected_leads_id as $lead_id){
+                                        $lead = get_lead_by_id($content->domain, $content->access_token, $lead_id);
+                                        // print_r($lead);
+                                        // запрос на получение связанных сущностей (контакт) - https://zakirov.amocrm.ru/api/v4/leads/{ ID }/links
+                                        $linked_contact = get_entity_links($content->domain, $content->access_token, 'leads', $lead_id);
+                                        // print_r($contact);
+                                        $contact_id = $linked_contact['_embedded']['links'][0]['to_entity_id'];
+                                        // echo $contact_id;
+                                        $contact = get_contact_by_id($content->domain, $content->access_token, $contact_id);
+                                        // var_dump($contact);
+                                        $contact_name = $contact['name'];
+                                        // var_dump('Имя:', $contact_name);
+                                        $contact_tel = 0;
+                                        foreach ($contact['custom_fields_values'] as $field){
+                                            if($field['field_id'] === 248661)
+                                            $contact_tel = prepareLogin($field['values'][0]['value']);
+                                        }
+                                        // var_dump('Телефон:', $contact_tel);
+                                        // Дата Получена рекомендация – новая сделка на «Новое обращение»
+                                        // Дата Забронирована квартира – сделка перемещена на этап «Бронь»
+                                        // Дата Договор подписан – сделка перемещена на этап «Договор подписан»
+                                        // Дата Успешно (надо подумать над названием) – сделка перемещена на этап «В акте».
+                                        // Также нужно добавить в случае не состоявшейся сделки:
+                                        // Дата Отказ – сделка убирается в «Закрыто, не реализовано»
+                                        ?>
+                                        <div class="friend-item">
+                                            <div class="friend-main not-confirm">
+                                                <div class="title">
+                                                    <h2><?php echo $contact_name; ?></h2>
+                                                    <h3><?php echo '+'. substr($contact_tel, 0, 1) . ' (' . substr($contact_tel, 1, 3) . ') ' . substr($contact_tel, 4, 3) . '-' . substr($contact_tel, 7, 2) . '-' . substr($contact_tel, 9, 2); ?></h3>
+                                                </div>
+                                                <h4>Ожидайте проведения переговоров</h4>
+                                                <div class="circle"></div>
+                                                <div class="friend-hover">
+                                                    <div class="info">
+                                                        <h2>Консультация</h2>
+                                                        <h3>Назначена на 21 мая 2021</h3>
+                                                    </div>
+                                                    <div class="info">
+                                                        <h2>Бронирование</h2>
+                                                        <h3>Нет информации</h3>
+                                                    </div>
+                                                    <div class="info">
+                                                        <h2>Покупка</h2>
+                                                        <h3>Нет информации</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="info">
-                                            <h2>Бронирование</h2>
-                                            <h3>Нет информации</h3>
-                                        </div>
-                                        <div class="info">
-                                            <h2>Покупка</h2>
-                                            <h3>Нет информации</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                        <?php
+                                    }
+                                }
+                            ?>
 
-                            <div class="friend-item">
-                                <div class="friend-main not-confirm">
-                                    <div class="title">
-                                        <h2>Жанна</h2>
-                                        <h3>+7 (913) 942-93-11</h3>
-                                    </div>
-                                    <h4>Ожидайте проведения переговоров</h4>
-                                    <div class="circle"></div>
-                                    <div class="friend-hover">
-                                        <div class="info">
-                                            <h2>Консультация</h2>
-                                            <h3>Назначена на 21 мая 2021</h3>
-                                        </div>
-                                        <div class="info">
-                                            <h2>Бронирование</h2>
-                                            <h3>Нет информации</h3>
-                                        </div>
-                                        <div class="info">
-                                            <h2>Покупка</h2>
-                                            <h3>Нет информации</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="friend-item">
-                                <div class="friend-main not-confirm active">
-                                    <div class="title">
-                                        <h2>Виктория</h2>
-                                        <h3>+7 (902) 344-23-15</h3>
-                                    </div>
-                                    <h4>Ожидайте проведения переговоров</h4>
-                                    <div class="circle"></div>
-                                    <div class="friend-hover">
-                                        <div class="info">
-                                            <h2>Консультация</h2>
-                                            <h3>Назначена на 21 мая 2021</h3>
-                                        </div>
-                                        <div class="info">
-                                            <h2>Бронирование</h2>
-                                            <h3>Нет информации</h3>
-                                        </div>
-                                        <div class="info">
-                                            <h2>Покупка</h2>
-                                            <h3>Нет информации</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="friend-item">
-                                <div class="friend-main confirm">
-                                    <div class="title">
-                                        <h2>Кристина</h2>
-                                        <h3>+7 (900) 965-98-98</h3>
-                                    </div>
-                                    <h4>Покупка совершена</h4>
-                                    <div class="circle"></div>
-                                </div>
-                                <div class="friend-hover">
-                                    <div class="info">
-                                        <h2>Консультация</h2>
-                                        <h3>Назначена на 21 мая 2021</h3>
-                                    </div>
-                                    <div class="info">
-                                        <h2>Бронирование</h2>
-                                        <h3>Нет информации</h3>
-                                    </div>
-                                    <div class="info">
-                                        <h2>Покупка</h2>
-                                        <h3>Нет информации</h3>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="friend-item">
-                                <div class="friend-main confirm">
-                                    <div class="title">
-                                        <h2>Александр</h2>
-                                        <h3>+7 (987) 965-98-98</h3>
-                                    </div>
-                                    <h4>Покупка совершена</h4>
-                                    <div class="circle"></div>
-                                </div>
-                                <div class="friend-hover">
-                                    <div class="info">
-                                        <h2>Консультация</h2>
-                                        <h3>Назначена на 21 мая 2021</h3>
-                                    </div>
-                                    <div class="info">
-                                        <h2>Бронирование</h2>
-                                        <h3>Нет информации</h3>
-                                    </div>
-                                    <div class="info">
-                                        <h2>Покупка</h2>
-                                        <h3>Нет информации</h3>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="friend-item">
-                                <div class="friend-main confirm">
-                                    <div class="title">
-                                        <h2>Инна</h2>
-                                        <h3>+7 (987) 345-98-98</h3>
-                                    </div>
-                                    <h4>Покупка совершена</h4>
-                                    <div class="circle"></div>
-                                </div>
-                                <div class="friend-hover">
-                                    <div class="info">
-                                        <h2>Консультация</h2>
-                                        <h3>Назначена на 21 мая 2021</h3>
-                                    </div>
-                                    <div class="info">
-                                        <h2>Бронирование</h2>
-                                        <h3>Нет информации</h3>
-                                    </div>
-                                    <div class="info">
-                                        <h2>Покупка</h2>
-                                        <h3>Нет информации</h3>
-                                    </div>
-                                </div>
-                            </div>
+<!--                            <div class="friend-item">-->
+<!--                                <div class="friend-main not-confirm">-->
+<!--                                    <div class="title">-->
+<!--                                        <h2>Виктория</h2>-->
+<!--                                        <h3>+7 (902) 344-23-15</h3>-->
+<!--                                    </div>-->
+<!--                                    <h4>Ожидайте проведения переговоров</h4>-->
+<!--                                    <div class="circle"></div>-->
+<!--                                    <div class="friend-hover">-->
+<!--                                        <div class="info">-->
+<!--                                            <h2>Консультация</h2>-->
+<!--                                            <h3>Назначена на 21 мая 2021</h3>-->
+<!--                                        </div>-->
+<!--                                        <div class="info">-->
+<!--                                            <h2>Бронирование</h2>-->
+<!--                                            <h3>Нет информации</h3>-->
+<!--                                        </div>-->
+<!--                                        <div class="info">-->
+<!--                                            <h2>Покупка</h2>-->
+<!--                                            <h3>Нет информации</h3>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!---->
+<!--                            <div class="friend-item">-->
+<!--                                <div class="friend-main not-confirm">-->
+<!--                                    <div class="title">-->
+<!--                                        <h2>Жанна</h2>-->
+<!--                                        <h3>+7 (913) 942-93-11</h3>-->
+<!--                                    </div>-->
+<!--                                    <h4>Ожидайте проведения переговоров</h4>-->
+<!--                                    <div class="circle"></div>-->
+<!--                                    <div class="friend-hover">-->
+<!--                                        <div class="info">-->
+<!--                                            <h2>Консультация</h2>-->
+<!--                                            <h3>Назначена на 21 мая 2021</h3>-->
+<!--                                        </div>-->
+<!--                                        <div class="info">-->
+<!--                                            <h2>Бронирование</h2>-->
+<!--                                            <h3>Нет информации</h3>-->
+<!--                                        </div>-->
+<!--                                        <div class="info">-->
+<!--                                            <h2>Покупка</h2>-->
+<!--                                            <h3>Нет информации</h3>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!---->
+<!--                            <div class="friend-item">-->
+<!--                                <div class="friend-main not-confirm active">-->
+<!--                                    <div class="title">-->
+<!--                                        <h2>Виктория</h2>-->
+<!--                                        <h3>+7 (902) 344-23-15</h3>-->
+<!--                                    </div>-->
+<!--                                    <h4>Ожидайте проведения переговоров</h4>-->
+<!--                                    <div class="circle"></div>-->
+<!--                                    <div class="friend-hover">-->
+<!--                                        <div class="info">-->
+<!--                                            <h2>Консультация</h2>-->
+<!--                                            <h3>Назначена на 21 мая 2021</h3>-->
+<!--                                        </div>-->
+<!--                                        <div class="info">-->
+<!--                                            <h2>Бронирование</h2>-->
+<!--                                            <h3>Нет информации</h3>-->
+<!--                                        </div>-->
+<!--                                        <div class="info">-->
+<!--                                            <h2>Покупка</h2>-->
+<!--                                            <h3>Нет информации</h3>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!---->
+<!--                            <div class="friend-item">-->
+<!--                                <div class="friend-main confirm">-->
+<!--                                    <div class="title">-->
+<!--                                        <h2>Кристина</h2>-->
+<!--                                        <h3>+7 (900) 965-98-98</h3>-->
+<!--                                    </div>-->
+<!--                                    <h4>Покупка совершена</h4>-->
+<!--                                    <div class="circle"></div>-->
+<!--                                </div>-->
+<!--                                <div class="friend-hover">-->
+<!--                                    <div class="info">-->
+<!--                                        <h2>Консультация</h2>-->
+<!--                                        <h3>Назначена на 21 мая 2021</h3>-->
+<!--                                    </div>-->
+<!--                                    <div class="info">-->
+<!--                                        <h2>Бронирование</h2>-->
+<!--                                        <h3>Нет информации</h3>-->
+<!--                                    </div>-->
+<!--                                    <div class="info">-->
+<!--                                        <h2>Покупка</h2>-->
+<!--                                        <h3>Нет информации</h3>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!---->
+<!--                            <div class="friend-item">-->
+<!--                                <div class="friend-main confirm">-->
+<!--                                    <div class="title">-->
+<!--                                        <h2>Александр</h2>-->
+<!--                                        <h3>+7 (987) 965-98-98</h3>-->
+<!--                                    </div>-->
+<!--                                    <h4>Покупка совершена</h4>-->
+<!--                                    <div class="circle"></div>-->
+<!--                                </div>-->
+<!--                                <div class="friend-hover">-->
+<!--                                    <div class="info">-->
+<!--                                        <h2>Консультация</h2>-->
+<!--                                        <h3>Назначена на 21 мая 2021</h3>-->
+<!--                                    </div>-->
+<!--                                    <div class="info">-->
+<!--                                        <h2>Бронирование</h2>-->
+<!--                                        <h3>Нет информации</h3>-->
+<!--                                    </div>-->
+<!--                                    <div class="info">-->
+<!--                                        <h2>Покупка</h2>-->
+<!--                                        <h3>Нет информации</h3>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!---->
+<!--                            <div class="friend-item">-->
+<!--                                <div class="friend-main confirm">-->
+<!--                                    <div class="title">-->
+<!--                                        <h2>Инна</h2>-->
+<!--                                        <h3>+7 (987) 345-98-98</h3>-->
+<!--                                    </div>-->
+<!--                                    <h4>Покупка совершена</h4>-->
+<!--                                    <div class="circle"></div>-->
+<!--                                </div>-->
+<!--                                <div class="friend-hover">-->
+<!--                                    <div class="info">-->
+<!--                                        <h2>Консультация</h2>-->
+<!--                                        <h3>Назначена на 21 мая 2021</h3>-->
+<!--                                    </div>-->
+<!--                                    <div class="info">-->
+<!--                                        <h2>Бронирование</h2>-->
+<!--                                        <h3>Нет информации</h3>-->
+<!--                                    </div>-->
+<!--                                    <div class="info">-->
+<!--                                        <h2>Покупка</h2>-->
+<!--                                        <h3>Нет информации</h3>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
 
                         </div>
                     </div>
@@ -291,13 +373,14 @@ get_header();
                         <input type="hidden" name="n" value="3" form="user-contacts">
                         <input type="hidden" name="form-action" value="update-user-contacts" form="user-contacts">
                         <div class="info-field">
-                            <p>Фамилия<span>*</span></p>
-                            <input type="text" name="f" <?php if(!empty($user_data->last_name)){ print 'value="'.$user_data->last_name.'"'; } else { print 'placeholder="Фамилия"'; } ?> form="user-contacts">
+                            <p>ФИО<span>*</span></p>
+                            <input type="text" name="fio" <?php if(!empty($user_data->first_name)){ print 'value="'.$user_data->first_name.'"'; } else { print 'placeholder="ФИО"'; } ?> form="user-contacts">
+<!--                            <input type="text" name="f" --><?php //if(!empty($user_data->last_name)){ print 'value="'.$user_data->last_name.'"'; } else { print 'placeholder="Фамилия"'; } ?><!-- form="user-contacts">-->
                         </div>
                         <div class="info-field">
-                            <p>Имя<span>*</span></p>
-                            <input type="text" name="i" <?php if(!empty($user_data->first_name)){ print 'value="'.$user_data->first_name.'"'; } else { print 'placeholder="Имя"'; } ?> form="user-contacts">
-                            <input type="text" name="o" <?php if(isset($all_meta_for_user['patronymic'])){print 'value="'.$all_meta_for_user['patronymic'][0].'"';} else {print 'placeholder="Отчество"';} ?> form="user-contacts">
+                            <p>Город<span>*</span></p>
+                            <input type="text" name="city" <?php if(!empty($user_data->first_name)){ print 'value="'.$user_data->last_name.'"'; } else { print 'placeholder="Город"'; } ?> form="user-contacts">
+                            <!--                            <input type="text" name="o" --><?php //if(isset($all_meta_for_user['patronymic'])){print 'value="'.$all_meta_for_user['patronymic'][0].'"';} else {print 'placeholder="Отчество"';} ?><!-- form="user-contacts">-->
                         </div>
                         <div class="info-field-date">
                             <p>Дата рождения</p>

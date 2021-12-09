@@ -55,12 +55,12 @@ get_header();
         <div class="breadcrumbs">
             <div class="container">
                 <div class="image">
-                    <a href="http://bynextpr.ru/">
+                    <a href="<?php echo home_url(); ?>">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-left.svg" alt="arrow-left">
                     </a>
                 </div>
                 <div class="link">
-                    <a href="http://bynextpr.ru/">На главную</a>
+                    <a href="<?php echo home_url(); ?>">На главную</a>
                 </div>
             </div>
         </div>
