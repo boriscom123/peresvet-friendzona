@@ -53,19 +53,21 @@
     > .footer-copyright {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       margin: 50px 0;
       @media (max-width: 600px) { flex-direction: column; align-items: center; min-height: 50px; }
       > a {
-        width: 50%;
+        width: 30%;
         font-family: $mainFontFamily;
         font-weight: 500;
         font-size: 13px;
         color: $alterFontColor2;
+        text-align: center;
         @media (max-width: 600px) { width: 100%; }
-        &:last-child {
-          margin: 0 0 0 25%;
-          @media (max-width: 600px) { margin: 0 0 0 0;}
-        }
+        //&:last-child {
+        //  margin: 0 0 0 25%;
+        //  @media (max-width: 600px) { margin: 0 0 0 0;}
+        //}
         &:hover {
           text-decoration: underline;
         }

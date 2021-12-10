@@ -111,6 +111,9 @@ if (isset($_POST['action'])) {
                     include 'assets/amocrm/amocrm-refresh.php';
                     $result['refresh_result'] = $refresh_result;
                     $result[] = "Токен обновлен";
+                    $content = $amo_integration_page->post_content;
+                    $content = mb_substr($content, mb_strpos($content, '{'), mb_strpos($content, '}') - mb_strpos($content, '{') + 1);
+                    $content = json_decode($content);
                 }
                 $result['access_token'] = $content->access_token;
                 $result[] = "Отправляем в Амо";
@@ -162,6 +165,22 @@ if (isset($_POST['action'])) {
             header("Refresh: 0");
             exit;
         }
+    }
+    if ($_POST['action'] === 'send-message'){
+        // echo 'отправляем сообщение';
+        // print_r($_POST);
+        $to = 'frend.zona2020@mail.ru'; // 'frend.zona2020@mail.ru'; 'frend.zona2020@mail.ru';
+        // $copy = 'boriscom@mail.ru'; // 'boriscom123@yandex.ru';
+        $subject = 'Вопрос с сайта fz2020.ru';
+        $message = 'Имя пользователя';
+        $headers =    array(
+            'From' => 'admin@fz2020.ru',
+            'Reply-To' => $_POST['user-email'],
+            'X-Mailer' => 'PHP/' . phpversion()
+        );
+        $mail = mail($to, $subject, $message);
+        // var_dump('wp_mail', $mail);
+        // echo 'ok';
     }
 }
 if (isset($_POST['form-action'])) {
@@ -297,6 +316,7 @@ if (is_user_logged_in()) {
             $content = json_decode($content);
             // var_dump('AMO CRM', $content);
             include 'assets/amocrm/amocrm-users.php';
+            // phpinfo();
             // получаем коллекцию всех сделок
             // $all_leads = get_all_linked_leads($content->domain, $content->access_token, $all_meta_for_user['amo-lead-id'][0]);
             // echo '<br>Всего сделок: ' . count($all_leads['_embedded']['leads']). '<br>';
@@ -324,12 +344,12 @@ if (is_user_logged_in()) {
             // }
             // получаем дополнительные поля
             // leads|contacts|companies|customers
-            $gcf = get_custom_fields($content->domain, $content->access_token, 'leads');
-            var_dump('get_custom_field_by_id', $gcf);
-            foreach ($gcf['_embedded']['custom_fields'] as $field) {
-                echo '<br>';
-                print_r($field['name']);
-            }
+            // $gcf = get_custom_fields($content->domain, $content->access_token, 'leads');
+            // var_dump('get_custom_fields', $gcf);
+//            foreach ($gcf['_embedded']['custom_fields'] as $field) {
+//                echo '<br>';
+//                print_r($field['name']);
+//            }
 
             // посмотреть доступные тэги
             // leads|contacts|companies|customers
@@ -341,9 +361,9 @@ if (is_user_logged_in()) {
 
 
             // $new_lead_id = 21367677;
-//            $new_lead_id = 21368073;
-//            $lead = get_lead_by_id($content->domain, $content->access_token, $new_lead_id);
-//            var_dump('get_lead_by_id', $lead);
+            // $new_lead_id = 21368073;
+            // $lead = get_lead_by_id($content->domain, $content->access_token, $new_lead_id);
+            // var_dump('get_lead_by_id', $lead);
             // $cc = contact_custom_fields($content->domain, $content->access_token);
             // var_dump('contact_custom_fields', $cc);
             // $new_contact = add_new_contact($content->domain, $content->access_token, $user_data->ID);

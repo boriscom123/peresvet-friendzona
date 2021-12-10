@@ -604,3 +604,58 @@ function get_entity_links($subdomain, $access_token, $entity_type, $entity_id){
     // var_dump($out);
     return json_decode($out, true);
 }
+
+// подготовка статусов
+function get_pipline_status($status_id){
+    $statuses = [
+        'id' => 'name',
+        '26670388' => 'Новая рекомендация' , // В AMO CRM - 'Неразобранное',
+        '26670391' => 'Новая рекомендация', // В AMO CRM - 'НОВОЕ ОБРАЩЕНИЕ',
+        '28558921' => 'В работе', // В AMO CRM - 'ПОЛУЧИЛ ИНФОРМАЦИЮ',
+        '26670394' => 'В работе', // В AMO CRM - 'ПОДБОР ВАРИАНТОВ',
+        '26670397' => 'В работе', // В AMO CRM - 'ВАРИАНТЫ ПРЕДЛОЖЕНЫ',
+        '26676619' => 'В работе', // В AMO CRM - 'ЭКСКУРСИЯ',
+        '26670400' => 'Забронирована квартира', // В AMO CRM - 'БРОНЬ',
+        '26676625' => 'Забронирована квартира', // В AMO CRM - 'ИПОТЕКА',
+        '26676628' => 'Забронирована квартира', // В AMO CRM - 'НА ПОДГОТОВКЕ ДОГОВОРА',
+        '26676631' => 'Регистрация договора', // В AMO CRM - 'ДОГОВОР ПОДПИСАН',
+        '26676634' => 'Регистрация договора', // В AMO CRM - 'ЗАРЕГИСТРИРОВАН',
+        '35437765' => 'Успешная рекомендация', // В AMO CRM - 'В АКТЕ',
+        '142' => 'Успешная рекомендация', // В AMO CRM - 'Успешно реализовано',
+        '143' => 'Рекомендация закрыта', // В AMO CRM - 'Закрыто и не реализовано' - добавить причину
+    ];
+    if($statuses[$status_id]) {
+        $status = $statuses[$status_id];
+    } else {
+        $status = 'Статус не определен';
+    }
+    return $status;
+}
+
+// подготовка причины отказа
+function get_loss_reason($subdomain, $access_token, $lead_id){
+    // echo "Получить причину отказа по сделке: " . $lead_id;
+    $link = 'https://' . $subdomain . '.amocrm.ru/api/v4/leads/' . $lead_id . '?with=loss_reason';
+
+    /** Формируем заголовки */
+    $headers = [
+        'Authorization: Bearer ' . $access_token
+    ];
+
+    $curl = curl_init(); #Сохраняем дескриптор сеанса cURL
+    /** Устанавливаем необходимые опции для сеанса cURL  */
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_USERAGENT, 'amoCRM-API-client/1.0');
+    curl_setopt($curl, CURLOPT_URL, $link);
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
+    curl_setopt($curl, CURLOPT_HEADER, false);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_COOKIEFILE, dirname(__FILE__) . '/cookie.txt'); #PHP>5.3.6 dirname(__FILE__) -> __DIR__
+    curl_setopt($curl, CURLOPT_COOKIEJAR, dirname(__FILE__) . '/cookie.txt'); #PHP>5.3.6 dirname(__FILE__) -> __DIR__
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+    $out = curl_exec($curl); #Инициируем запрос к API и сохраняем ответ в переменную
+    curl_close($curl);
+    // var_dump($out);
+    return json_decode($out, true);
+}

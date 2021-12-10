@@ -17,18 +17,32 @@ get_header();
         $content = $amo_integration_page->post_content;
         $content = mb_substr($content, mb_strpos($content, '{'), mb_strpos($content, '}') - mb_strpos($content, '{') + 1);
         $content = json_decode($content);
+        if ($content->token_expires < $_SERVER['REQUEST_TIME']) {
+            include 'assets/amocrm/amocrm-refresh.php';
+            $result['refresh_result'] = $refresh_result;
+            $content = $amo_integration_page->post_content;
+            $content = mb_substr($content, mb_strpos($content, '{'), mb_strpos($content, '}') - mb_strpos($content, '{') + 1);
+            $content = json_decode($content);
+        }
         $new_lead_id = $all_meta_for_user['amo-lead-id'][0];
         // include 'assets/amocrm/amocrm-users.php';
         $lead = get_lead_by_id($content->domain, $content->access_token, $new_lead_id);
-
+        $form_link = '';
+        foreach ($lead['custom_fields_values'] as $cf){
+            if ($cf['field_id'] == 384025){
+                $form_link = $cf['values'][0]['value'];
+            }
+        }
         // получаем массив id сделок зарегистрированных через форму
         // https://zakirov.amocrm.ru/api/v4/leads?filter[query]=21367677
         $all_leads = get_all_linked_leads($content->domain, $content->access_token, $all_meta_for_user['amo-lead-id'][0]);
         $user_connected_leads_id = [];
-        foreach ($all_leads['_embedded']['leads'] as $lead) {
-            // print_r($lead['name']);
-            if($lead['id'] != $all_meta_for_user['amo-lead-id'][0]){
-                $user_connected_leads_id[] = $lead['id'];
+        if(count($all_leads['_embedded']['leads']) > 0){
+            foreach ($all_leads['_embedded']['leads'] as $lead) {
+                // print_r($lead['name']);
+                if($lead['id'] != $all_meta_for_user['amo-lead-id'][0]){
+                    $user_connected_leads_id[] = $lead['id'];
+                }
             }
         }
     } else {
@@ -119,14 +133,43 @@ get_header();
                                     echo "Ваша индивидуальная ссылка и код";
                                 ?>
                             </div>
-                            <button data-link="<?php echo $lead['custom_fields_values'][2]['values'][0]['value']; ?>" id="copy-link">Копировать</button>
+                            <button data-link="<?php echo $form_link; ?>" id="copy-link">Копировать</button>
                         </div>
                     </div>
 
                     <div class="user-bonus <?php if($nav != 1 || $nav != 1){echo 'd-none';} ?>">
+                        <?php
+                        $user_bonus_balance = 0;
+                        if (count($user_connected_leads_id) > 0) {
+                            // print_r($user_connected_leads_id);
+                            foreach ($user_connected_leads_id as $lead_id) {
+                                // print_r($lead_id);
+                                $lead = get_lead_by_id($content->domain, $content->access_token, $lead_id);
+                                if($lead['status_id'] === 142){
+                                    $user_bonus_balance +=40000;
+                                }
+                            }
+                        }
+                        $show_bonuses = '';
+                        if(strlen($user_bonus_balance) > 3 && strlen($user_bonus_balance) < 7){
+                            // echo 'Больше 3 и меньше 7';
+                            $show_bonuses = substr($user_bonus_balance, 0, strlen($user_bonus_balance) - 3 ) . ' ' . substr($user_bonus_balance, strlen($user_bonus_balance) - 3, strlen($user_bonus_balance));
+                            // echo $show_bonuses;
+                        } elseif (strlen($user_bonus_balance) > 6 && strlen($user_bonus_balance) < 10){
+                            // echo 'Больше 6 и меньше 10';
+                            $show_bonuses = substr($user_bonus_balance, 0, strlen($user_bonus_balance) - 6 ) . ' ' . substr($user_bonus_balance, strlen($user_bonus_balance) - 6, strlen($user_bonus_balance) - 3) . ' ' . substr($user_bonus_balance, strlen($user_bonus_balance) - 3, strlen($user_bonus_balance));
+                        } elseif (strlen($user_bonus_balance) > 9 && strlen($user_bonus_balance) < 13) {
+                            // echo 'Больше 9 и меньше 13';
+                            $show_bonuses = $user_bonus_balance;
+                        } else {
+                            // echo 'Больше 12';
+                            $show_bonuses = $user_bonus_balance;
+                        }
+                        $progress_bar = $user_bonus_balance / (1440000 / 100);
+                        ?>
                         <h2>Бонусный счет</h2>
                         <div class="info">
-                            <h3>0 баллов</h3>
+                            <h3><?php echo $show_bonuses; ?> баллов</h3>
                             <button id="user-money-button">Вывести</button>
                         </div>
                         <a href="#">Операции по счету</a>
@@ -134,21 +177,21 @@ get_header();
 
                     <div class="user-bank <?php if($nav != 1 || $nav != 1){echo 'd-none';} ?>">
                         <h2>Копилка</h2>
-                        <p>Наберите необходимое количество баллов и получите скидку 300 000 рублей на свою квартиру</p>
+                        <p>Наберите необходимое количество баллов и получите скидку 560 000 рублей на свою квартиру</p>
                         <div class="progress">
                             <div class="start"></div>
-                            <div class="line"><div></div></div>
+                            <div class="line"><div style="width: <?php echo $progress_bar; ?>%"></div></div>
                             <div class="end"></div>
-                            <div class="range"></div>
+                            <div class="range" style="left: <?php echo $progress_bar; ?>%"></div>
                         </div>
                         <div class="info">
                             <div>
                                 <h3>Текущий баланс</h3>
-                                <h2 class="color-red">0</h2>
+                                <h2 class="color-red"><?php echo $show_bonuses; ?></h2>
                             </div>
                             <div>
                                 <h3>Осталось до скидки</h3>
-                                <h2 class="color-black">2 395 000</h2>
+                                <h2 class="color-black">1 440 000</h2>
                             </div>
                         </div>
                     </div>
@@ -177,36 +220,46 @@ get_header();
                                             if($field['field_id'] === 248661)
                                             $contact_tel = prepareLogin($field['values'][0]['value']);
                                         }
-                                        // var_dump('Телефон:', $contact_tel);
-                                        // Дата Получена рекомендация – новая сделка на «Новое обращение»
-                                        // Дата Забронирована квартира – сделка перемещена на этап «Бронь»
-                                        // Дата Договор подписан – сделка перемещена на этап «Договор подписан»
-                                        // Дата Успешно (надо подумать над названием) – сделка перемещена на этап «В акте».
-                                        // Также нужно добавить в случае не состоявшейся сделки:
-                                        // Дата Отказ – сделка убирается в «Закрыто, не реализовано»
+                                        $status = get_pipline_status($lead['status_id']);
+                                        // var_dump('status', $status);
+                                        $status_date = date('d-m-Y', $lead['updated_at']);
+                                        // var_dump('$status_date', $status_date);
+                                        if($lead['status_id'] === 143){
+                                            $loss_reason = get_loss_reason($content->domain, $content->access_token, $lead['id']);
+                                            // var_dump('$loss_reason', $loss_reason['_embedded']['loss_reason'][0]['name']);
+                                            $reason = $loss_reason['_embedded']['loss_reason'][0]['name'];
+                                        }
                                         ?>
                                         <div class="friend-item">
-                                            <div class="friend-main not-confirm">
+                                            <div class="friend-main <?php if($status !== 'Успешная рекомендация') { echo 'not-'; }?>confirm">
                                                 <div class="title">
                                                     <h2><?php echo $contact_name; ?></h2>
                                                     <h3><?php echo '+'. substr($contact_tel, 0, 1) . ' (' . substr($contact_tel, 1, 3) . ') ' . substr($contact_tel, 4, 3) . '-' . substr($contact_tel, 7, 2) . '-' . substr($contact_tel, 9, 2); ?></h3>
                                                 </div>
-                                                <h4>Ожидайте проведения переговоров</h4>
+                                                <h4><?php echo $status; ?></h4>
                                                 <div class="circle"></div>
+                                                <?php
+                                                if($status !== 'Успешная рекомендация') { ?>
                                                 <div class="friend-hover">
                                                     <div class="info">
-                                                        <h2>Консультация</h2>
-                                                        <h3>Назначена на 21 мая 2021</h3>
+                                                        <h2><?php echo $status; ?></h2>
+                                                        <h3><?php echo $status_date; ?></h3>
+                                                        <?php
+                                                            if($lead['status_id'] === 143){
+                                                                echo "<h2>{$reason}</h2>";
+                                                            }
+                                                        ?>
                                                     </div>
-                                                    <div class="info">
-                                                        <h2>Бронирование</h2>
-                                                        <h3>Нет информации</h3>
-                                                    </div>
-                                                    <div class="info">
-                                                        <h2>Покупка</h2>
-                                                        <h3>Нет информации</h3>
-                                                    </div>
+<!--                                                    <div class="info">-->
+<!--                                                        <h2>Бронирование</h2>-->
+<!--                                                        <h3>Нет информации</h3>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="info">-->
+<!--                                                        <h2>Покупка</h2>-->
+<!--                                                        <h3>Нет информации</h3>-->
+<!--                                                    </div>-->
                                                 </div>
+                                                <?php } ?>
                                             </div>
                                         </div>
                                         <?php

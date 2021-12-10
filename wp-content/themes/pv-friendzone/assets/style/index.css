@@ -1900,6 +1900,7 @@ button {
 .footer > .container > .footer-copyright {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 50px 0;
 }
 @media (max-width: 600px) {
@@ -1910,23 +1911,16 @@ button {
   }
 }
 .footer > .container > .footer-copyright > a {
-  width: 50%;
+  width: 30%;
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 13px;
   color: #A5A5A5;
+  text-align: center;
 }
 @media (max-width: 600px) {
   .footer > .container > .footer-copyright > a {
     width: 100%;
-  }
-}
-.footer > .container > .footer-copyright > a:last-child {
-  margin: 0 0 0 25%;
-}
-@media (max-width: 600px) {
-  .footer > .container > .footer-copyright > a:last-child {
-    margin: 0 0 0 0;
   }
 }
 .footer > .container > .footer-copyright > a:hover {
@@ -2183,6 +2177,7 @@ button {
 .modals > .header-menu > .container-modal > .container > .modal-menu-copyright {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 50px 0 0 0;
   padding: 0 0 50px 0;
 }
@@ -2199,6 +2194,7 @@ button {
   font-weight: 500;
   font-size: 13px;
   color: #A5A5A5;
+  text-align: center;
 }
 @media (max-width: 600px) {
   .modals > .header-menu > .container-modal > .container > .modal-menu-copyright > a {
@@ -2654,6 +2650,18 @@ button {
 }
 .modals > .form-login > .container > .login-form-inputs > .inputs > input:not(:last-child) {
   margin: 0 0 20px 0;
+}
+.modals > .form-login > .container > .login-form-inputs > .inputs > .pass-lock {
+  background-image: url("../images/pass-lock.svg");
+  background-repeat: no-repeat;
+  background-size: 5%;
+  background-position: 95% 50%;
+}
+.modals > .form-login > .container > .login-form-inputs > .inputs > .pass-lock-open {
+  background-image: url("../images/pass-lock-open.svg");
+  background-repeat: no-repeat;
+  background-size: 5%;
+  background-position: 95% 50%;
 }
 .modals > .form-login > .container > .login-form-inputs > .inputs > .alert {
   border: 1px solid #FA1E38;

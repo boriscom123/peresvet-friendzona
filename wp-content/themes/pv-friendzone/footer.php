@@ -44,7 +44,8 @@
         <div class="container">
             <div class="footer-copyright">
                 <a href="#">© 2012-2021 Пересвет.Недвижимость</a>
-                <a href="#">Политика конфиденциальности</a>
+                <a href="<?php echo get_template_directory_uri(); ?>/assets/privacy.pdf" target="_blank">Политика конфиденциальности</a>
+                <a href="<?php echo get_template_directory_uri(); ?>/assets/rules.pdf" target="_blank">Правила</a>
             </div>
         </div>
             <div class="container">
@@ -112,7 +113,8 @@
                     </div>
                     <div class="modal-menu-copyright">
                         <a href="#">© 2012-2021 Пересвет.Недвижимость</a>
-                        <a href="#">Политика конфиденциальности</a>
+                        <a href="<?php echo get_template_directory_uri(); ?>/assets/privacy.pdf" target="_blank">Политика конфиденциальности</a>
+                        <a href="<?php echo get_template_directory_uri(); ?>/assets/rules.pdf" target="_blank">Правила</a>
                     </div>
                 </div>
             </div>
@@ -184,7 +186,7 @@
                     <input type="hidden" name="action" value="login" form="form-login">
                     <div class="inputs">
                         <input type="text" name="u-login" placeholder="Телефон" form="form-login" id="form-login-u-login">
-                        <input type="password" name="u-pass" placeholder="Пароль" form="form-login" id="form-login-u-pass">
+                        <input class="pass-lock" type="password" name="u-pass" placeholder="Пароль" form="form-login" id="form-login-u-pass">
                     </div>
                     <div class="text">
                         <a href="#" id="modal-pass-forget">Забыли пароль?</a>
@@ -258,12 +260,15 @@
                     <p>Ответ на вопрос отправим на почту, указанную в личном кабинете</p>
                 </div>
                 <div class="form-question-inputs d-flex">
-                    <form action="user.html" method="get" id="question"></form>
+                    <form method="post" id="form-question"></form>
+                    <input type="hidden" name="action" value="send-message" form="form-question">
+                    <input type="hidden" name="user-login" value="<?php echo $user_data->user_login; ?>" form="form-question">
+                    <input type="hidden" name="user-email" value="<?php if(isset($all_meta_for_user['email'])){ echo $all_meta_for_user['email'][0]; } ?>" form="form-question">
                     <div class="inputs">
-                        <textarea name="u-question" id="u-question" placeholder="Ваше сообщение*" form="question"></textarea>
+                        <textarea name="user-question" id="user-question" placeholder="Ваше сообщение*" form="form-question"></textarea>
                     </div>
                     <div class="submit">
-                        <input type="submit" value="Отправить" form="question">
+                        <input type="submit" value="Отправить" form="form-question">
                     </div>
 
                 </div>

@@ -141,6 +141,19 @@ let sliderPaginationBlock = document.getElementById('slider-pagination');
 let sliderImagesBlock = document.getElementById('slider-images');
 let sliderTextBlock = document.getElementById('slider-text');
 let sliderHrefLinks = ['https://fz2020.ru/#block-3-4-ancor', 'https://fz2020.ru/#block-2-ancor', 'https://fz2020.ru/#block-4-ancor'];
+addEventListener('DOMContentLoaded', function () {
+    getSliderLinks()
+});
+function getSliderLinks() {
+    console.log('Готовим список ссылок для слайдера');
+    console.log(sliderHrefLinks);
+    sliderHrefLinks = [];
+    console.log(sliderHrefLinks);
+    for (let i = 0; i < sliderTextBlock.children.length; i++){
+        sliderHrefLinks[i] = sliderTextBlock.children[i].children[2].href;
+    }
+    console.log(sliderHrefLinks);
+}
 // блок 1 - слайдер - конец
 // закрытие модальных окон
 function closeModal(el) {
@@ -334,8 +347,9 @@ function formLoginChekValues() {
             method: 'POST',
             body: formData
         }).then(response => response.text()).then((response) => {
+            response = JSON.parse(response);
             console.log(response);
-            if (response === 'ok') {
+            if (response.result === 'ok') {
                 console.log('Данные пользователя совпали. Подтверждаем вход для пользователя');
                 formLoginEl.submit();
             } else {
@@ -349,6 +363,18 @@ function formLoginChekValues() {
     }
 }
 
+function changeElType(el){
+    if(el.type === 'text'){
+        el.type = 'password';
+        el.classList.remove('pass-lock-open');
+        el.classList.add('pass-lock');
+    } else {
+        el.type = 'text';
+        el.classList.remove('pass-lock');
+        el.classList.add('pass-lock-open');
+    }
+}
+
 const modalLoginInputTel = document.getElementById('form-login-u-login');
 modalLoginInputTel.addEventListener('keyup', function () {
     checkLoginTelInputElAction()
@@ -356,6 +382,9 @@ modalLoginInputTel.addEventListener('keyup', function () {
 const modalLoginInputPass = document.getElementById('form-login-u-pass');
 modalLoginInputPass.addEventListener('keyup', function () {
     checkPassInputElAction()
+});
+modalLoginInputPass.addEventListener('click', function () {
+    changeElType(this)
 });
 const formLoginEl = document.getElementById('form-login');
 let modalLoginConfirmButtonEl = document.getElementById('form-login-submit');
@@ -704,9 +733,10 @@ function sendRestorePass(el) {
             method: 'POST',
             body: formData
         }).then(response => response.text()).then((response) => {
+            response = JSON.parse(response);
             console.log(response);
             //  = response.slice(0, 2)
-            if (response === 'error') {
+            if (response.result === 'error') {
                 console.log('Номера нет в базе');
                 //     if(modalRegInputTel.classList.contains('ok')) {
                 //         modalRegInputTel.classList.remove('ok');
@@ -714,7 +744,7 @@ function sendRestorePass(el) {
                 //     if(!modalRegInputTel.classList.contains('alert')) {
                 //         modalRegInputTel.classList.add('alert');
                 //     }
-            } else if (response === 'ok') {
+            } else if (response.result === 'ok') {
                 console.log('Номер есть в базе');
                 showLoginModal();
                 //     if(formRegistrationEl.confirmf && formRegistrationEl.confirmi && formRegistrationEl.confirmtel){

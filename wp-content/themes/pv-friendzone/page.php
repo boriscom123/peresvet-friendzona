@@ -23,18 +23,42 @@ get_header();
                 <div class="container">
                     <div class="main-block-1-container-info">
                         <div class="text-block" id="slider-text">
-                            <div class="text">
-                                <h2>Счастье не в друзьях, а в их количестве!</h2>
-                                <h1>Помоги другу купить квартиру и получи<br>40 000 ₽</h1>
-                            </div>
-                            <div class="text d-none">
-                                <h2>FRIENDзона — пространство возможностей</h2>
-                                <h1>Присоединяйтесь к уникальному сообществу единомышленников и экспертов недвижимости</h1>
-                            </div>
-                            <div class="text d-none">
-                                <h2>FRIENDзона — пространство возможностей</h2>
-                                <h1>Купите себе квартиру со скидкой в 300 000 ₽</h1>
-                            </div>
+                            <?php
+                                // echo 'получаем странциы слайдера';
+                                $all_pages = get_pages( [] );
+                                $slider_pages = [];
+                                foreach ($all_pages as $page) {
+                                    // print_r($page->post_title);
+                                    if(mb_substr($page->post_title, 0, 7) == 'Слайдер'){
+                                        $slider_pages[] = $page;
+                                    }
+                                }
+                            ?>
+                            <?php
+                                $i = 0;
+                                foreach ($slider_pages as $page){
+                                    if($i === 0 ){
+                                        echo "<div class='text'>";
+                                    } else {
+                                        echo "<div class='text d-none'>";
+                                    }
+                                    echo $page->post_content;
+                                    echo "</div>";
+                                    $i++;
+                                }
+                            ?>
+<!--                            <div class="text">-->
+<!--                                <h2>Счастье не в друзьях, а в их количестве!</h2>-->
+<!--                                <h1>Помоги другу купить квартиру и получи<br>40 000 ₽</h1>-->
+<!--                            </div>-->
+<!--                            <div class="text d-none">-->
+<!--                                <h2>FRIENDзона — пространство возможностей</h2>-->
+<!--                                <h1>Присоединяйтесь к уникальному сообществу единомышленников и экспертов недвижимости</h1>-->
+<!--                            </div>-->
+<!--                            <div class="text d-none">-->
+<!--                                <h2>FRIENDзона — пространство возможностей</h2>-->
+<!--                                <h1>Купите себе квартиру со скидкой в 300 000 ₽</h1>-->
+<!--                            </div>-->
                         </div>
                         <div class="main-block-1-container-info-navigation">
                             <a href="https://fz2020.ru/#block-3-4-ancor" data-link="0">Узнать подробнее</a>
@@ -50,9 +74,20 @@ get_header();
                         </div>
                     </div>
                     <div class="main-block-1-container-image" id="slider-images">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/block-1-image-1.svg" alt="block-1-image">
-                        <img class="d-none" src="<?php echo get_template_directory_uri(); ?>/assets/images/block-1-image-2.svg" alt="block-2-image">
-                        <img class="d-none" src="<?php echo get_template_directory_uri(); ?>/assets/images/block-1-image-3.svg" alt="block-3-image">
+                        <?php
+                        $i = 0;
+                        foreach ($slider_pages as $page){
+                            if($i === 0 ){
+                                echo "<img src='". get_the_post_thumbnail_url($page->ID). "' alt='block-1-image'>";
+                            } else {
+                                echo "<img src='". get_the_post_thumbnail_url($page->ID). "' class='d-none' alt='block-1-image'>";
+                            }
+                            $i++;
+                        }
+                        ?>
+<!--                        <img src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/block-1-image-1.svg" alt="block-1-image">-->
+<!--                        <img class="d-none" src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/block-1-image-2.svg" alt="block-2-image">-->
+<!--                        <img class="d-none" src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/block-1-image-3.svg" alt="block-3-image">-->
                     </div>
                 </div>
             </div>
