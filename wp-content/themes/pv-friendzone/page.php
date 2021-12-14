@@ -156,6 +156,7 @@ get_header();
             </div>
 
             <div class="main-block-3">
+                <a id="block-3-ancor" class="ancor"></a>
                 <div class="container">
                     <div class="main-block-3-1">
                         <h2>Ключевое слово <br>FRIEND - друг</h2>
@@ -317,6 +318,7 @@ get_header();
             </div>
 
             <div class="main-block-5">
+                <a id="block-5-ancor" class="ancor"></a>
                 <div class="container">
                     <div class="main-block-5-info">
                         <h2>Присоединяйся к сообществу <br>FRIENDзона прямо сейчас!</h2>
@@ -329,6 +331,7 @@ get_header();
             </div>
 
             <div class="main-block-6">
+                <a id="block-6-ancor" class="ancor"></a>
                 <div class="container">
                     <div class="main-block-6-1">
                         <h2>Ответы на вопросы</h2>
@@ -383,6 +386,7 @@ get_header();
             </div>
 
             <div class="main-block-7">
+                <a id="block-7-ancor" class="ancor"></a>
                 <div class="container">
                     <div class="main-block-7-1">
                         <h2>Избранные новости</h2>

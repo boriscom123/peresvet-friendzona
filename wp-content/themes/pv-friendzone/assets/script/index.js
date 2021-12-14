@@ -951,7 +951,12 @@ function linkCopyToBuffer(el){
     console.log('Копируем ссылку в буфер обмена', el);
     let userLink = el.getAttribute('data-link');
     navigator.clipboard.writeText(userLink);
-}
+    // показать всплывающее окно с успешным копирование
+    showPopUpMessageEl('ok', 'Ссылка успешно скопирована');
+    // закрываем попап
+    setTimeout(() => {
+        closePopUpMessageEl();
+    }, 3000);}
 const linkCopyButtonEl = document.getElementById('copy-link');
 if (linkCopyButtonEl) {
     linkCopyButtonEl.addEventListener("click", function () {
@@ -959,3 +964,21 @@ if (linkCopyButtonEl) {
     });
 }
 // скопировать ссылку на форму - конец
+// скопировать код пользователя
+function copyCodeToBuffer(el){
+    console.log('Копируем код в буфер обмена', el);
+    let userLink = el.getAttribute('data-code');
+    navigator.clipboard.writeText(userLink);
+    // показать всплывающее окно с успешным копирование
+    showPopUpMessageEl('ok', 'Код пользователя успешно скопирован');
+    // закрываем попап
+    setTimeout(() => {
+        closePopUpMessageEl();
+    }, 3000);}
+const codeCopyButtonEl = document.getElementById('copy-code');
+if (codeCopyButtonEl) {
+    codeCopyButtonEl.addEventListener("click", function () {
+        copyCodeToBuffer(this)
+    });
+}
+// скопировать пользователя - конец
