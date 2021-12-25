@@ -41,10 +41,42 @@
             }
 
             > a {
-              > img {
-                height: 100%;
+              display: flex;
+              justify-content: space-between;
+
+              > .image-1 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 width: 100%;
-                object-fit: contain;
+                max-width: #{calc(50% - 6px)};
+
+                > img {
+                  height: 100%;
+                  width: 100%;
+                  object-fit: contain;
+                }
+              }
+
+              > .decoration {
+                height: auto;
+                width: 2px;
+                background-color: $mainBgColor;
+                margin: 0 5px 0 5px;
+              }
+
+              > .image-2 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                max-width: #{calc(50% - 6px)};
+
+                > img {
+                  height: 100%;
+                  width: 100%;
+                  object-fit: contain;
+                }
               }
             }
           }
@@ -205,6 +237,9 @@
               justify-content: center;
               align-items: center;
               @media (max-width: 650px) {
+                margin: 50px 0 15px 0;
+              }
+              @media (max-width: 600px) {
                 margin: 0 0 15px 0;
               }
 
@@ -257,29 +292,104 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin: 50px 0 0 0;
-          padding: 0 0 50px 0;
+          margin: 50px 0;
+
           @media (max-width: 600px) {
             flex-direction: column;
             align-items: center;
             min-height: 50px;
           }
 
-          > a {
+          > div {
             width: 50%;
-            font-family: $mainFontFamily;
-            font-weight: 500;
-            font-size: 13px;
-            color: $alterFontColor2;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             @media (max-width: 600px) {
               width: 100%;
             }
 
-            &:hover {
-              text-decoration: underline;
+            > a {
+              width: 100%;
+              font-family: $mainFontFamily;
+              font-weight: 500;
+              font-size: 13px;
+              color: $alterFontColor2;
+              text-align: left;
+
+              &:hover {
+                text-decoration: underline;
+              }
             }
           }
+
+          > .copyright {
+            @media (max-width: 800px) {
+              min-width: 280px;
+            }
+            @media (max-width: 600px) {
+              width: 100%;
+            }
+
+            > a {
+              @media (max-width: 600px) {
+                text-align: center;
+              }
+            }
+          }
+
+          > .rules {
+            margin: 0 0 25px 0;
+            @media (max-width: 800px) {
+              width: calc(100% - 60px);
+            }
+            @media (max-width: 400px) {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+            }
+
+            > a {
+              width: 50%;
+              @media (max-width: 400px) {
+                width: 100%;
+              }
+            }
+
+            > a:first-child {
+              margin: 0 0 0 25%;
+              @media (max-width: 800px) {
+                margin: 0 0 0 10%;
+              }
+              @media (max-width: 600px) {
+                margin: 0 0 0 0;
+                text-align: center;
+              }
+              @media (max-width: 400px) {
+                margin: 10px 0 0 0;
+              }
+            }
+
+            > a:last-child {
+              // margin: 0 15% 0 0;
+              margin: 0 0 0 25%;
+              @media (max-width: 1100px) {
+                margin: 0 0 0 20%;
+              }
+              @media (max-width: 900px) {
+                margin: 0 0 0 15%;
+              }
+              // @media (max-width: 800px) { margin: 0 0 0 0; }
+              @media (max-width: 600px) {
+                margin: 0 0 0 0;
+                text-align: center;
+              }
+              @media (max-width: 400px) {
+                margin: 10px 0 0 0;
+              }
+            }
+          }
+
         }
       }
     }
@@ -317,7 +427,7 @@
         }
         @media (max-width: 500px) {
           width: 100%;
-          height: 323px;
+          // height: 323px;
         }
 
         > h2 {
@@ -1112,6 +1222,14 @@
             &:not(:last-child) {
               margin: 0 0 20px 0;
             }
+          }
+
+          > .alert {
+            border: 1px solid $alterColor3;
+          }
+
+          > .ok {
+            border: 1px solid green;
           }
         }
 

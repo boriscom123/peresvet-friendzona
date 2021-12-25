@@ -11,15 +11,42 @@
 
 ?>
 <?php
-// echo 'test';
 $result = [];
-// получаем данные со страницы интеграции
-$amo_integration_page = get_page_by_title('Интеграция с АМО СРМ');
-// include 'assets/amocrm/amocrm.php';
-// $result['amo_crm'] = $amo_crm;
-// include 'assets/amocrm/amocrm-users.php';
-// include 'assets/amocrm/amocrm-refresh.php';
-// $result['refresh_result'] = $refresh_result;
+
+if (is_user_logged_in()) {
+    // получаем данные пользователя только если пользователь зарегистрирован
+    $user_data = get_userdata(get_current_user_id());
+    $all_meta_for_user = get_user_meta(get_current_user_id());
+    $result['all_meta_for_user'] = $all_meta_for_user;
+
+    // подключаем все запросы в амо срм
+    include 'assets/amocrm/amocrm-users.php';
+
+    // получаем данные со страницы интеграции амо срм
+    $amo_integration_page = get_page_by_title('Интеграция с АМО СРМ');
+    $content = $amo_integration_page->post_content;
+    $content = mb_substr($content, mb_strpos($content, '{'), mb_strpos($content, '}') - mb_strpos($content, '{') + 1);
+    $content = json_decode($content);
+    $result['amo-page-content'] = $content;
+
+    // проверяем наличие действующей интеграции
+    if($content->access_token === null){
+        $result[] = "Делаем новую интеграцию";
+        $result['new_amo_integration_response'] = set_new_integration($content->domain, $content->client_id, $content->client_secret, $content->code);
+        $result[] = "Интеграция прошла";
+    }
+
+    // проверяем срок действия токена
+    if ($content->token_expires < $_SERVER['REQUEST_TIME']) {
+        $result[] = "Токен просрочен";
+        $result['amo_refresh_token_response'] = amo_token_refresh($content->domain, $content->client_id, $content->client_secret, $content->refresh_token, $content->redirect_uri);
+        $result[] = "Токен обновлен";
+        $content = $amo_integration_page->post_content;
+        $content = mb_substr($content, mb_strpos($content, '{'), mb_strpos($content, '}') - mb_strpos($content, '{') + 1);
+        $content = json_decode($content);
+    }
+}
+
 function prepareLogin($tel)
 {
     $user_tel = $tel;
@@ -93,59 +120,66 @@ if (isset($_POST['action'])) {
 //                    wp_update_user( [ 'ID' => $user_id, 'first_name' => $_POST['i'], 'display_name' => $_POST['i'], 'nickname' => $_POST['i'] ] );
 //                }
             $result[] = 'Подготовка данных к добавлению в АМО СРМ';
-            if ($amo_integration_page === null) {
+            // подключаем все запросы в амо срм
+            include 'assets/amocrm/amocrm-users.php';
+
+            // получаем данные со страницы интеграции амо срм
+            $amo_integration_page = get_page_by_title('Интеграция с АМО СРМ');
+            $content = $amo_integration_page->post_content;
+            $content = mb_substr($content, mb_strpos($content, '{'), mb_strpos($content, '}') - mb_strpos($content, '{') + 1);
+            $content = json_decode($content);
+            $result['amo-page-content'] = $content;
+
+            // проверяем наличие действующей интеграции
+            if($content->access_token === null){
                 $result[] = "Делаем новую интеграцию";
-                include 'assets/amocrm/amocrm.php';
-                $result['amo_crm'] = $amo_crm;
-            } else {
-                $result[] = "Используем имеющийся токен";
+                $result['new_amo_integration_response'] = set_new_integration($content->domain, $content->client_id, $content->client_secret, $content->code);
+                $result[] = "Интеграция прошла";
+            }
+
+            // проверяем срок действия токена
+            if ($content->token_expires < $_SERVER['REQUEST_TIME']) {
+                $result[] = "Токен просрочен";
+                $result['amo_refresh_token_response'] = amo_token_refresh($content->domain, $content->client_id, $content->client_secret, $content->refresh_token, $content->redirect_uri);
+                $result[] = "Токен обновлен";
                 $content = $amo_integration_page->post_content;
                 $content = mb_substr($content, mb_strpos($content, '{'), mb_strpos($content, '}') - mb_strpos($content, '{') + 1);
                 $content = json_decode($content);
+            }
 
-                // $token = explode("/", file_get_contents("wp-content/themes/pv-friendzone/assets/amocrm/amointegrationapi.json"));
-
-                // if (json_decode($token[1], true)['until'] < $_SERVER['REQUEST_TIME']) {
-                if ($content->token_expires < $_SERVER['REQUEST_TIME']) {
-                    $result[] = "Токен просрочен";
-                    include 'assets/amocrm/amocrm-refresh.php';
-                    $result['refresh_result'] = $refresh_result;
-                    $result[] = "Токен обновлен";
-                    $content = $amo_integration_page->post_content;
-                    $content = mb_substr($content, mb_strpos($content, '{'), mb_strpos($content, '}') - mb_strpos($content, '{') + 1);
-                    $content = json_decode($content);
-                }
+            if ($content->access_token !== null) {
+                $result[] = "Используем имеющийся токен";
                 $result['access_token'] = $content->access_token;
-                $result[] = "Отправляем в Амо";
-                include 'assets/amocrm/amocrm-users.php';
                 $result[] = "Создаем новую сделку";
                 $new_lead_id = add_new_lead($content->domain, $content->access_token, $content->pipeline_id, $_POST['city'], $_POST['card']);
                 $result[] = "Номер новой сделки new_lead_id";
                 $result['new_lead_id'] = $new_lead_id;
-                // var_dump('Номер новой сделки', $new_lead_id);
+
                 $result[] = "Обновляем наименование сделки по new_lead_id";
                 $update_lead = update_lead($content->domain, $content->access_token, $new_lead_id);
                 $result[] = "Ответ после обновления сделки update_lead";
                 $result['update_lead'] = $update_lead;
-                // var_dump('Ответ после обновления сделки', $update_lead);
+
+                $result[] = "Создаем новый контакт";
                 $new_contact_id = add_new_contact($content->domain, $content->access_token, $user_id);
                 $result[] = "Номер контакта new_contact_id";
                 $result['new_contact_id'] = $new_contact_id;
-                // var_dump('Номер контакта', $new_contact_id);
+
+                $result[] = "Добавляем номер контакта к сделке";
                 $connect = lead_link_to_contact($content->domain, $content->access_token, $new_lead_id, $result['new_contact_id']['id']);
-                $result[] = "Ответ после прикрепления контакта к сделке connect";
+                $result[] = "Ответ после прикрепления контакта к сделке - connect";
                 $result['connect'] = $connect;
-                // var_dump('Ответ после прикрепления контакта к сделке', $connect);
+
                 $result[] = 'добавляем пользователю ссылку на его сделку в амо срм';
                 update_user_meta($user_id, 'amo-lead-id', $new_lead_id);
                 $result[] = 'добавляем пользователю ссылку на его контакт в амо срм';
                 update_user_meta($user_id, 'amo-contact-id', $result['new_contact_id']['id']);
                 $result[] = "Добавление прошло";
+
+                $result[] = 'Редирект на главную';
+                wp_redirect(home_url());
+                exit;
             }
-            $result[] = 'Редирект на главную';
-            wp_redirect(home_url());
-            // var_dump($result);
-            exit;
         }
     }
     if ($_POST['action'] === 'login') {
@@ -166,25 +200,53 @@ if (isset($_POST['action'])) {
             exit;
         }
     }
-    if ($_POST['action'] === 'send-message'){
+    if ($_POST['action'] === 'send-message') {
         // echo 'отправляем сообщение';
         // print_r($_POST);
-        $to = 'frend.zona2020@mail.ru'; // 'frend.zona2020@mail.ru'; 'frend.zona2020@mail.ru';
-        // $copy = 'boriscom@mail.ru'; // 'boriscom123@yandex.ru';
-        $subject = 'Вопрос с сайта fz2020.ru';
-        $message = 'Имя пользователя';
-        $headers =    array(
-            'From' => 'admin@fz2020.ru',
-            'Reply-To' => $_POST['user-email'],
-            'X-Mailer' => 'PHP/' . phpversion()
-        );
-        $mail = mail($to, $subject, $message);
-        // var_dump('wp_mail', $mail);
-        // echo 'ok';
+        if (isset($_POST['user-login'])) {
+            $u_login = $_POST['user-login'];
+        }
+        if (isset($_POST['user-email'])) {
+            $u_email = $_POST['user-email'];
+        }
+        if (isset($_POST['user-question'])) {
+            $u_question = $_POST['user-question'];
+        }
+        if (isset($u_login) && isset($u_email) && isset($u_question)) {
+            // echo 'Данные пользователя подготовлены. Отправляем сообщение';
+            $to = 'frend.zona2020@mail.ru'; // 'frend.zona2020@mail.ru'; 'frend.zona2020@mail.ru';
+            $copy = 'boriscom@mail.ru'; // 'boriscom123@yandex.ru';
+            $subject = 'Вопрос с сайта fz2020.ru';
+            $message = 'Логин: ' . $u_login . ' Почта: ' . $u_email . ' Вопрос:' . $u_question;
+            $headers = array(
+                'From' => 'admin@fz2020.ru',
+                'Reply-To' => $u_email,
+                'X-Mailer' => 'PHP/' . phpversion()
+            );
+            $mail = mail($to, $subject, $message);
+            // var_dump('wp_mail', $mail);
+            // echo 'ok';
+        } else {
+            // echo 'Сообщение не отправлено. Нет необходимых данных';
+        }
+    }
+    if ($_POST['action'] === 'get-money') {
+        $result[] = "Запрос с формы вывода денежных средств";
+        $result['POST_request'] = $_POST;
+        // создаем запрос в амо
+        // к текущей сделке пользователя в поле Запрос сумма добавляем сумму баллов для подтверждения вывода
+        if (!isset($all_meta_for_user['amo-lead-id'])) {
+            $result[] = "Невозможно получить номер сделки пользователя";
+        }
+        $lead_id = $all_meta_for_user['amo-lead-id'][0];
+        $result['user_lead_id'] =  $lead_id;
+        // сумму баллов добавляем в поле "Запрос сумма" id "555951"
+        $user_summ = add_money_request_to_lead($content->domain, $content->access_token, $lead_id, $_POST['u-summ']);
+        $result['user_summ'] = $user_summ;
     }
 }
 if (isset($_POST['form-action'])) {
-    $result['POST'] = $_POST;
+    $result['POST_request'] = $_POST;
     if ($_POST['form-action'] === 'update-user-contacts') {
         // print 'Изменяем данные пользователя';
 //        if (isset($_POST['f'])) {
@@ -221,8 +283,15 @@ if (isset($_POST['form-action'])) {
 //            update_user_meta(get_current_user_id(), 'patronymic', $_POST['o']);
 //        }
         if (isset($_POST['date'])) {
-            // изменяем дату рождения
+            $result[] =  "изменяем дату рождения";
             update_user_meta(get_current_user_id(), 'date', $_POST['date']);
+            // необходимо добавить дату рождения в АМО
+            $contact_id = $all_meta_for_user['amo-contact-id'][0];
+            $result['user_contact_id'] = $contact_id;
+            $user_birthday_timestamp = strtotime($_POST['date']);
+            $result['user_birthday_timestamp'] =  $user_birthday_timestamp;
+            $add_birthday = set_user_birthday($content->domain, $content->access_token, $contact_id, $user_birthday_timestamp);
+            $result['add_birthday'] =  $add_birthday;
         }
         if (isset($_POST['gender'])) {
             // print 'Изменяем пол';
@@ -285,12 +354,6 @@ if (isset($_POST['form-action'])) {
         }
     }
 }
-if (is_user_logged_in()) {
-    $user_data = get_userdata(get_current_user_id());
-    // $result['user_data'] = $user_data;
-    $all_meta_for_user = get_user_meta(get_current_user_id());
-    $result['all_meta_for_user'] = $all_meta_for_user;
-}
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -306,81 +369,14 @@ if (is_user_logged_in()) {
     <div class="d-none">
         <?php
         // print_r($result);
-        if ($amo_integration_page === null) {
-            echo "Страница не найдена";
+        if (!is_user_logged_in()) {
+            echo "Пользователь не определен";
         } else {
-            $user_data = get_userdata(get_current_user_id());
-            // var_dump($user_data);
-            $content = $amo_integration_page->post_content;
-            $content = mb_substr($content, mb_strpos($content, '{'), mb_strpos($content, '}') - mb_strpos($content, '{') + 1);
-            $content = json_decode($content);
-            // var_dump('AMO CRM', $content);
-            include 'assets/amocrm/amocrm-users.php';
-            // phpinfo();
-            // получаем коллекцию всех сделок
-            // $all_leads = get_all_linked_leads($content->domain, $content->access_token, $all_meta_for_user['amo-lead-id'][0]);
-            // echo '<br>Всего сделок: ' . count($all_leads['_embedded']['leads']). '<br>';
-            // var_dump('$all_leads_embeddedleads', $all_leads['_embedded']['leads']);
-//            $user_connected_leads_id = [];
-//            foreach ($all_leads['_embedded']['leads'] as $lead) {
-//                // print_r($lead['name']);
-//                if($lead['id'] != $all_meta_for_user['amo-lead-id'][0]){
-//                    $user_connected_leads_id[] = $lead['id'];
-//                }
-//            }
-//            var_dump('Всего прикрепленных сделок:', $user_connected_leads_id);
-            // $pipeline_id = 1974898;
-            // echo '$pipeline_id '. $pipeline_id;
-            // $city = "Красноярск";
-            // echo '$city '. $city;
-//            $add_ntl = add_new_lead($content->domain, $content->access_token, $pipeline_id, $city);
-//            var_dump('$add_ntl', $add_ntl);
-            // $test = check_account($content->domain, $content->access_token);
-            // var_dump('check_account', $test);
-            // $leads = get_all_leads($content->domain, $content->access_token);
-            // var_dump('get_all_leads', $leads);
-            // foreach ($leads['_embedded']['leads'] as $lead) {
-            //     echo "id: " . $lead['id'] . " имя: " . $lead['name'] . "<br>";
-            // }
-            // получаем дополнительные поля
-            // leads|contacts|companies|customers
-            // $gcf = get_custom_fields($content->domain, $content->access_token, 'leads');
-            // var_dump('get_custom_fields', $gcf);
-//            foreach ($gcf['_embedded']['custom_fields'] as $field) {
-//                echo '<br>';
-//                print_r($field['name']);
-//            }
-
-            // посмотреть доступные тэги
-            // leads|contacts|companies|customers
-//            $tags = get_all_tags($content->domain, $content->access_token, 'leads');
-//            foreach ($tags['_embedded']['tags'] as $tag) {
-//                echo "<br>";
-//                print_r($tag);
-//            }
-
-
-            // $new_lead_id = 21367677;
-            // $new_lead_id = 21368073;
-            // $lead = get_lead_by_id($content->domain, $content->access_token, $new_lead_id);
-            // var_dump('get_lead_by_id', $lead);
-            // $cc = contact_custom_fields($content->domain, $content->access_token);
-            // var_dump('contact_custom_fields', $cc);
-            // $new_contact = add_new_contact($content->domain, $content->access_token, $user_data->ID);
-            // $new_contact_id = 26670382;
-            // var_dump('add_new_contact', $new_contact_id);
-            // $allc = get_all_contacts($content->domain, $content->access_token);
-            // var_dump('get_all_contacts', $allc);
-            // print_r($allc['_embedded']['contacts']);
-//            foreach ($allc['_embedded']['contacts'] as $contact) {
-//                echo "id: " . $contact['id'] . " имя: " . $contact['name'] . " first_name: " . $contact['first_name'] . "<br>";
-//            }
-            // $ci = get_contact_by_id($content->domain, $content->access_token, $new_contact_id);
-            // var_dump('get_contact_by_id', $ci);
-            // leads|contacts|companies|customers
-            // $ll = get_entity_links($content->domain, $content->access_token, 'leads', $new_lead_id);
-            // var_dump('get_entity_links', $ll);
-        }
+            // проверка подключения АМО СРМ
+            // $test_amo_account = check_account($content->domain, $content->access_token);
+            // print_r($test_amo_account);
+            print_r($result);
+         }
         ?>
     </div>
     <div class="header-fixed">
@@ -390,7 +386,13 @@ if (is_user_logged_in()) {
         <div class="container">
             <div class="header-logo">
                 <a class="header-logo-image" href="https://fz2020.ru/">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.svg" alt="FRIENDзона">
+                    <div class="image-1">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/logo_friendzona-01.svg" alt="FRIENDзона">
+                    </div>
+                    <div class="decoration"></div>
+                    <div class="image-2">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/peresvet.svg" alt="FRIENDзона">
+                    </div>
                 </a>
             </div>
             <div class="header-buttons">
@@ -401,7 +403,7 @@ if (is_user_logged_in()) {
                             <img src="<?php if (isset($all_meta_for_user['user_avatar'])) {
                                 print wp_get_attachment_image_url($all_meta_for_user['user_avatar'][0]);
                             } else {
-                                echo get_template_directory_uri() . '/assets/images/avatar-new.svg';
+                                echo get_template_directory_uri() . '/assets/images/avatar-new-grey.svg';
                             } ?>" alt="user-avatar">
                         </div>
                         <div class="user"><?php if (isset($user_data)) {

@@ -9,6 +9,7 @@ if (is_user_logged_in()) {
     $user_data = get_userdata(get_current_user_id());
     $all_meta_for_user = get_user_meta(get_current_user_id());
     $avatar = get_avatar_url(get_current_user_id());
+    $user_lead_id = $all_meta_for_user['amo-lead-id'][0];
     // print_r($user_data);
     // print_r($all_meta_for_user);
 
@@ -17,40 +18,83 @@ if (is_user_logged_in()) {
     $content = $amo_integration_page->post_content;
     $content = mb_substr($content, mb_strpos($content, '{'), mb_strpos($content, '}') - mb_strpos($content, '{') + 1);
     $content = json_decode($content);
-    if ($content->token_expires < $_SERVER['REQUEST_TIME']) {
-        include 'assets/amocrm/amocrm-refresh.php';
-        $result['refresh_result'] = $refresh_result;
-        $content = $amo_integration_page->post_content;
-        $content = mb_substr($content, mb_strpos($content, '{'), mb_strpos($content, '}') - mb_strpos($content, '{') + 1);
-        $content = json_decode($content);
-    }
-    $new_lead_id = $all_meta_for_user['amo-lead-id'][0];
-    // include 'assets/amocrm/amocrm-users.php';
-    $lead = get_lead_by_id($content->domain, $content->access_token, $new_lead_id);
-    $form_link = '';
-    if (count($lead['custom_fields_values']) > 0) {
-        foreach ($lead['custom_fields_values'] as $cf) {
-            if ($cf['field_id'] == 384025) {
-                $form_link = $cf['values'][0]['value'];
+
+    if($content->access_token === null){
+        echo "Нет связи с АМО СРМ";
+        // wp_redirect(home_url()); // перенаправляем на главную страницу
+    } else {
+        // получаем массив сделок с необходимым идентификатором
+        // https://zakirov.amocrm.ru/api/v4/leads?filter[query]=21367677
+        $all_leads = get_all_linked_leads($content->domain, $content->access_token, $all_meta_for_user['amo-lead-id'][0]);
+        $user_main_lead = [];
+        $user_connected_leads = [];
+        $form_link = ''; // ссылка на форму для отправки другу
+        if ($all_leads['_embedded']['leads']) {
+            foreach ($all_leads['_embedded']['leads'] as $lead) {
+                if ($lead['id'] != $all_meta_for_user['amo-lead-id'][0]) {
+                    // прикрепленные сделки пользователя
+                    $user_connected_leads[] = $lead;
+                } else {
+                    // основная сделка пользователя
+                    $user_main_lead = $lead;
+                    if ($lead['custom_fields_values']) {
+                        foreach ($lead['custom_fields_values'] as $cf) {
+                            if ($cf['field_id'] == 384025) {
+                                $form_link = $cf['values'][0]['value'];
+                            }
+                        }
+                    }
+                }
             }
         }
-    }
-    // получаем массив id сделок зарегистрированных через форму
-    // https://zakirov.amocrm.ru/api/v4/leads?filter[query]=21367677
-    $all_leads = get_all_linked_leads($content->domain, $content->access_token, $all_meta_for_user['amo-lead-id'][0]);
-    $user_connected_leads_id = [];
-    if (count($all_leads['_embedded']['leads']) > 0) {
-        foreach ($all_leads['_embedded']['leads'] as $lead) {
-            // print_r($lead['name']);
-            if ($lead['id'] != $all_meta_for_user['amo-lead-id'][0]) {
-                $user_connected_leads_id[] = $lead['id'];
+
+        // подсчет бонусных баллов пользователя
+        $user_bonus_balance = 0;
+        if (count($user_connected_leads) > 0) {
+            // print_r($user_connected_leads_id);
+            foreach ($user_connected_leads as $lead) {
+                if ($lead['status_id'] === 142 || $lead['status_id'] === 35437765) {
+                    $user_bonus_balance += 40000;
+                }
             }
         }
+
+        // проверка суммы выведенных средств
+        $user_money_balance = 0;
+        foreach ($user_main_lead['custom_fields_values'] as $cf) {
+            if ($cf['field_name'] == "Вознаграждение получено") {
+                $user_money_balance = $cf['values'][0]['value'];
+            }
+        }
+
+        // подсчет итоговой суммы для отображения в лличном кабинете
+        $user_bonus_balance = $user_bonus_balance - $user_money_balance;
+        if ($user_bonus_balance < 0) {
+            $user_bonus_balance = 0;
+        }
+
+        // подготовка текстового отображения суммы баллов
+        $show_bonuses = '';
+        if (strlen($user_bonus_balance) > 3 && strlen($user_bonus_balance) < 7) {
+            // echo 'Больше 3 и меньше 7';
+            $show_bonuses = substr($user_bonus_balance, 0, strlen($user_bonus_balance) - 3) . ' ' . substr($user_bonus_balance, strlen($user_bonus_balance) - 3, strlen($user_bonus_balance));
+            // echo $show_bonuses;
+        } elseif (strlen($user_bonus_balance) > 6 && strlen($user_bonus_balance) < 10) {
+            // echo 'Больше 6 и меньше 10';
+            $show_bonuses = substr($user_bonus_balance, 0, strlen($user_bonus_balance) - 6) . ' ' . substr($user_bonus_balance, strlen($user_bonus_balance) - 6, strlen($user_bonus_balance) - 3) . ' ' . substr($user_bonus_balance, strlen($user_bonus_balance) - 3, strlen($user_bonus_balance));
+        } elseif (strlen($user_bonus_balance) > 9 && strlen($user_bonus_balance) < 13) {
+            // echo 'Больше 9 и меньше 13';
+            $show_bonuses = $user_bonus_balance;
+        } else {
+            // echo 'Больше 12';
+            $show_bonuses = $user_bonus_balance;
+        }
+
+        // подготовка процентного отображения (для шкалы заполнения)
+        $progress_bar = $user_bonus_balance / (1440000 / 100);
+
+        // подготовка списка друзей пользователя
     }
-} else {
-    // echo 'Вы всего лишь пользователь!';
-    wp_redirect(home_url()); // перенаправляем на главную страницу
-    exit;
 }
 if (isset($_GET)) {
     // print_r($_GET);
@@ -67,7 +111,23 @@ if (isset($_POST['n'])) {
     $nav = $_POST['n'];
 }
 ?>
-
+    <div class="d-none">
+        <?php
+        if($content->access_token === null){
+            echo "Нет связи с АМО СРМ";
+        } else {
+            echo "Связь с АМО СРМ установлена. Смотрим подготовленные данные<br>";
+            echo "Основная сделка: <br>";
+            print_r($user_main_lead);
+            echo "Прикрепленные сделки: <br>";
+            print_r($user_connected_leads);
+            echo "Бонусные баллы пользователя: <br>";
+            print_r($user_bonus_balance);
+            echo "Сумма выведенных денег пользователем: <br>";
+            print_r($user_money_balance);
+        }
+        ?>
+    </div>
     <div class="breadcrumbs">
         <div class="container">
             <div class="image">
@@ -93,7 +153,7 @@ if (isset($_POST['n'])) {
                             <img src="<?php if (isset($all_meta_for_user['user_avatar'])) {
                                 print wp_get_attachment_image_url($all_meta_for_user['user_avatar'][0]);
                             } else {
-                                echo get_template_directory_uri() . '/assets/images/avatar-new.svg';
+                                echo get_template_directory_uri() . '/assets/images/avatar-new-grey.svg';
                             } ?>" alt="user-avatar">
                             <form enctype="multipart/form-data" method="post" id="user-avatar">
                                 <input type="hidden" name="form-action" value="update-user-avatar" form="user-avatar">
@@ -138,67 +198,45 @@ if (isset($_POST['n'])) {
 
                 <div class="user-pages">
 
-                    <div class="user-code <?php if ($nav != 1 || $nav != 1) {
+                    <div class="user-code <?php if ($nav != 1) {
                         echo 'd-none';
+                    } else {
+                        echo 'd-flex';
                     } ?>">
-                        <h2>Уникальный код</h2>
-                        <h3 data-code="<?php if (isset($all_meta_for_user['amo-lead-id'])) {
-                            print $all_meta_for_user['amo-lead-id'][0];
-                        } ?>" id="copy-code"><?php if (isset($all_meta_for_user['amo-lead-id'])) {
+                        <div class="code">
+                            <h2>Уникальный код</h2>
+                            <h3 data-code="<?php if (isset($all_meta_for_user['amo-lead-id'])) {
                                 print $all_meta_for_user['amo-lead-id'][0];
-                            } ?></h3>
-                        <div class="info">
-                            <div>
-                                <?php
-                                // echo $lead['custom_fields_values'][2]['values'][0]['value'];
-                                echo "Ваша индивидуальная ссылка";
-                                ?>
-                            </div>
-                            <button data-link="<?php echo $form_link; ?>" id="copy-link">Копировать</button>
+                            } ?>" id="copy-code"><?php if (isset($all_meta_for_user['amo-lead-id'])) {
+                                    print $all_meta_for_user['amo-lead-id'][0];
+                                } ?></h3>
+                        </div>
+                        <div class="link">
+                            <button data-link="<?php echo $form_link; ?>" id="copy-link">Копировать индивидуальную
+                                ссылку
+                            </button>
                         </div>
                     </div>
 
-                    <div class="user-bonus <?php if ($nav != 1 || $nav != 1) {
+                    <div class="user-bonus <?php if ($nav != 1) {
                         echo 'd-none';
                     } ?>">
-                        <?php
-                        $user_bonus_balance = 0;
-                        if (count($user_connected_leads_id) > 0) {
-                            // print_r($user_connected_leads_id);
-                            foreach ($user_connected_leads_id as $lead_id) {
-                                // print_r($lead_id);
-                                $lead = get_lead_by_id($content->domain, $content->access_token, $lead_id);
-                                if ($lead['status_id'] === 142) {
-                                    $user_bonus_balance += 40000;
-                                }
-                            }
-                        }
-                        $show_bonuses = '';
-                        if (strlen($user_bonus_balance) > 3 && strlen($user_bonus_balance) < 7) {
-                            // echo 'Больше 3 и меньше 7';
-                            $show_bonuses = substr($user_bonus_balance, 0, strlen($user_bonus_balance) - 3) . ' ' . substr($user_bonus_balance, strlen($user_bonus_balance) - 3, strlen($user_bonus_balance));
-                            // echo $show_bonuses;
-                        } elseif (strlen($user_bonus_balance) > 6 && strlen($user_bonus_balance) < 10) {
-                            // echo 'Больше 6 и меньше 10';
-                            $show_bonuses = substr($user_bonus_balance, 0, strlen($user_bonus_balance) - 6) . ' ' . substr($user_bonus_balance, strlen($user_bonus_balance) - 6, strlen($user_bonus_balance) - 3) . ' ' . substr($user_bonus_balance, strlen($user_bonus_balance) - 3, strlen($user_bonus_balance));
-                        } elseif (strlen($user_bonus_balance) > 9 && strlen($user_bonus_balance) < 13) {
-                            // echo 'Больше 9 и меньше 13';
-                            $show_bonuses = $user_bonus_balance;
-                        } else {
-                            // echo 'Больше 12';
-                            $show_bonuses = $user_bonus_balance;
-                        }
-                        $progress_bar = $user_bonus_balance / (1440000 / 100);
-                        ?>
                         <h2>Бонусный счет</h2>
                         <div class="info">
                             <h3><?php echo $show_bonuses; ?> баллов</h3>
-                            <button id="user-money-button">Вывести</button>
+                            <button id="user-money-button" data-max-summ="<?php echo $user_bonus_balance; ?>">Вывести
+                            </button>
                         </div>
-                        <a href="#">Операции по счету</a>
+                        <?php
+                        if (isset($user_money_balance) && $user_money_balance > 0) {
+                            echo "<a href='#'>Всего выведено: {$user_money_balance}</a>";
+                        } else {
+                            echo "<a href='#'>Операций по счету нет</a>";
+                        }
+                        ?>
                     </div>
 
-                    <div class="user-bank <?php if ($nav != 1 || $nav != 1) {
+                    <div class="user-bank <?php if ($nav != 1) {
                         echo 'd-none';
                     } ?>">
                         <h2>Копилка</h2>
@@ -217,7 +255,8 @@ if (isset($_POST['n'])) {
                                 <h2 class="color-red"><?php echo $show_bonuses; ?></h2>
                             </div>
                             <div>
-                                <h3>Осталось до скидки</h3>
+                                <!--                                <h3>Осталось до скидки</h3>-->
+                                <h3>Необходимо для скидки</h3>
                                 <h2 class="color-black">1 440 000</h2>
                             </div>
                         </div>
@@ -230,33 +269,37 @@ if (isset($_POST['n'])) {
                         <div class="friends-list">
 
                             <?php
-                            if (count($user_connected_leads_id) > 0) {
+                            if (count($user_connected_leads) > 0) {
                                 // print_r($user_connected_leads_id);
-                                foreach ($user_connected_leads_id as $lead_id) {
-                                    $lead = get_lead_by_id($content->domain, $content->access_token, $lead_id);
+                                foreach ($user_connected_leads as $lead) {
                                     // print_r($lead);
                                     // запрос на получение связанных сущностей (контакт) - https://zakirov.amocrm.ru/api/v4/leads/{ ID }/links
-                                    $linked_contact = get_entity_links($content->domain, $content->access_token, 'leads', $lead_id);
-                                    // print_r($contact);
-                                    $contact_id = $linked_contact['_embedded']['links'][0]['to_entity_id'];
-                                    // echo $contact_id;
-                                    $contact = get_contact_by_id($content->domain, $content->access_token, $contact_id);
-                                    // var_dump($contact);
-                                    $contact_name = $contact['name'];
-                                    // var_dump('Имя:', $contact_name);
-                                    $contact_tel = 0;
-                                    foreach ($contact['custom_fields_values'] as $field) {
-                                        if ($field['field_id'] === 248661)
-                                            $contact_tel = prepareLogin($field['values'][0]['value']);
+                                    // $linked_contact = get_entity_links($content->domain, $content->access_token, 'leads', $lead['id']);
+                                    if($lead['_embedded']['contacts'][0]['id']) {
+                                        $contact_id = $lead['_embedded']['contacts'][0]['id'];
+                                        // print_r($contact_id);
                                     }
-                                    $status = get_pipline_status($lead['status_id']);
-                                    // var_dump('status', $status);
-                                    $status_date = date('d-m-Y', $lead['updated_at']);
-                                    // var_dump('$status_date', $status_date);
-                                    if ($lead['status_id'] === 143) {
-                                        $loss_reason = get_loss_reason($content->domain, $content->access_token, $lead['id']);
-                                        // var_dump('$loss_reason', $loss_reason['_embedded']['loss_reason'][0]['name']);
-                                        $reason = $loss_reason['_embedded']['loss_reason'][0]['name'];
+
+                                    $contact_tel = 0;
+                                    if($contact_id > 0){
+                                        $contact = get_contact_by_id($content->domain, $content->access_token, $contact_id);
+                                        // print_r($contact);
+
+                                        // подготавливаем имя контакта
+                                        $contact_name = $contact['name'];
+                                        foreach ($contact['custom_fields_values'] as $field) {
+                                            if ($field['field_id'] === 248661)
+                                                // подготавливаем телефон контакта
+                                                $contact_tel = prepareLogin($field['values'][0]['value']);
+                                        }
+
+                                        // подготавливаем статус сделки
+                                        $status = get_pipline_status($lead['status_id']);
+                                        $status_date = date('d-m-Y', $lead['updated_at']);
+                                        if ($lead['status_id'] === 143) {
+                                            // указываем причину закрытия сделки
+                                            $reason = $lead['_embedded']['loss_reason'][0]['name'];
+                                        }
                                     }
                                     ?>
                                     <div class="friend-item">
@@ -265,7 +308,7 @@ if (isset($_POST['n'])) {
                                         } ?>confirm">
                                             <div class="title">
                                                 <h2><?php echo $contact_name; ?></h2>
-                                                <h3><?php echo '+' . substr($contact_tel, 0, 1) . ' (' . substr($contact_tel, 1, 3) . ') ' . substr($contact_tel, 4, 3) . '-' . substr($contact_tel, 7, 2) . '-' . substr($contact_tel, 9, 2); ?></h3>
+                                                <h3><?php echo '+' . substr($contact_tel, 0, 1) . ' (***) ***-' . substr($contact_tel, 7, 2) . '-' . substr($contact_tel, 9, 2); ?></h3>
                                             </div>
                                             <h4><?php echo $status; ?></h4>
                                             <div class="circle"></div>
@@ -273,8 +316,10 @@ if (isset($_POST['n'])) {
                                             if ($status !== 'Успешная рекомендация') { ?>
                                                 <div class="friend-hover">
                                                     <div class="info">
-                                                        <h2><?php echo $status; ?></h2>
-                                                        <h3><?php echo $status_date; ?></h3>
+                                                        <div class="title">
+                                                            <h2><?php echo $status; ?></h2>
+                                                            <h3><?php echo $status_date; ?></h3>
+                                                        </div>
                                                         <?php
                                                         if ($lead['status_id'] === 143) {
                                                             echo "<h2>{$reason}</h2>";

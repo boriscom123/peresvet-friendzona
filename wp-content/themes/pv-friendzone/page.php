@@ -173,7 +173,10 @@ get_header();
                 <div class="container">
                     <div class="main-block-3-2">
                         <div class="main-block-3-info-item main-item">
-                            <h2>FRIENDзона</h2>
+                            <div class="image">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/logo_friendzona-03.svg" alt="block-3-img-1">
+                            </div>
+<!--                            <h2>FRIENDзона</h2>-->
                         </div>
                         <div class="main-block-3-info-item image-item">
                             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/block-3-img-1.svg" alt="block-3-img-1">

@@ -1,10 +1,122 @@
 <?php
-$amo_users_result = [];
-$amo_users_result[] = "Подготовка необходимых данных для работы с амосрм";
+// создание новой интеграции
+function set_new_integration($domain, $client_id, $client_secret, $code)
+{
+    $link = 'https://' . $domain . '.amocrm.ru/oauth2/access_token';
+    $data = [
+        'client_id' => $client_id,
+        'client_secret' => $client_secret,
+        'grant_type' => 'authorization_code',
+        'code' => $code,
+        'redirect_uri' => 'https://fz2020.ru/',
+    ];
+
+    $curl = curl_init(); //Сохраняем дескриптор сеанса cURL
+    /** Устанавливаем необходимые опции для сеанса cURL  */
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_USERAGENT, 'amoCRM-oAuth-client/1.0');
+    curl_setopt($curl, CURLOPT_URL, $link);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type:application/json']);
+    curl_setopt($curl, CURLOPT_HEADER, false);
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
+    curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 1);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+    $out = curl_exec($curl); //Инициируем запрос к API и сохраняем ответ в переменную
+    $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+    curl_close($curl);
+    $out = json_decode($out);
+    $code = (int)$code;
+    if ($code < 200 || $code > 204) {
+        echo "set_new_integration. Ошибочный код ответа: " . $code;
+    } else {
+        echo "set_new_integration. Код ответа успешный: " . $code;
+        // сохраняем ответ от сервера на странице интеграции.
+        $amo_integration_page = get_page_by_title('Интеграция с АМО СРМ');
+        $content = $amo_integration_page->post_content;
+        $content = mb_substr($content, mb_strpos($content, '{'), mb_strpos($content, '}') - mb_strpos($content, '{') + 1);
+        $content = json_decode($content);
+
+        $content->expires_in = $out->expires_in;
+        $content->access_token = $out->access_token;
+        $content->refresh_token = $out->refresh_token;
+        $content->token_expires = $_SERVER['REQUEST_TIME'] + 86400;
+        $content = json_encode($content);
+        $data = [
+            'ID' => $amo_integration_page->ID,
+            'post_content' => $content
+        ];
+        wp_update_post(wp_slash($data));
+    }
+    return $out;
+}
+
+// обновление токена авторизации
+function amo_token_refresh($domain, $client_id, $client_secret, $refresh_token, $redirect_uri)
+{
+    $link = 'https://' . $domain . '.amocrm.ru/oauth2/access_token';
+    $data = [
+        'client_id' => $client_id,
+        'client_secret' => $client_secret,
+        'grant_type' => 'refresh_token',
+        'refresh_token' => $refresh_token,
+        'redirect_uri' => $redirect_uri,
+    ];
+
+    $curl = curl_init(); //Сохраняем дескриптор сеанса cURL
+    /** Устанавливаем необходимые опции для сеанса cURL  */
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_USERAGENT, 'amoCRM-oAuth-client/1.0');
+    curl_setopt($curl, CURLOPT_URL, $link);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type:application/json']);
+    curl_setopt($curl, CURLOPT_HEADER, false);
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
+    curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 1);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+    $out = curl_exec($curl); //Инициируем запрос к API и сохраняем ответ в переменную
+    $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+    curl_close($curl);
+    $out = json_decode($out);
+    $code = (int)$code;
+    $errors = [
+        400 => 'Bad request',
+        401 => 'Unauthorized',
+        403 => 'Forbidden',
+        404 => 'Not found',
+        500 => 'Internal server error',
+        502 => 'Bad gateway',
+        503 => 'Service unavailable',
+    ];
+    if ($code < 200 || $code > 204) {
+        echo "amo_token_refresh. Ошибочный код ответа: " . $code;
+    } else {
+        echo "amo_token_refresh. Код ответа успешный: " . $code;
+        // сохраняем ответ от сервера на странице интеграции.
+        $amo_integration_page = get_page_by_title('Интеграция с АМО СРМ');
+        $content = $amo_integration_page->post_content;
+        $content = mb_substr($content, mb_strpos($content, '{'), mb_strpos($content, '}') - mb_strpos($content, '{') + 1);
+        $content = json_decode($content);
+
+        $content->expires_in = $out->expires_in;
+        $content->access_token = $out->access_token;
+        $content->refresh_token = $out->refresh_token;
+        $content->token_expires = $_SERVER['REQUEST_TIME'] + 86400;
+        $content = json_encode($content);
+        $data = [
+            'ID' => $amo_integration_page->ID,
+            'post_content' => $content
+        ];
+        wp_update_post(wp_slash($data));
+    }
+    return $out;
+}
+
 // проверка доступности аккаунта
 function check_account($subdomain, $access_token)
 {
-    $link = 'https://' . $subdomain . '.amocrm.ru/api/v2/account'; //Формируем URL для запроса
+    $link = 'https://' . $subdomain . '.amocrm.ru/api/v4/account'; //Формируем URL для запроса
+    // echo $link;
     /** Формируем заголовки */
     $headers = [
         'Authorization: Bearer ' . $access_token
@@ -13,6 +125,7 @@ function check_account($subdomain, $access_token)
     /** Устанавливаем необходимые опции для сеанса cURL  */
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_USERAGENT, 'amoCRM-oAuth-client/1.0');
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
     curl_setopt($curl, CURLOPT_URL, $link);
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($curl, CURLOPT_HEADER, false);
@@ -23,6 +136,7 @@ function check_account($subdomain, $access_token)
     curl_close($curl);
     // print_r(json_decode($out, true));
     $code = (int)$code;
+    // echo $code;
     $errors = [
         400 => 'Bad request',
         401 => 'Unauthorized',
@@ -41,7 +155,7 @@ function check_account($subdomain, $access_token)
         }
     } catch (\Exception $e) {
         // print $out;
-        die('Файл: amocrm-users check_account Строка: 44 Ошибка: ' . $e->getMessage() . PHP_EOL . 'Код ошибки: ' . $e->getCode());
+        // die('Файл: amocrm-users check_account Строка: 44 Ошибка: ' . $e->getMessage() . PHP_EOL . 'Код ошибки: ' . $e->getCode());
     }
     return json_decode($out, true);
 }
@@ -79,7 +193,7 @@ function get_all_leads($subdomain, $access_token)
 function get_all_linked_leads($subdomain, $access_token, $lead_id)
 {
     // echo "получить все связанные сделки";
-    $link = 'https://' . $subdomain . '.amocrm.ru/api/v4/leads?filter[query]=' . $lead_id;
+    $link = 'https://' . $subdomain . '.amocrm.ru/api/v4/leads?filter[query]=' . $lead_id . '&with=loss_reason,contacts';
     /** Формируем заголовки */
     $headers = [
         'Authorization: Bearer ' . $access_token
@@ -533,7 +647,7 @@ function get_all_tags($subdomain, $access_token, $entity_type)
 function get_custom_fields($subdomain, $access_token, $entity_type)
 {
     // echo "Получаем дополнительные поля для сущности: " . $entity_type;
-    $link = 'https://' . $subdomain . '.amocrm.ru/api/v4/' . $entity_type . '/custom_fields';
+    $link = 'https://' . $subdomain . '.amocrm.ru/api/v4/' . $entity_type . '/custom_fields?limit=250';
     /** Формируем заголовки */
     $headers = [
         'Authorization: Bearer ' . $access_token
@@ -581,7 +695,8 @@ function get_custom_field_by_id($subdomain, $access_token, $entity_type, $custom
 }
 
 // получить связи сущности
-function get_entity_links($subdomain, $access_token, $entity_type, $entity_id){
+function get_entity_links($subdomain, $access_token, $entity_type, $entity_id)
+{
     // echo "Получаем связи для сущности: " . $entity_type . " по id: " . $entity_id;
     $link = 'https://' . $subdomain . '.amocrm.ru/api/v4/' . $entity_type . '/' . $entity_id . '/links';
     /** Формируем заголовки */
@@ -606,10 +721,11 @@ function get_entity_links($subdomain, $access_token, $entity_type, $entity_id){
 }
 
 // подготовка статусов
-function get_pipline_status($status_id){
+function get_pipline_status($status_id)
+{
     $statuses = [
         'id' => 'name',
-        '26670388' => 'Новая рекомендация' , // В AMO CRM - 'Неразобранное',
+        '26670388' => 'Новая рекомендация', // В AMO CRM - 'Неразобранное',
         '26670391' => 'Новая рекомендация', // В AMO CRM - 'НОВОЕ ОБРАЩЕНИЕ',
         '28558921' => 'В работе', // В AMO CRM - 'ПОЛУЧИЛ ИНФОРМАЦИЮ',
         '26670394' => 'В работе', // В AMO CRM - 'ПОДБОР ВАРИАНТОВ',
@@ -624,7 +740,7 @@ function get_pipline_status($status_id){
         '142' => 'Успешная рекомендация', // В AMO CRM - 'Успешно реализовано',
         '143' => 'Рекомендация закрыта', // В AMO CRM - 'Закрыто и не реализовано' - добавить причину
     ];
-    if($statuses[$status_id]) {
+    if ($statuses[$status_id]) {
         $status = $statuses[$status_id];
     } else {
         $status = 'Статус не определен';
@@ -633,7 +749,8 @@ function get_pipline_status($status_id){
 }
 
 // подготовка причины отказа
-function get_loss_reason($subdomain, $access_token, $lead_id){
+function get_loss_reason($subdomain, $access_token, $lead_id)
+{
     // echo "Получить причину отказа по сделке: " . $lead_id;
     $link = 'https://' . $subdomain . '.amocrm.ru/api/v4/leads/' . $lead_id . '?with=loss_reason';
 
@@ -657,5 +774,106 @@ function get_loss_reason($subdomain, $access_token, $lead_id){
     $out = curl_exec($curl); #Инициируем запрос к API и сохраняем ответ в переменную
     curl_close($curl);
     // var_dump($out);
+    return json_decode($out, true);
+}
+
+// добавление к сделке запроса на вывод баллов
+function add_money_request_to_lead($subdomain, $access_token, $lead_id, $summ)
+{
+    $link = 'https://' . $subdomain . '.amocrm.ru/api/v4/leads';
+    // echo $link;
+    /** Формируем заголовки */
+    $headers = [
+        'Authorization: Bearer ' . $access_token
+    ];
+    /** Подготовка запроса к БД */
+    // необходимо сделать запрос на получение всех кастомных полей для сделки
+    // и выбрать из списка id с именем - "Запрос сумма"
+    $custon_field_id = 0;
+    $all_custom_fields = get_custom_fields($subdomain, $access_token, 'leads');
+    foreach ($all_custom_fields['_embedded']['custom_fields'] as $cf) {
+        if ($cf['name'] === "Запрос сумма") {
+            $custon_field_id = $cf['id'];
+        }
+    }
+
+    $data = '[
+            {
+                "id": ' . $lead_id . ',
+                "custom_fields_values": [
+                    {
+                        "field_id": ' . $custon_field_id . ', 
+                        "values": [
+                            {
+                                "value": ' . $summ . '
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]';
+    // print $data;
+    $curl = curl_init(); #Сохраняем дескриптор сеанса cURL
+    /** Устанавливаем необходимые опции для сеанса cURL  */
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_USERAGENT, 'amoCRM-API-client/1.0');
+    curl_setopt($curl, CURLOPT_URL, $link);
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PATCH');
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($curl, CURLOPT_HEADER, false);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_COOKIEFILE, dirname(__FILE__) . '/cookie.txt'); #PHP>5.3.6 dirname(__FILE__) -> __DIR__
+    curl_setopt($curl, CURLOPT_COOKIEJAR, dirname(__FILE__) . '/cookie.txt'); #PHP>5.3.6 dirname(__FILE__) -> __DIR__
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+    $out = curl_exec($curl); #Инициируем запрос к API и сохраняем ответ в переменную
+    curl_close($curl);
+    // echo 'update_lead - Обновляем сделку '.$out.'<br>';
+    // var_dump($out);
+    return json_decode($out, true);
+}
+
+// добавляем день рождения пользователя к контакту
+function set_user_birthday($subdomain, $access_token, $user_id, $time_stamp)
+{
+    $link = 'https://' . $subdomain . '.amocrm.ru/api/v4/contacts';
+    // echo $link;
+    /** Формируем заголовки */
+    $headers = [
+        'Authorization: Bearer ' . $access_token
+    ];
+    /** Подготовка запроса к БД */
+
+    $data = '[
+            {
+                "id": ' . $user_id . ',
+                "custom_fields_values": [
+                    {
+                        "field_id": 321615, 
+                        "values": [
+                            {
+                                "value": ' . $time_stamp . '
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]';
+    // print $data;
+    $curl = curl_init(); #Сохраняем дескриптор сеанса cURL
+    /** Устанавливаем необходимые опции для сеанса cURL  */
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_USERAGENT, 'amoCRM-API-client/1.0');
+    curl_setopt($curl, CURLOPT_URL, $link);
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PATCH');
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($curl, CURLOPT_HEADER, false);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_COOKIEFILE, dirname(__FILE__) . '/cookie.txt'); #PHP>5.3.6 dirname(__FILE__) -> __DIR__
+    curl_setopt($curl, CURLOPT_COOKIEJAR, dirname(__FILE__) . '/cookie.txt'); #PHP>5.3.6 dirname(__FILE__) -> __DIR__
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+    $out = curl_exec($curl); #Инициируем запрос к API и сохраняем ответ в переменную
+    curl_close($curl);
     return json_decode($out, true);
 }

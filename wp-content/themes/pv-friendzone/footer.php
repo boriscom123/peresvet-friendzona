@@ -22,7 +22,13 @@
             <div class="footer-links">
                 <div class="image">
                     <a href="https://fz2020.ru/">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer-logo.svg" alt="footer-logo">
+                        <div class="image-1">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/logo_friendzona-03.svg" alt="FRIENDзона">
+                        </div>
+                        <div class="decoration"></div>
+                        <div class="image-2">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/peresvet-w.svg" alt="FRIENDзона">
+                        </div>
                     </a>
                 </div>
                 <div class="links">
@@ -43,9 +49,13 @@
         </div>
         <div class="container">
             <div class="footer-copyright">
-                <a href="#">© 2012-2021 Пересвет.Недвижимость</a>
-                <a href="<?php echo get_template_directory_uri(); ?>/assets/privacy.pdf" target="_blank">Политика конфиденциальности</a>
-                <a href="<?php echo get_template_directory_uri(); ?>/assets/rules.pdf" target="_blank">Правила</a>
+                <div class="copyright">
+                    <a href="#">© 2012-2021 Пересвет.Недвижимость</a>
+                </div>
+                <div class="rules">
+                    <a href="<?php echo get_template_directory_uri(); ?>/assets/privacy.pdf" target="_blank">Политика конфиденциальности</a>
+                    <a href="<?php echo get_template_directory_uri(); ?>/assets/rules.pdf" target="_blank">Правила</a>
+                </div>
             </div>
         </div>
             <div class="container">
@@ -63,7 +73,13 @@
                     <div class="modal-menu-buttons">
                         <div class="image">
                             <a href="https://fz2020.ru/">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer-logo.svg" alt="footer-logo">
+                                <div class="image-1">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/logo_friendzona-03.svg" alt="FRIENDзона">
+                                </div>
+                                <div class="decoration"></div>
+                                <div class="image-2">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/peresvet-w.svg" alt="FRIENDзона">
+                                </div>
                             </a>
                         </div>
                         <div class="buttons">
@@ -71,7 +87,7 @@
                                 if( is_user_logged_in() ){ ?>
                                     <div class="login d-flex user-info">
                                         <div class="avatar">
-                                            <img src="<?php if(isset($all_meta_for_user['user_avatar'])){print wp_get_attachment_image_url($all_meta_for_user['user_avatar'][0]);} else {echo get_template_directory_uri().'/assets/images/avatar-new.svg';} ?>" alt="user-avatar">
+                                            <img src="<?php if(isset($all_meta_for_user['user_avatar'])){print wp_get_attachment_image_url($all_meta_for_user['user_avatar'][0]);} else {echo get_template_directory_uri().'/assets/images/avatar-new-grey.svg';} ?>" alt="user-avatar">
                                         </div>
                                         <div class="user"><?php echo $user_data->get('display_name'); ?></div>
                                         <div class="actions">
@@ -112,9 +128,13 @@
                         </div>
                     </div>
                     <div class="modal-menu-copyright">
-                        <a href="#">© 2012-2021 Пересвет.Недвижимость</a>
-                        <a href="<?php echo get_template_directory_uri(); ?>/assets/privacy.pdf" target="_blank">Политика конфиденциальности</a>
-                        <a href="<?php echo get_template_directory_uri(); ?>/assets/rules.pdf" target="_blank">Правила</a>
+                        <div class="copyright">
+                            <a href="#">© 2012-2021 Пересвет.Недвижимость</a>
+                        </div>
+                        <div class="rules">
+                            <a href="<?php echo get_template_directory_uri(); ?>/assets/privacy.pdf" target="_blank">Политика конфиденциальности</a>
+                            <a href="<?php echo get_template_directory_uri(); ?>/assets/rules.pdf" target="_blank">Правила</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -124,7 +144,7 @@
             <div class="container">
                 <div class="reg-form-info">
                     <h2>Регистрация в&nbsp;личном&nbsp;кабинете</h2>
-                    <p>В личном кабинете вы можете просматривать историю переданных показаний и платежей, задавать вопросы специалистам компании</p>
+                    <p>В личном кабинете вы можете просматривать кто воспользовался вашей рекомендацией, сколько баллов на вашем счету, задавать вопросы специалистам компании.</p>
                     <div class="image">
                     </div>
                 </div>
@@ -231,10 +251,11 @@
             <div class="container">
                 <div class="money-form-info">
                     <h2>Вывод денежных средств</h2>
-                    <p>Оставьте заявку и мы вам перезвоним,<br>ваш 1 бонусный балл = 1 рублю</p>
+                    <p>Оставьте заявку и мы вам перезвоним,<br>ваш 1 бонусный балл = 1 рублю<br>Минимальная сумма 20 000</p>
                 </div>
                 <div class="money-form-inputs d-flex">
-                    <form method="get" id="form-money"></form>
+                    <form method="post" id="form-money"></form>
+                    <input type="hidden" name="action" value="get-money" form="form-money">
                     <div class="inputs">
                         <input type="tel" name="u-summ" placeholder="Сумма" form="form-money" id="form-money-u-summ">
                     </div>
@@ -243,7 +264,7 @@
                         <label for="form-money-u-agree">Я подтверждаю снятие баллов</label>
                     </div>
                     <div class="submit">
-                        <input type="submit" value="Отправить" form="form-money" id="form-money-submit">
+                        <input type="button" value="Отправить" form="form-money" id="form-money-submit">
                     </div>
 
                 </div>

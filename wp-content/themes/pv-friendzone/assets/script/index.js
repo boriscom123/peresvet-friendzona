@@ -144,16 +144,20 @@ let sliderHrefLinks = ['https://fz2020.ru/#block-3-4-ancor', 'https://fz2020.ru/
 addEventListener('DOMContentLoaded', function () {
     getSliderLinks()
 });
+
 function getSliderLinks() {
-    console.log('Готовим список ссылок для слайдера');
-    console.log(sliderHrefLinks);
+    // console.log('Готовим список ссылок для слайдера');
+    // console.log(sliderHrefLinks);
     sliderHrefLinks = [];
-    console.log(sliderHrefLinks);
-    for (let i = 0; i < sliderTextBlock.children.length; i++){
-        sliderHrefLinks[i] = sliderTextBlock.children[i].children[2].href;
+    // console.log(sliderHrefLinks);
+    if (sliderTextBlock) {
+        for (let i = 0; i < sliderTextBlock.children.length; i++) {
+            sliderHrefLinks[i] = sliderTextBlock.children[i].children[2].href;
+        }
     }
-    console.log(sliderHrefLinks);
+    // console.log(sliderHrefLinks);
 }
+
 // блок 1 - слайдер - конец
 // закрытие модальных окон
 function closeModal(el) {
@@ -363,8 +367,8 @@ function formLoginChekValues() {
     }
 }
 
-function changeElType(el){
-    if(el.type === 'text'){
+function changeElType(el) {
+    if (el.type === 'text') {
         el.type = 'password';
         el.classList.remove('pass-lock-open');
         el.classList.add('pass-lock');
@@ -747,6 +751,10 @@ function sendRestorePass(el) {
             } else if (response.result === 'ok') {
                 console.log('Номер есть в базе');
                 showLoginModal();
+                // добавляем перенос номера телефона в форму входа
+                modalLoginInputTel.value = modalPassRestoreTelEl.value;
+                // переносим активность на окно ввода пароля
+                modalLoginInputPass.focus();
                 //     if(formRegistrationEl.confirmf && formRegistrationEl.confirmi && formRegistrationEl.confirmtel){
                 //         modalRegistrationInputsEl.classList.remove('d-flex');
                 //         modalRegistrationInputsEl.classList.add('d-none');
@@ -805,6 +813,9 @@ function modalMoneyAction(el) {
     closeModal();
     modalsEl.classList.remove('d-none');
     modalsEl.children[4].classList.remove('d-none');
+    if (userMoneyButtonEl) {
+        getMoneyInputEl.value = userMoneyButtonEl.getAttribute('data-max-summ');
+    }
 }
 
 let userMoneyButtonEl = document.getElementById('user-money-button');
@@ -947,7 +958,7 @@ if (addAvatarEl) {
 }
 // изменение аватара пользователя - конец
 // скопировать ссылку на форму
-function linkCopyToBuffer(el){
+function linkCopyToBuffer(el) {
     console.log('Копируем ссылку в буфер обмена', el);
     let userLink = el.getAttribute('data-link');
     navigator.clipboard.writeText(userLink);
@@ -956,7 +967,9 @@ function linkCopyToBuffer(el){
     // закрываем попап
     setTimeout(() => {
         closePopUpMessageEl();
-    }, 3000);}
+    }, 3000);
+}
+
 const linkCopyButtonEl = document.getElementById('copy-link');
 if (linkCopyButtonEl) {
     linkCopyButtonEl.addEventListener("click", function () {
@@ -965,7 +978,7 @@ if (linkCopyButtonEl) {
 }
 // скопировать ссылку на форму - конец
 // скопировать код пользователя
-function copyCodeToBuffer(el){
+function copyCodeToBuffer(el) {
     console.log('Копируем код в буфер обмена', el);
     let userLink = el.getAttribute('data-code');
     navigator.clipboard.writeText(userLink);
@@ -974,7 +987,9 @@ function copyCodeToBuffer(el){
     // закрываем попап
     setTimeout(() => {
         closePopUpMessageEl();
-    }, 3000);}
+    }, 3000);
+}
+
 const codeCopyButtonEl = document.getElementById('copy-code');
 if (codeCopyButtonEl) {
     codeCopyButtonEl.addEventListener("click", function () {
@@ -982,3 +997,55 @@ if (codeCopyButtonEl) {
     });
 }
 // скопировать пользователя - конец
+// вывести баллы пользователя
+function getMoney(el) {
+    console.log('Кнопка вывода деняг');
+    // получаем элемент формы
+    const getMoneyFormEl = document.getElementById('form-money');
+    // получаем элемент суммы баллов
+    const maxSumm = Number(userMoneyButtonEl.getAttribute('data-max-summ'));
+    // console.log('maxSumm', maxSumm);
+    if (getMoneyInputEl.value >= 20000 && getMoneyInputEl.value <= maxSumm) {
+        // console.log('Количество баллов подходит');
+        if (getMoneyInputEl.classList.contains('alert')) {
+            getMoneyInputEl.classList.remove('alert');
+        }
+        getMoneyInputEl.classList.add('ok');
+        getMoneyInputEl.summ = true;
+    } else {
+        // console.log('Не подходящее количество баллов');
+        if (getMoneyInputEl.classList.contains('ok')) {
+            getMoneyInputEl.classList.remove('ok');
+        }
+        getMoneyInputEl.classList.add('alert');
+        getMoneyInputEl.summ = false;
+    }
+    // console.log('Количество баллов', getMoneyInputEl.value);
+    // получаем элемент чекбокса подтверждения
+    const getMoneyCheckEl = document.getElementById('form-money-u-agree');
+    if (getMoneyCheckEl.checked) {
+        // console.log('Чекбокс подтвержден');
+    } else {
+        // console.log('Чекбокс НЕ подтвержден');
+    }
+    if (getMoneyCheckEl.checked && getMoneyInputEl.summ) {
+        // console.log('Посылаем запрос на вывод средств');
+        showPopUpMessageEl('ok', 'Запрос принят. С вами свяжется специалист компании.');
+        // закрываем попап
+        setTimeout(() => {
+            closePopUpMessageEl();
+        }, 3000);
+        getMoneyFormEl.submit();
+    } else {
+        console.log('Запрос на вывод средств не отправлен');
+    }
+}
+
+const getMoneyButtonEl = document.getElementById('form-money-submit');
+const getMoneyInputEl = document.getElementById('form-money-u-summ');
+if (getMoneyButtonEl) {
+    getMoneyButtonEl.addEventListener("click", function () {
+        getMoney(this)
+    });
+}
+// вывести баллы пользователя - конец
