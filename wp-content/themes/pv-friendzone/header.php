@@ -214,7 +214,7 @@ if (isset($_POST['action'])) {
         }
         if (isset($u_login) && isset($u_email) && isset($u_question)) {
             // echo 'Данные пользователя подготовлены. Отправляем сообщение';
-            $to = 'frend.zona2020@mail.ru'; // 'frend.zona2020@mail.ru'; 'frend.zona2020@mail.ru';
+            $to = 'fz2020@pv-real.ru'; // 'frend.zona2020@mail.ru'; 'frend.zona2020@mail.ru';
             $copy = 'boriscom@mail.ru'; // 'boriscom123@yandex.ru';
             $subject = 'Вопрос с сайта fz2020.ru';
             $message = 'Логин: ' . $u_login . ' Почта: ' . $u_email . ' Вопрос:' . $u_question;

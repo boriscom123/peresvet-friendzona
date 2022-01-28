@@ -20,6 +20,7 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
+          position: relative;
           @media (max-width: 600px) {
             height: 180px;
           }
@@ -49,7 +50,7 @@
                 justify-content: center;
                 align-items: center;
                 width: 100%;
-                max-width: #{calc(50% - 6px)};
+                max-width: #{calc(55% - 11px)};
 
                 > img {
                   height: 100%;
@@ -62,7 +63,7 @@
                 height: auto;
                 width: 2px;
                 background-color: $mainBgColor;
-                margin: 0 5px 0 5px;
+                margin: 0 10px 0 10px;
               }
 
               > .image-2 {
@@ -70,7 +71,7 @@
                 justify-content: center;
                 align-items: center;
                 width: 100%;
-                max-width: #{calc(50% - 6px)};
+                max-width: #{calc(45% - 11px)};
 
                 > img {
                   height: 100%;
@@ -94,6 +95,15 @@
             }
 
             > .not-login {
+              @media (max-width: 650px) {
+                position: absolute;
+                top: 100px;
+                left: 0;
+              }
+              @media (max-width: 600px) {
+                // top: 85%;
+              }
+
               > button {
                 padding: 0;
                 box-sizing: border-box;
@@ -237,10 +247,11 @@
               justify-content: center;
               align-items: center;
               @media (max-width: 650px) {
-                margin: 50px 0 15px 0;
+                // margin: 50px 0 15px 0;
               }
               @media (max-width: 600px) {
-                margin: 0 0 15px 0;
+                // margin: 0 0 15px 0;
+                margin-bottom: 60px;
               }
 
               &:hover {
@@ -301,8 +312,8 @@
           }
 
           > div {
-            width: 50%;
-            display: flex;
+            // width: 50%;
+            // display: flex;
             justify-content: space-between;
             align-items: center;
             @media (max-width: 600px) {
@@ -339,9 +350,11 @@
           }
 
           > .rules {
+            width: 100%;
+            display: flex;
             margin: 0 0 25px 0;
             @media (max-width: 800px) {
-              width: calc(100% - 60px);
+              // width: calc(100% - 60px);
             }
             @media (max-width: 400px) {
               width: 100%;
@@ -357,13 +370,13 @@
             }
 
             > a:first-child {
-              margin: 0 0 0 25%;
+              // margin: 0 0 0 25%;
               @media (max-width: 800px) {
-                margin: 0 0 0 10%;
+                // margin: 0 0 0 10%;
               }
               @media (max-width: 600px) {
                 margin: 0 0 0 0;
-                text-align: center;
+                // text-align: center;
               }
               @media (max-width: 400px) {
                 margin: 10px 0 0 0;
@@ -372,17 +385,17 @@
 
             > a:last-child {
               // margin: 0 15% 0 0;
-              margin: 0 0 0 25%;
+              // margin: 0 0 0 25%;
               @media (max-width: 1100px) {
-                margin: 0 0 0 20%;
+                // margin: 0 0 0 20%;
               }
               @media (max-width: 900px) {
-                margin: 0 0 0 15%;
+                // margin: 0 0 0 15%;
               }
               // @media (max-width: 800px) { margin: 0 0 0 0; }
               @media (max-width: 600px) {
                 margin: 0 0 0 0;
-                text-align: center;
+                // text-align: center;
               }
               @media (max-width: 400px) {
                 margin: 10px 0 0 0;

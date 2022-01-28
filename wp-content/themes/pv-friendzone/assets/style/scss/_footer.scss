@@ -28,7 +28,7 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            max-width: #{calc(50% - 6px)};
+            max-width: #{calc(55% - 11px)};
 
             > img {
               height: 100%;
@@ -41,7 +41,7 @@
             height: auto;
             width: 2px;
             background-color: $mainBgColor;
-            margin: 0 5px 0 5px;
+            margin: 0 10px 0 10px;
           }
 
           > .image-2 {
@@ -49,7 +49,7 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            max-width: #{calc(50% - 6px)};
+            max-width: #{calc(45% - 11px)};
 
             > img {
               height: 100%;

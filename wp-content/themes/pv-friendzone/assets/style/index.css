@@ -141,7 +141,7 @@ button {
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: calc(50% - 6px);
+  max-width: calc(55% - 11px);
 }
 .header > .header-fixed > .container > .header-logo > .header-logo-image > .image-1 > img {
   height: 100%;
@@ -152,14 +152,14 @@ button {
   height: auto;
   width: 2px;
   background-color: #1B1B1B;
-  margin: 0 5px 0 5px;
+  margin: 0 10px 0 10px;
 }
 .header > .header-fixed > .container > .header-logo > .header-logo-image > .image-2 {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: calc(50% - 6px);
+  max-width: calc(45% - 11px);
 }
 .header > .header-fixed > .container > .header-logo > .header-logo-image > .image-2 > img {
   height: 100%;
@@ -565,6 +565,18 @@ button {
   line-height: 45px;
   color: #FFFFFF;
 }
+.main > .main-block-2 > .main-block-2-top > .container > .main-block-2-container-info > h2 > span {
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: 35px;
+}
+.main > .main-block-2 > .main-block-2-top > .container > .main-block-2-container-info > h2 > span > img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 12px;
+}
 .main > .main-block-2 > .main-block-2-top > .container > .main-block-2-container-info > h3 {
   width: 100%;
   max-width: 460px;
@@ -574,6 +586,18 @@ button {
   font-size: 15px;
   line-height: 26px;
   color: #FFFFFF;
+}
+.main > .main-block-2 > .main-block-2-top > .container > .main-block-2-container-info > h3 > span {
+  display: inline-block;
+  position: relative;
+  width: 100px;
+  height: 15px;
+}
+.main > .main-block-2 > .main-block-2-top > .container > .main-block-2-container-info > h3 > span > img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 5px;
 }
 .main > .main-block-2 > .main-block-2-top > .container > .main-block-2-container-info > .main-block-2-container-info-button {
   height: 40px;
@@ -826,6 +850,18 @@ button {
     margin: 25px 0 0 0;
   }
 }
+.main > .main-block-3 > .container > .main-block-3-1 > .text > p > span {
+  display: inline-block;
+  position: relative;
+  width: 100px;
+  height: 15px;
+}
+.main > .main-block-3 > .container > .main-block-3-1 > .text > p > span > img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 5px;
+}
 .main > .main-block-3 > .container > .main-block-3-1 > .text > .decoration {
   height: 1px;
   width: 135px;
@@ -952,6 +988,18 @@ button {
   .main > .main-block-3 > .container > .main-block-3-3 > h2 {
     max-width: calc(100% - 40px);
   }
+}
+.main > .main-block-3 > .container > .main-block-3-3 > h2 > span {
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: 35px;
+}
+.main > .main-block-3 > .container > .main-block-3-3 > h2 > span > img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 12px;
 }
 .main > .main-block-3 > .container > .main-block-3-3 > .text {
   width: 100%;
@@ -1124,6 +1172,18 @@ button {
     max-width: calc(100% - 40px);
   }
 }
+.main > .main-block-4 > .container > .main-block-4-1 > h2 > span {
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: 35px;
+}
+.main > .main-block-4 > .container > .main-block-4-1 > h2 > span > img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 12px;
+}
 .main > .main-block-4 > .container > .main-block-4-1 > .text {
   width: 100%;
   max-width: calc(50% - 10px);
@@ -1288,6 +1348,18 @@ button {
     font-size: 30px;
     line-height: 40px;
   }
+}
+.main > .main-block-5 > .container > .main-block-5-info > h2 > span {
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: 35px;
+}
+.main > .main-block-5 > .container > .main-block-5-info > h2 > span > img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 12px;
 }
 .main > .main-block-5 > .container > .main-block-5-info > button {
   height: 40px;
@@ -1883,7 +1955,7 @@ button {
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: calc(50% - 6px);
+  max-width: calc(55% - 11px);
 }
 .footer > .container > .footer-links > .image > a > .image-1 > img {
   height: 100%;
@@ -1894,14 +1966,14 @@ button {
   height: auto;
   width: 2px;
   background-color: #F8F5EA;
-  margin: 0 5px 0 5px;
+  margin: 0 10px 0 10px;
 }
 .footer > .container > .footer-links > .image > a > .image-2 {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: calc(50% - 6px);
+  max-width: calc(45% - 11px);
 }
 .footer > .container > .footer-links > .image > a > .image-2 > img {
   height: 100%;
@@ -2097,6 +2169,7 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 @media (max-width: 600px) {
   .modals > .header-menu > .container-modal > .container > .modal-menu-buttons {
@@ -2131,7 +2204,7 @@ button {
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: calc(50% - 6px);
+  max-width: calc(55% - 11px);
 }
 .modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > a > .image-1 > img {
   height: 100%;
@@ -2142,14 +2215,14 @@ button {
   height: auto;
   width: 2px;
   background-color: #F8F5EA;
-  margin: 0 5px 0 5px;
+  margin: 0 10px 0 10px;
 }
 .modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > a > .image-2 {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: calc(50% - 6px);
+  max-width: calc(45% - 11px);
 }
 .modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > a > .image-2 > img {
   height: 100%;
@@ -2170,6 +2243,13 @@ button {
 @media (max-width: 600px) {
   .modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons {
     width: 60px;
+  }
+}
+@media (max-width: 650px) {
+  .modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons > .not-login {
+    position: absolute;
+    top: 100px;
+    left: 0;
   }
 }
 .modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons > .not-login > button {
@@ -2299,14 +2379,9 @@ button {
   justify-content: center;
   align-items: center;
 }
-@media (max-width: 650px) {
-  .modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons > .close {
-    margin: 50px 0 15px 0;
-  }
-}
 @media (max-width: 600px) {
   .modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons > .close {
-    margin: 0 0 15px 0;
+    margin-bottom: 60px;
   }
 }
 .modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons > .close:hover {
@@ -2358,8 +2433,6 @@ button {
   }
 }
 .modals > .header-menu > .container-modal > .container > .modal-menu-copyright > div {
-  width: 50%;
-  display: flex;
   justify-content: space-between;
   align-items: center;
 }
@@ -2395,12 +2468,9 @@ button {
   }
 }
 .modals > .header-menu > .container-modal > .container > .modal-menu-copyright > .rules {
+  width: 100%;
+  display: flex;
   margin: 0 0 25px 0;
-}
-@media (max-width: 800px) {
-  .modals > .header-menu > .container-modal > .container > .modal-menu-copyright > .rules {
-    width: calc(100% - 60px);
-  }
 }
 @media (max-width: 400px) {
   .modals > .header-menu > .container-modal > .container > .modal-menu-copyright > .rules {
@@ -2417,18 +2487,9 @@ button {
     width: 100%;
   }
 }
-.modals > .header-menu > .container-modal > .container > .modal-menu-copyright > .rules > a:first-child {
-  margin: 0 0 0 25%;
-}
-@media (max-width: 800px) {
-  .modals > .header-menu > .container-modal > .container > .modal-menu-copyright > .rules > a:first-child {
-    margin: 0 0 0 10%;
-  }
-}
 @media (max-width: 600px) {
   .modals > .header-menu > .container-modal > .container > .modal-menu-copyright > .rules > a:first-child {
     margin: 0 0 0 0;
-    text-align: center;
   }
 }
 @media (max-width: 400px) {
@@ -2436,23 +2497,9 @@ button {
     margin: 10px 0 0 0;
   }
 }
-.modals > .header-menu > .container-modal > .container > .modal-menu-copyright > .rules > a:last-child {
-  margin: 0 0 0 25%;
-}
-@media (max-width: 1100px) {
-  .modals > .header-menu > .container-modal > .container > .modal-menu-copyright > .rules > a:last-child {
-    margin: 0 0 0 20%;
-  }
-}
-@media (max-width: 900px) {
-  .modals > .header-menu > .container-modal > .container > .modal-menu-copyright > .rules > a:last-child {
-    margin: 0 0 0 15%;
-  }
-}
 @media (max-width: 600px) {
   .modals > .header-menu > .container-modal > .container > .modal-menu-copyright > .rules > a:last-child {
     margin: 0 0 0 0;
-    text-align: center;
   }
 }
 @media (max-width: 400px) {

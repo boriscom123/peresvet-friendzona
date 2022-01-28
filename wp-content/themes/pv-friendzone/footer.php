@@ -128,7 +128,7 @@
                         </div>
                     </div>
                     <div class="modal-menu-copyright">
-                        <div class="copyright">
+                        <div class="copyright d-none">
                             <a href="#">© 2012-2021 Пересвет.Недвижимость</a>
                         </div>
                         <div class="rules">

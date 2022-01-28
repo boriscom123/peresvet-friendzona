@@ -215,6 +215,20 @@
             font-size: 35px;
             line-height: 45px;
             color: $alterFontColor;
+
+            > span {
+              display: inline-block;
+              position: relative;
+              width: 200px;
+              height: 35px;
+
+              > img {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                top: 12px;
+              }
+            }
           }
 
           > h3 {
@@ -226,6 +240,20 @@
             font-size: 15px;
             line-height: 26px;
             color: $alterFontColor;
+
+            > span {
+              display: inline-block;
+              position: relative;
+              width: 100px;
+              height: 15px;
+
+              > img {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                top: 5px;
+              }
+            }
           }
 
           > .main-block-2-container-info-button {
@@ -479,6 +507,20 @@
             @media (max-width: 600px) {
               margin: 25px 0 0 0;
             }
+
+            > span {
+              display: inline-block;
+              position: relative;
+              width: 100px;
+              height: 15px;
+
+              > img {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                top: 5px;
+              }
+            }
           }
 
           > .decoration {
@@ -615,6 +657,20 @@
           color: $alterFontColor3;
           @media (max-width: 600px) {
             max-width: #{calc(100% - 40px)};
+          }
+
+          > span {
+            display: inline-block;
+            position: relative;
+            width: 200px;
+            height: 35px;
+
+            > img {
+              position: absolute;
+              height: 100%;
+              width: 100%;
+              top: 12px;
+            }
           }
         }
 
@@ -784,6 +840,20 @@
           @media (max-width: 600px) {
             max-width: #{calc(100% - 40px)};
           }
+
+          > span {
+            display: inline-block;
+            position: relative;
+            width: 200px;
+            height: 35px;
+
+            > img {
+              position: absolute;
+              height: 100%;
+              width: 100%;
+              top: 12px;
+            }
+          }
         }
 
         > .text {
@@ -947,6 +1017,20 @@
           @media (max-width: 800px) {
             font-size: 30px;
             line-height: 40px;
+          }
+
+          > span {
+            display: inline-block;
+            position: relative;
+            width: 200px;
+            height: 35px;
+
+            > img {
+              position: absolute;
+              height: 100%;
+              width: 100%;
+              top: 12px;
+            }
           }
         }
 
