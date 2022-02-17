@@ -21,14 +21,12 @@
         <div class="container">
             <div class="footer-links">
                 <div class="image">
-                    <a href="https://fz2020.ru/">
-                        <div class="image-1">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/logo_friendzona-03.svg" alt="FRIENDзона">
-                        </div>
-                        <div class="decoration"></div>
-                        <div class="image-2">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/peresvet-w.svg" alt="FRIENDзона">
-                        </div>
+                    <a class="image-1" href="https://fz2020.ru/">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/logo_friendzona-03.svg" alt="FRIENDзона">
+                    </a>
+                    <div class="decoration"></div>
+                    <a class="image-2" href="https://pv-real.ru/" target="_blank">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/peresvet-w.svg" alt="FRIENDзона">
                     </a>
                 </div>
                 <div class="links">
@@ -72,14 +70,12 @@
                 <div class="container">
                     <div class="modal-menu-buttons">
                         <div class="image">
-                            <a href="https://fz2020.ru/">
-                                <div class="image-1">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/logo_friendzona-03.svg" alt="FRIENDзона">
-                                </div>
-                                <div class="decoration"></div>
-                                <div class="image-2">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/peresvet-w.svg" alt="FRIENDзона">
-                                </div>
+                            <a class="image-1" href="https://fz2020.ru/">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/logo_friendzona-03.svg" alt="FRIENDзона">
+                            </a>
+                            <div class="decoration"></div>
+                            <a class="image-2" href="https://pv-real.ru/" target="_blank">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/peresvet-w.svg" alt="FRIENDзона">
                             </a>
                         </div>
                         <div class="buttons">

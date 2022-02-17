@@ -35,16 +35,16 @@
       > .header-logo {
         width: 50%;
         max-width: 280px;
-        transition: $transition;
+        //transition: $transition;
         @media (max-width: 600px) {
           width: #{calc(100% - 60px)};
         }
         // @media (max-width: 600px) { margin-bottom: 60px; }
-        &:hover {
-          cursor: pointer;
-          transform: scale(1.1);
-          // background-color: pink;
-        }
+        //&:hover {
+        //  cursor: pointer;
+        //  transform: scale(1.1);
+        //   background-color: pink;
+        //}
 
         > .header-logo-image {
           display: flex;
@@ -56,11 +56,17 @@
             align-items: center;
             width: 100%;
             max-width: #{calc(55% - 11px)};
+            transition: $transition;
 
             > img {
               height: 100%;
               width: 100%;
               object-fit: contain;
+            }
+
+            &:hover {
+              cursor: pointer;
+              transform: scale(1.1);
             }
           }
 
@@ -77,11 +83,18 @@
             align-items: center;
             width: 100%;
             max-width: #{calc(45% - 11px)};
+            transition: $transition;
+
 
             > img {
               height: 100%;
               width: 100%;
               object-fit: contain;
+            }
+
+            &:hover {
+              cursor: pointer;
+              transform: scale(1.1);
             }
           }
         }

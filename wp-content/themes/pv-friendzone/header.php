@@ -385,15 +385,15 @@ if (isset($_POST['form-action'])) {
         </div>
         <div class="container">
             <div class="header-logo">
-                <a class="header-logo-image" href="https://fz2020.ru/">
-                    <div class="image-1">
+                <div class="header-logo-image">
+                    <a class="image-1" href="https://fz2020.ru/">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/logo_friendzona-01.svg" alt="FRIENDзона">
-                    </div>
+                    </a>
                     <div class="decoration"></div>
-                    <div class="image-2">
+                    <a class="image-2" href="https://pv-real.ru/" target="_blank">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/peresvet.svg" alt="FRIENDзона">
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
             <div class="header-buttons">
                 <?php

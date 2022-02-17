@@ -121,16 +121,11 @@ button {
 .header > .header-fixed > .container > .header-logo {
   width: 50%;
   max-width: 280px;
-  transition: 0.3s;
 }
 @media (max-width: 600px) {
   .header > .header-fixed > .container > .header-logo {
     width: calc(100% - 60px);
   }
-}
-.header > .header-fixed > .container > .header-logo:hover {
-  cursor: pointer;
-  transform: scale(1.1);
 }
 .header > .header-fixed > .container > .header-logo > .header-logo-image {
   display: flex;
@@ -142,11 +137,16 @@ button {
   align-items: center;
   width: 100%;
   max-width: calc(55% - 11px);
+  transition: 0.3s;
 }
 .header > .header-fixed > .container > .header-logo > .header-logo-image > .image-1 > img {
   height: 100%;
   width: 100%;
   object-fit: contain;
+}
+.header > .header-fixed > .container > .header-logo > .header-logo-image > .image-1:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 .header > .header-fixed > .container > .header-logo > .header-logo-image > .decoration {
   height: auto;
@@ -160,11 +160,16 @@ button {
   align-items: center;
   width: 100%;
   max-width: calc(45% - 11px);
+  transition: 0.3s;
 }
 .header > .header-fixed > .container > .header-logo > .header-logo-image > .image-2 > img {
   height: 100%;
   width: 100%;
   object-fit: contain;
+}
+.header > .header-fixed > .container > .header-logo > .header-logo-image > .image-2:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 .header > .header-fixed > .container > .header-buttons {
   width: 50%;
@@ -1940,45 +1945,54 @@ button {
 .footer > .container > .footer-links > .image {
   width: 50%;
   max-width: 280px;
+  display: flex;
+  justify-content: space-between;
+  height: fit-content;
 }
 @media (max-width: 800px) {
   .footer > .container > .footer-links > .image {
     min-width: 280px;
   }
 }
-.footer > .container > .footer-links > .image > a {
-  display: flex;
-  justify-content: space-between;
-}
-.footer > .container > .footer-links > .image > a > .image-1 {
+.footer > .container > .footer-links > .image > .image-1 {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   max-width: calc(55% - 11px);
+  transition: 0.3s;
 }
-.footer > .container > .footer-links > .image > a > .image-1 > img {
+.footer > .container > .footer-links > .image > .image-1 > img {
   height: 100%;
   width: 100%;
   object-fit: contain;
 }
-.footer > .container > .footer-links > .image > a > .decoration {
+.footer > .container > .footer-links > .image > .image-1:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+.footer > .container > .footer-links > .image > .decoration {
   height: auto;
   width: 2px;
   background-color: #F8F5EA;
   margin: 0 10px 0 10px;
 }
-.footer > .container > .footer-links > .image > a > .image-2 {
+.footer > .container > .footer-links > .image > .image-2 {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   max-width: calc(45% - 11px);
+  transition: 0.3s;
 }
-.footer > .container > .footer-links > .image > a > .image-2 > img {
+.footer > .container > .footer-links > .image > .image-2 > img {
   height: 100%;
   width: 100%;
   object-fit: contain;
+}
+.footer > .container > .footer-links > .image > .image-2:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 .footer > .container > .footer-links > .links {
   width: 50%;
@@ -2179,7 +2193,8 @@ button {
 .modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image {
   width: 50%;
   max-width: 280px;
-  transition: 0.3s;
+  display: flex;
+  justify-content: space-between;
 }
 @media (max-width: 600px) {
   .modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image {
@@ -2191,43 +2206,45 @@ button {
     margin-bottom: 60px;
   }
 }
-.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image:hover {
-  cursor: pointer;
-  transform: scale(1.1);
-}
-.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > a {
-  display: flex;
-  justify-content: space-between;
-}
-.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > a > .image-1 {
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > .image-1 {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   max-width: calc(55% - 11px);
+  transition: 0.3s;
 }
-.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > a > .image-1 > img {
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > .image-1 > img {
   height: 100%;
   width: 100%;
   object-fit: contain;
 }
-.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > a > .decoration {
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > .image-1:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > .decoration {
   height: auto;
   width: 2px;
   background-color: #F8F5EA;
   margin: 0 10px 0 10px;
 }
-.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > a > .image-2 {
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > .image-2 {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   max-width: calc(45% - 11px);
+  transition: 0.3s;
 }
-.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > a > .image-2 > img {
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > .image-2 > img {
   height: 100%;
   width: 100%;
   object-fit: contain;
+}
+.modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > .image-2:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 .modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .buttons {
   width: 50%;
