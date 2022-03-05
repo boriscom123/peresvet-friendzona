@@ -146,7 +146,7 @@ button {
 }
 .header > .header-fixed > .container > .header-logo > .header-logo-image > .image-1:hover {
   cursor: pointer;
-  transform: scale(1.1);
+  transform: scale(1.07);
 }
 .header > .header-fixed > .container > .header-logo > .header-logo-image > .decoration {
   height: auto;
@@ -1992,7 +1992,7 @@ button {
 }
 .footer > .container > .footer-links > .image > .image-2:hover {
   cursor: pointer;
-  transform: scale(1.1);
+  transform: scale(1.07);
 }
 .footer > .container > .footer-links > .links {
   width: 50%;
@@ -2221,7 +2221,7 @@ button {
 }
 .modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > .image-1:hover {
   cursor: pointer;
-  transform: scale(1.1);
+  transform: scale(1.07);
 }
 .modals > .header-menu > .container-modal > .container > .modal-menu-buttons > .image > .decoration {
   height: auto;
