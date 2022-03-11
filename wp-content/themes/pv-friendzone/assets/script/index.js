@@ -1,4 +1,8 @@
 console.log('blank');
+const showConsole = false;
+if(showConsole){
+    console.log('Консоль включена');
+}
 
 // обработка всех кликов
 function documentClickListener(el, event) {
@@ -7,7 +11,9 @@ function documentClickListener(el, event) {
     } else {
         document.click = 1;
     }
-    console.log('document.click', document.click);
+    if(showConsole) {
+        console.log('document.click', document.click);
+    }
     if (document.showUserInfo) {
         for (let i = 0; i < showUserInfoEl.length; i++) {
             showUserInfoEl[i].lastElementChild.classList.remove('d-flex');
@@ -257,7 +263,9 @@ if (showAllQuestionsButtonEl) {
 // показать все вопросы - конец
 // воспроизведение видео
 function playVideoSmall(el) {
-    console.log(el.parentNode.nextElementSibling.children[1].children[0]);
+    if(showConsole) {
+        console.log(el.parentNode.nextElementSibling.children[1].children[0]);
+    }
     el.parentNode.nextElementSibling.children[1].children[0].play();
     // videoContainerSmallEl.play();
 }
@@ -291,7 +299,9 @@ if (playVideoButtonBigEl) {
 // модальное окно Вход
 function checkLoginTelInputElAction() {
     let value = modalLoginInputTel.value;
-    // console.log('Телефон: ', value);
+    if(showConsole) {
+        // console.log('Телефон: ', value);
+    }
     let re = /^\+?[78][-\(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/;
     let valid = re.test(modalLoginInputTel.value);
     if (value && valid) {
@@ -314,7 +324,9 @@ function checkLoginTelInputElAction() {
 }
 
 function checkPassInputElAction() {
-    // console.log('Проверяем пароль');
+    if(showConsole) {
+        // console.log('Проверяем пароль');
+    }
     if (modalLoginInputPass.value.length >= 6) {
         formLoginEl.confirmpass = true;
         if (modalLoginInputPass.classList.contains('alert')) {
@@ -335,14 +347,18 @@ function checkPassInputElAction() {
 }
 
 function formLoginChekValues() {
-    console.log('formLoginChekValues');
+    if(showConsole) {
+        // console.log('formLoginChekValues');
+    }
     checkLoginTelInputElAction();
     checkPassInputElAction();
     formLoginEl.addEventListener('submit', (event) => {
         event.preventDefault();
     });
     if (formLoginEl.confirmlogintel && formLoginEl.confirmpass) {
-        console.log('Отправляем данные AJAX для проверки логина и пароля пользователя');
+        if(showConsole) {
+            // console.log('Отправляем данные AJAX для проверки логина и пароля пользователя');
+        }
         let formData = new FormData();
         formData.set('action', 'user-login');
         formData.set('u-tel', modalLoginInputTel.value);
@@ -352,12 +368,18 @@ function formLoginChekValues() {
             body: formData
         }).then(response => response.text()).then((response) => {
             response = JSON.parse(response);
-            console.log(response);
+            if(showConsole) {
+                console.log(response);
+            }
             if (response.result === 'ok') {
-                console.log('Данные пользователя совпали. Подтверждаем вход для пользователя');
+                if(showConsole) {
+                    console.log('Данные пользователя совпали. Подтверждаем вход для пользователя');
+                }
                 formLoginEl.submit();
             } else {
-                console.log('Данные пользователя Не совпали');
+                if(showConsole) {
+                    console.log('Данные пользователя Не совпали');
+                }
                 showPopUpMessageEl('alert', 'Неправильный логин или пароль');
                 setTimeout(() => {
                     closePopUpMessageEl();
@@ -443,7 +465,9 @@ if (modalLoginConfirmButtonEl) {
 // }
 function checkFIOInputElAction() {
     let value = modalRegInputFIO.value;
-    // console.log('ФИО: ', value);
+    if(showConsole) {
+        // console.log('ФИО: ', value);
+    }
     if (value && value.length > 3) {
         formRegistrationEl.confirmFIO = true;
         if (modalRegInputFIO.classList.contains('alert')) {
@@ -465,7 +489,9 @@ function checkFIOInputElAction() {
 
 function checkTelInputElAction() {
     let value = modalRegInputTel.value;
-    // console.log('Телефон: ', value);
+    if(showConsole){
+        // console.log('Телефон: ', value);
+    }
     let re = /^\+?[78][-\(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/;
     let valid = re.test(modalRegInputTel.value);
     if (value && valid) {
@@ -489,7 +515,9 @@ function checkTelInputElAction() {
 
 function checkCityInputElAction() {
     let value = modalRegInputCity.value;
-    // console.log('Город: ', value);
+    if(showConsole) {
+        // console.log('Город: ', value);
+    }
     if (value && value.length > 3) {
         formRegistrationEl.confirmCity = true;
         if (modalRegInputCity.classList.contains('alert')) {
@@ -516,7 +544,9 @@ function modalRegistrationAction(el) {
     checkTelInputElAction();
     checkCityInputElAction();
     if (formRegistrationRulesEl.checked && formRegistrationEl.confirmFIO && formRegistrationEl.confirmtel && formRegistrationEl.confirmCity) {
-        // console.log('checked');
+        if(showConsole) {
+            // console.log('checked');
+        }
         formRegistrationEl.addEventListener('submit', (event) => {
             event.preventDefault();
         });
@@ -547,9 +577,13 @@ function modalRegistrationAction(el) {
             body: formData
         }).then(response => response.text()).then((response) => {
             response = JSON.parse(response);
-            console.log(response);
+            if(showConsole) {
+                console.log(response);
+            }
             if (response.result === 'error') {
-                console.log(response.message);
+                if(showConsole) {
+                    console.log(response.message);
+                }
                 if (modalRegInputTel.classList.contains('ok')) {
                     modalRegInputTel.classList.remove('ok');
                 }
@@ -557,7 +591,9 @@ function modalRegistrationAction(el) {
                     modalRegInputTel.classList.add('alert');
                 }
             } else if (response.result === 'ok') {
-                console.log(response.message);
+                if(showConsole) {
+                    console.log(response.message);
+                }
                 if (formRegistrationEl.confirmFIO && formRegistrationEl.confirmtel && formRegistrationEl.confirmCity) {
                     modalRegistrationInputsEl.classList.remove('d-flex');
                     modalRegistrationInputsEl.classList.add('d-none');
@@ -577,7 +613,9 @@ function modalRegistrationAction(el) {
             }
         });
     } else {
-        console.log('ne checked');
+        if(showConsole) {
+            console.log('ne checked');
+        }
         formRegistrationEl.addEventListener('submit', (event) => {
             event.preventDefault();
         });
@@ -592,7 +630,9 @@ function reSendTelCode() {
 
 function modalRegistrationConfirmAction(el) {
     if (!modalRegInputCode.value) {
-        console.log('net coda');
+        if(showConsole) {
+            console.log('net coda');
+        }
         modalRegInputCode.confirmcode = false;
         if (modalRegInputCode.classList.contains('ok')) {
             modalRegInputCode.classList.remove('ok');
@@ -603,7 +643,9 @@ function modalRegistrationConfirmAction(el) {
     } else {
         if (modalRegInputCode.value.length === 6) {
             // formRegistrationEl.confirmcode = true;
-            console.log('Проверяем код с зарегистрированным пользователем');
+            if(showConsole) {
+                console.log('Проверяем код с зарегистрированным пользователем');
+            }
             let formData = new FormData();
             formData.set('action', 'code-check');
             formData.set('tel', modalRegistrationTelCheckEl.children[1].children[1].textContent);
@@ -613,12 +655,18 @@ function modalRegistrationConfirmAction(el) {
                 body: formData
             }).then(response => response.text()).then((response) => {
                 response = JSON.parse(response);
-                console.log(response);
+                if(showConsole) {
+                    console.log(response);
+                }
                 if (response.result === 'ok') {
-                    console.log('Код совпал. Подтверждаем регистрацию для пользователя');
+                    if(showConsole) {
+                        console.log('Код совпал. Подтверждаем регистрацию для пользователя');
+                    }
                     formRegistrationEl.submit();
                 } else if (response.result === 'error') {
-                    console.log('Код Не совпал. Попробуйте еще раз');
+                    if(showConsole) {
+                        console.log('Код Не совпал. Попробуйте еще раз');
+                    }
                     if (modalRegInputCode.classList.contains('ok')) {
                         modalRegInputCode.classList.remove('ok');
                     }
@@ -628,7 +676,9 @@ function modalRegistrationConfirmAction(el) {
                 }
             });
         } else {
-            console.log('Неправильная длина кода');
+            if(showConsole) {
+                console.log('Неправильная длина кода');
+            }
         }
     }
     if (formRegistrationEl.confirmf && formRegistrationEl.confirmi && formRegistrationEl.confirmtel && formRegistrationEl.confirmcode) {
@@ -685,7 +735,9 @@ function modalPassForget(el) {
 
 function checkRestoreTelInputEl() {
     let value = modalPassRestoreTelEl.value;
-    // console.log('Телефон: ', value);
+    if(showConsole) {
+        // console.log('Телефон: ', value);
+    }
     let re = /^\+?[78][-\(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/;
     let valid = re.test(modalPassRestoreTelEl.value);
     if (value && valid) {
@@ -708,9 +760,13 @@ function checkRestoreTelInputEl() {
 }
 
 function sendRestorePass(el) {
-    console.log('Нажата кнопка выслать новый пароль');
+    if(showConsole) {
+        console.log('Нажата кнопка выслать новый пароль');
+    }
     if (formPassRestoreEl.confirmtel) {
-        console.log('Высылаем новый пароль');
+        if(showConsole) {
+            console.log('Высылаем новый пароль');
+        }
         // подготавливаем номер телефона в формате: +7 (912) 345-67-89
         let tel = '';
         for (let i = 0; i < modalPassRestoreTelEl.value.length; i++) {
@@ -738,10 +794,14 @@ function sendRestorePass(el) {
             body: formData
         }).then(response => response.text()).then((response) => {
             response = JSON.parse(response);
-            console.log(response);
+            if(showConsole) {
+                console.log(response);
+            }
             //  = response.slice(0, 2)
             if (response.result === 'error') {
-                console.log('Номера нет в базе');
+                if(showConsole) {
+                    console.log('Номера нет в базе');
+                }
                 //     if(modalRegInputTel.classList.contains('ok')) {
                 //         modalRegInputTel.classList.remove('ok');
                 //     }
@@ -749,7 +809,9 @@ function sendRestorePass(el) {
                 //         modalRegInputTel.classList.add('alert');
                 //     }
             } else if (response.result === 'ok') {
-                console.log('Номер есть в базе');
+                if(showConsole) {
+                    console.log('Номер есть в базе');
+                }
                 showLoginModal();
                 // добавляем перенос номера телефона в форму входа
                 modalLoginInputTel.value = modalPassRestoreTelEl.value;
@@ -774,7 +836,9 @@ function sendRestorePass(el) {
             }
         });
     } else {
-        console.log('Номер телефона не правильно указан');
+        if(showConsole) {
+            console.log('Номер телефона не правильно указан');
+        }
     }
 }
 
@@ -808,8 +872,10 @@ if (userQuestionButtonEl) {
 // модально окно задать вопрос - конец
 // модально окно вывести
 function modalMoneyAction(el) {
-    console.log(el);
-    console.log('modalMoneyAction');
+    if(showConsole) {
+        console.log(el);
+        console.log('modalMoneyAction');
+    }
     closeModal();
     modalsEl.classList.remove('d-none');
     modalsEl.children[4].classList.remove('d-none');
@@ -897,9 +963,13 @@ for (let i = 0; i < showUserInfoEl.length; i++) {
 // асинхронные запросы
 function ajaxRequest(url, data) {
     let requestUrl = url;
-    console.log('URL: ', requestUrl);
+    if(showConsole) {
+        console.log('URL: ', requestUrl);
+    }
     let requestData = data;
-    console.log('DATA: ', requestData);
+    if(showConsole) {
+        console.log('DATA: ', requestData);
+    }
     let formData = new FormData();
     for (let key in requestData) {
         formData.set(key, requestData[key]);
@@ -909,7 +979,9 @@ function ajaxRequest(url, data) {
         // headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: formData
     }).then(response => response.text()).then((response) => {
-        console.log(response);
+        if(showConsole) {
+            console.log(response);
+        }
         return response;
     });
 }
@@ -918,8 +990,10 @@ let siteAjaxUrl = 'https://fz2020.ru/ajax/';
 // асинхронные запросы - конец
 // pop-up сообщения
 function closePopUpMessageEl() {
-    console.log('closePopUpMessageEl');
-    console.log('Скрываем информационное сообщение');
+    if(showConsole) {
+        console.log('closePopUpMessageEl');
+        console.log('Скрываем информационное сообщение');
+    }
     if (!popUpEl.classList.contains('d-none')) {
         popUpEl.classList.add('d-none');
     }
@@ -959,7 +1033,9 @@ if (addAvatarEl) {
 // изменение аватара пользователя - конец
 // скопировать ссылку на форму
 function linkCopyToBuffer(el) {
-    console.log('Копируем ссылку в буфер обмена', el);
+    if(showConsole) {
+        console.log('Копируем ссылку в буфер обмена', el);
+    }
     let userLink = el.getAttribute('data-link');
     navigator.clipboard.writeText(userLink);
     // показать всплывающее окно с успешным копирование
@@ -979,7 +1055,9 @@ if (linkCopyButtonEl) {
 // скопировать ссылку на форму - конец
 // скопировать код пользователя
 function copyCodeToBuffer(el) {
-    console.log('Копируем код в буфер обмена', el);
+    if(showConsole) {
+        console.log('Копируем код в буфер обмена', el);
+    }
     let userLink = el.getAttribute('data-code');
     navigator.clipboard.writeText(userLink);
     // показать всплывающее окно с успешным копирование
@@ -999,37 +1077,51 @@ if (codeCopyButtonEl) {
 // скопировать пользователя - конец
 // вывести баллы пользователя
 function getMoney(el) {
-    console.log('Кнопка вывода деняг');
+    if(showConsole) {
+        console.log('Кнопка вывода деняг');
+    }
     // получаем элемент формы
     const getMoneyFormEl = document.getElementById('form-money');
     // получаем элемент суммы баллов
     const maxSumm = Number(userMoneyButtonEl.getAttribute('data-max-summ'));
     // console.log('maxSumm', maxSumm);
     if (getMoneyInputEl.value >= 20000 && getMoneyInputEl.value <= maxSumm) {
-        // console.log('Количество баллов подходит');
+        if(showConsole) {
+            // console.log('Количество баллов подходит');
+        }
         if (getMoneyInputEl.classList.contains('alert')) {
             getMoneyInputEl.classList.remove('alert');
         }
         getMoneyInputEl.classList.add('ok');
         getMoneyInputEl.summ = true;
     } else {
-        // console.log('Не подходящее количество баллов');
+        if(showConsole) {
+            // console.log('Не подходящее количество баллов');
+        }
         if (getMoneyInputEl.classList.contains('ok')) {
             getMoneyInputEl.classList.remove('ok');
         }
         getMoneyInputEl.classList.add('alert');
         getMoneyInputEl.summ = false;
     }
-    // console.log('Количество баллов', getMoneyInputEl.value);
+    if(showConsole) {
+        // console.log('Количество баллов', getMoneyInputEl.value);
+    }
     // получаем элемент чекбокса подтверждения
     const getMoneyCheckEl = document.getElementById('form-money-u-agree');
     if (getMoneyCheckEl.checked) {
-        // console.log('Чекбокс подтвержден');
+        if(showConsole) {
+            // console.log('Чекбокс подтвержден');
+        }
     } else {
-        // console.log('Чекбокс НЕ подтвержден');
+        if(showConsole) {
+            // console.log('Чекбокс НЕ подтвержден');
+        }
     }
     if (getMoneyCheckEl.checked && getMoneyInputEl.summ) {
-        // console.log('Посылаем запрос на вывод средств');
+        if(showConsole) {
+            // console.log('Посылаем запрос на вывод средств');
+        }
         showPopUpMessageEl('ok', 'Запрос принят. С вами свяжется специалист компании.');
         // закрываем попап
         setTimeout(() => {
@@ -1037,7 +1129,9 @@ function getMoney(el) {
         }, 3000);
         getMoneyFormEl.submit();
     } else {
-        console.log('Запрос на вывод средств не отправлен');
+        if(showConsole) {
+            console.log('Запрос на вывод средств не отправлен');
+        }
     }
 }
 
