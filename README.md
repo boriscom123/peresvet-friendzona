@@ -15,3 +15,5 @@ IP-адрес сервера: 37.140.192.80
 Пароль: O5986pxXPxMc5Y6g
 Имя базы: u1501693_default
 Host: localhost
+
+https://fz2020.ru/
