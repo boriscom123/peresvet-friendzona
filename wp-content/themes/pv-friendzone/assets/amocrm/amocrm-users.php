@@ -28,9 +28,9 @@ function set_new_integration($domain, $client_id, $client_secret, $code)
     $out = json_decode($out);
     $code = (int)$code;
     if ($code < 200 || $code > 204) {
-        echo "set_new_integration. Ошибочный код ответа: " . $code;
+        // echo "set_new_integration. Ошибочный код ответа: " . $code;
     } else {
-        echo "set_new_integration. Код ответа успешный: " . $code;
+        // echo "set_new_integration. Код ответа успешный: " . $code;
         // сохраняем ответ от сервера на странице интеграции.
         $amo_integration_page = get_page_by_title('Интеграция с АМО СРМ');
         $content = $amo_integration_page->post_content;
