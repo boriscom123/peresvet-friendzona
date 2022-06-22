@@ -18,7 +18,7 @@
       <option name="runOnExternalChanges" value="true" />
       <option name="scopeName" value="Project Files" />
       <option name="trackOnlyRoot" value="true" />
-      <option name="workingDir" value="$PROJECT_DIR$/wp-content/themes/pv-friendzone/assets/style" />
+      <option name="workingDir" value="$PROJECT_DIR$/pv-friendzone/assets/style" />
       <envs />
     </TaskOptions>
   </component>

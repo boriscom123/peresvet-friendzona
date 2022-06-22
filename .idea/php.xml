@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="MessDetectorOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PHPCSFixerOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PHPCodeSnifferOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
   <component name="PhpInterpreters">
     <interpreters>
       <interpreter id="92794e84-87d1-4662-9ff8-c655ebf0ce7a" name="PHP (project level)" home="C:\OpenServer\modules\php\PHP_8.0\php.exe" debugger_id="php.debugger.XDebug" debugger_extension="C:\OpenServer\modules\php\PHP_8.0\ext\php_xdebug.dll" />
@@ -76,4 +85,10 @@
     </phpInfoCache>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
+  <component name="PhpStanOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PsalmOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
 </project>
