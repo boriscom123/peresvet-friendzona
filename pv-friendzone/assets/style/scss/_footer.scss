@@ -1,0 +1,277 @@
+.footer {
+  width: 100%;
+  background-color: $alterBgColor4;
+  padding: 55px 0 0 0;
+
+  > .container {
+    > .footer-links {
+      display: flex;
+      justify-content: space-between;
+      @media (max-width: 600px) {
+        flex-direction: column;
+      }
+
+      > .image {
+        width: 50%;
+        // background-color: pink;
+        max-width: 280px;
+        @media (max-width: 800px) {
+          min-width: 280px;
+        }
+
+        display: flex;
+        justify-content: space-between;
+        height: fit-content;
+
+
+        > .image-1 {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          max-width: #{calc(55% - 11px)};
+          transition: $transition;
+
+
+          > img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+          }
+
+          &:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+          }
+        }
+
+        > .decoration {
+          height: auto;
+          width: 2px;
+          background-color: $mainBgColor;
+          margin: 0 10px 0 10px;
+        }
+
+        > .image-2 {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          max-width: #{calc(45% - 11px)};
+          transition: $transition;
+
+
+          > img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+          }
+
+          &:hover {
+            cursor: pointer;
+            transform: scale(1.07);
+          }
+        }
+
+        //> a {
+        //  display: flex;
+        //  justify-content: space-between;
+        //
+        //  > .image-1 {
+        //    display: flex;
+        //    justify-content: center;
+        //    align-items: center;
+        //    width: 100%;
+        //    max-width: #{calc(55% - 11px)};
+        //
+        //    > img {
+        //      height: 100%;
+        //      width: 100%;
+        //      object-fit: contain;
+        //    }
+        //  }
+        //
+        //  > .decoration {
+        //    height: auto;
+        //    width: 2px;
+        //    background-color: $mainBgColor;
+        //    margin: 0 10px 0 10px;
+        //  }
+        //
+        //  > .image-2 {
+        //    display: flex;
+        //    justify-content: center;
+        //    align-items: center;
+        //    width: 100%;
+        //    max-width: #{calc(45% - 11px)};
+        //
+        //    > img {
+        //      height: 100%;
+        //      width: 100%;
+        //      object-fit: contain;
+        //    }
+        //  }
+        //}
+      }
+
+      > .links {
+        width: 50%;
+        // max-width: #{calc(100% - 280px)};
+        @media (max-width: 800px) {
+          width: #{calc(100% - 60px)};
+        }
+        @media (max-width: 600px) {
+          width: 100%;
+          margin: 20px 0 0 0;
+        }
+        display: flex;
+
+        > div {
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          @media (max-width: 600px) {
+          }
+
+          > a {
+            font-family: $mainFontFamily;
+            font-weight: 500;
+            font-size: 13px;
+            color: $alterFontColor;
+            margin: 0 0 22px 50%;
+            white-space: nowrap;
+            @media (max-width: 800px) {
+              margin: 0 0 20px 25%;
+            }
+            @media (max-width: 600px) {
+              margin: 0 0 20px 10%;
+            }
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+
+    > .footer-copyright {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 50px 0;
+
+      @media (max-width: 600px) {
+        flex-direction: column;
+        align-items: center;
+        min-height: 50px;
+      }
+
+      > div {
+        width: 50%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @media (max-width: 600px) {
+          width: 100%;
+        }
+
+        > a {
+          width: 100%;
+          font-family: $mainFontFamily;
+          font-weight: 500;
+          font-size: 13px;
+          color: $alterFontColor2;
+          text-align: left;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      > .copyright {
+        @media (max-width: 800px) {
+          min-width: 280px;
+        }
+        @media (max-width: 600px) {
+          width: 100%;
+        }
+
+        > a {
+          @media (max-width: 600px) {
+            text-align: center;
+          }
+        }
+      }
+
+      > .rules {
+        @media (max-width: 800px) {
+          width: calc(100% - 60px);
+        }
+        @media (max-width: 400px) {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+
+        > a {
+          width: 50%;
+          @media (max-width: 400px) {
+            width: 100%;
+          }
+        }
+
+        > a:first-child {
+          margin: 0 0 0 25%;
+          @media (max-width: 800px) {
+            margin: 0 0 0 10%;
+          }
+          @media (max-width: 600px) {
+            margin: 0 0 0 0;
+            text-align: center;
+          }
+          @media (max-width: 400px) {
+            margin: 10px 0 0 0;
+          }
+        }
+
+        > a:last-child {
+          // margin: 0 15% 0 0;
+          margin: 0 0 0 25%;
+          @media (max-width: 1100px) {
+            margin: 0 0 0 20%;
+          }
+          @media (max-width: 900px) {
+            margin: 0 0 0 15%;
+          }
+          // @media (max-width: 800px) { margin: 0 0 0 0; }
+          @media (max-width: 600px) {
+            margin: 0 0 0 0;
+            text-align: center;
+          }
+          @media (max-width: 400px) {
+            margin: 10px 0 0 0;
+          }
+        }
+      }
+    }
+
+    > .made-by {
+      display: flex;
+      justify-content: center;
+      padding: 0 0 5px 0;
+
+      > a {
+        font-family: $mainFontFamily;
+        font-weight: 500;
+        font-size: 8px;
+        color: $alterFontColor2;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
