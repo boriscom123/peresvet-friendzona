@@ -15,6 +15,8 @@
         $user_data = get_userdata( get_current_user_id() );
         $all_meta_for_user = get_user_meta( get_current_user_id() );
     }
+
+    $current_year = date('Y');
 ?>
 
     <footer class="footer">
@@ -48,7 +50,7 @@
         <div class="container">
             <div class="footer-copyright">
                 <div class="copyright">
-                    <a href="#">© 2012-2021 Пересвет.Недвижимость</a>
+                    <a href="#">© 2012-<?php echo $current_year; ?> Пересвет.Недвижимость</a>
                 </div>
                 <div class="rules">
                     <a href="<?php echo get_template_directory_uri(); ?>/assets/privacy.pdf" target="_blank">Политика конфиденциальности</a>
@@ -125,7 +127,7 @@
                     </div>
                     <div class="modal-menu-copyright">
                         <div class="copyright d-none">
-                            <a href="#">© 2012-2021 Пересвет.Недвижимость</a>
+                            <a href="#">© 2012-<?php echo $current_year; ?> Пересвет.Недвижимость</a>
                         </div>
                         <div class="rules">
                             <a href="<?php echo get_template_directory_uri(); ?>/assets/privacy.pdf" target="_blank">Политика конфиденциальности</a>
